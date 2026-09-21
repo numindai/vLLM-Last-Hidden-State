@@ -1,0 +1,60 @@
+# Python bytecode and native build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python packaging
+build/
+dist/
+wheels/
+*.egg-info/
+*.egg
+.eggs/
+pip-wheel-metadata/
+
+# Virtual environments and local environment configuration
+.venv/
+venv/
+env/
+__pypackages__/
+.env
+.env.*
+!.env.example
+!.env.*.example
+.envrc
+
+# Test, lint, type-checking, and coverage caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+.pyre/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.cache/
+.ipynb_checkpoints/
+
+# Local model downloads and generated runs; keep validation reports in Git
+/models/
+/checkpoints/
+/outputs/
+/runs/
+/logs/
+*.log
+
+# Editor, OS, and Codex workspace state
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.agents/
+.codex/

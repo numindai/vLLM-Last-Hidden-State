@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-21",
+  "vllm_commit": "98dff2a81d747d1dba01a47f939f48c3526d4206",
+  "vllm_version": "0.29.0+cpu",
+  "vllm_source": "/home/soren/Documents/numind/vllm_package/vllm/vllm",
+  "metadata_source": "/home/soren/Documents/numind/vllm_package/vllm/vllm.egg-info",
+  "python": "3.12.13",
+  "platform": "Linux-7.2.3-1-cachyos-x86_64-with-glibc2.44",
+  "cuda_available": false,
+  "packages": {
+    "torch": "2.13.0+cpu",
+    "transformers": "5.17.0",
+    "openai": "3.13.0",
+    "packaging": "26.3",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "ruff": "0.16.7"
+  },
+  "cpu_native_sha256": {
+    "_C.abi3.so": "86790b44b70baeeb34a6d030b800f6ad0872a010517638a0f605283889dfcfb5",
+    "_C_AVX512.abi3.so": "21c6ae6f475275c6211ca2e4d3f0705d3fa68c9dcd72ca216085f6607f3debd1",
+    "_C_AVX2.abi3.so": "c3bde5eb862fe4834b027990513b9c54b8c2ebbddf185776782e4c5096b3fa09"
+  },
+  "model": "Qwen/Qwen3.5-0.8B",
+  "model_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "notes": [
+    "CPU extensions rebuilt in place from the pinned tag; source metadata regenerated after build.",
+    "Validation uses explicit PYTHONPATH because inherited editable paths predate repository relocation.",
+    "Existing Rust binaries were retained by upstream setup; Python frontend selected; tool calling/Rust frontend not validated.",
+    "No distribution wheel built."
+  ]
+}

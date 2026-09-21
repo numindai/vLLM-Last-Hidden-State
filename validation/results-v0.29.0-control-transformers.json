@@ -1,0 +1,23 @@
+[
+  {
+    "case": 0,
+    "cosine": 0.9998458027839661,
+    "relative_l2_error": 0.017573969438672066,
+    "passes_transformers_threshold": true,
+    "max_completion_tokens_precedence": "pass"
+  },
+  {
+    "case": 1,
+    "cosine": 0.9998604655265808,
+    "relative_l2_error": 0.016807902604341507,
+    "passes_transformers_threshold": true,
+    "max_completion_tokens_precedence": "pass"
+  },
+  {
+    "case": 2,
+    "cosine": 0.99910968542099,
+    "relative_l2_error": 0.04219333082437515,
+    "passes_transformers_threshold": true,
+    "max_completion_tokens_precedence": "pass"
+  }
+]

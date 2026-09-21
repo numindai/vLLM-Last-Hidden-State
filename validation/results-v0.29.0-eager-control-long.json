@@ -1,0 +1,200 @@
+[
+  {
+    "case": 0,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.25,
+    "mean_abs_error": 0.03879159688949585,
+    "cosine": 0.999921977519989,
+    "relative_l2_error": 0.012581612914800644,
+    "seconds": 1.3374452799907885,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  },
+  {
+    "case": 1,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.3125,
+    "mean_abs_error": 0.04536515474319458,
+    "cosine": 0.9998893141746521,
+    "relative_l2_error": 0.014940513297915459,
+    "seconds": 0.2884109980077483,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  },
+  {
+    "case": 2,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1704,
+    "last_token_id": 328,
+    "max_abs_error": 0.203125,
+    "mean_abs_error": 0.04356399178504944,
+    "cosine": 0.9999071359634399,
+    "relative_l2_error": 0.013650985434651375,
+    "seconds": 0.40930622402811423,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  },
+  {
+    "case": 0,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.21875,
+    "mean_abs_error": 0.03813529014587402,
+    "cosine": 0.9999288320541382,
+    "relative_l2_error": 0.012223312631249428,
+    "seconds": 0.7963595829787664,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  },
+  {
+    "case": 1,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.25,
+    "mean_abs_error": 0.041175276041030884,
+    "cosine": 0.9999175071716309,
+    "relative_l2_error": 0.012924903072416782,
+    "seconds": 0.7963309990009293,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  },
+  {
+    "case": 2,
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "hidden_size": 1024,
+    "position": 1704,
+    "last_token_id": 328,
+    "max_abs_error": 0.21484375,
+    "mean_abs_error": 0.0430106520652771,
+    "cosine": 0.9999110698699951,
+    "relative_l2_error": 0.013457736931741238,
+    "seconds": 0.795948110986501,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 12800.0
+  }
+]

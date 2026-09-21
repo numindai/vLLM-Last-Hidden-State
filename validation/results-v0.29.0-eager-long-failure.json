@@ -1,0 +1,108 @@
+{
+  "status": "failed",
+  "phase": "eager",
+  "suite": "long",
+  "reference_backend": "transformers",
+  "min_cosine": 0.999,
+  "max_relative_l2": 0.05,
+  "completed_case_metrics": [
+    {
+      "case": 0,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 1627,
+      "last_token_id": 328,
+      "max_abs_error": 0.28125,
+      "mean_abs_error": 0.059130698442459106,
+      "cosine": 0.9998248219490051,
+      "relative_l2_error": 0.018796490505337715,
+      "seconds": 1.2487705329549499,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    },
+    {
+      "case": 1,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 1627,
+      "last_token_id": 328,
+      "max_abs_error": 0.25,
+      "mean_abs_error": 0.042334944009780884,
+      "cosine": 0.9999092817306519,
+      "relative_l2_error": 0.013482898473739624,
+      "seconds": 0.27136362297460437,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    },
+    {
+      "case": 2,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 1704,
+      "last_token_id": 328,
+      "max_abs_error": 0.6875,
+      "mean_abs_error": 0.14655819535255432,
+      "cosine": 0.9989632368087769,
+      "relative_l2_error": 0.04553864151239395,
+      "seconds": 0.3268469559843652,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    }
+  ],
+  "failure": "Image case did not meet the unchanged numerical thresholds. The suite aborted before its remaining checks.",
+  "failure_trace": "Traceback (most recent call last):\n  File \"/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py\", line 307, in <module>\n    main()\n  File \"/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py\", line 303, in main\n    (reference if args.mode == \"reference\" else check_http)(args)\n  File \"/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py\", line 234, in check_http\n    compare(index, *request(messages))\n  File \"/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py\", line 229, in compare\n    assert cosine >= args.min_cosine\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError"
+}

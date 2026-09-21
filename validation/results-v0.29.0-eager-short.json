@@ -1,0 +1,194 @@
+[
+  {
+    "case": 0,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 27,
+    "last_token_id": 328,
+    "max_abs_error": 0.234375,
+    "mean_abs_error": 0.04275155067443848,
+    "cosine": 0.999900221824646,
+    "relative_l2_error": 0.014141392894089222,
+    "seconds": 0.2696501199970953,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  },
+  {
+    "case": 1,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 27,
+    "last_token_id": 328,
+    "max_abs_error": 0.375,
+    "mean_abs_error": 0.05500525236129761,
+    "cosine": 0.9998496174812317,
+    "relative_l2_error": 0.01739526353776455,
+    "seconds": 0.04995290300576016,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  },
+  {
+    "case": 2,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 104,
+    "last_token_id": 328,
+    "max_abs_error": 1.875,
+    "mean_abs_error": 0.1242256760597229,
+    "cosine": 0.9990071058273315,
+    "relative_l2_error": 0.04467019811272621,
+    "seconds": 0.1465609049773775,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  },
+  {
+    "case": 0,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 27,
+    "last_token_id": 328,
+    "max_abs_error": 0.234375,
+    "mean_abs_error": 0.04275155067443848,
+    "cosine": 0.999900221824646,
+    "relative_l2_error": 0.014141392894089222,
+    "seconds": 0.15877565799746662,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  },
+  {
+    "case": 1,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 27,
+    "last_token_id": 328,
+    "max_abs_error": 0.375,
+    "mean_abs_error": 0.05500525236129761,
+    "cosine": 0.9998496174812317,
+    "relative_l2_error": 0.01739526353776455,
+    "seconds": 0.15903054497903213,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  },
+  {
+    "case": 2,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 104,
+    "last_token_id": 328,
+    "max_abs_error": 1.875,
+    "mean_abs_error": 0.1242256760597229,
+    "cosine": 0.9990071058273315,
+    "relative_l2_error": 0.04467019811272621,
+    "seconds": 0.15645321301417425,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    }
+  }
+]
