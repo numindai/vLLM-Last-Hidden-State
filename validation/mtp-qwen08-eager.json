@@ -1,0 +1,50 @@
+{
+  "model": "mtp-test",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 44.0,
+    "spec_decode_num_draft_tokens_total": 88.0,
+    "spec_decode_num_accepted_tokens_total": 33.0,
+    "prefix_cache_hits_total": 0.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.0000003576278687,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999821782112122,
+      "relative_l2": 0.0060250540263950825,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998778700828552,
+      "relative_l2": 0.015810715034604073,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999356865882874,
+      "relative_l2": 0.011369040235877037,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998635649681091,
+      "relative_l2": 0.016557589173316956,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": null,
+  "streaming": true,
+  "mixed_traffic": true
+}

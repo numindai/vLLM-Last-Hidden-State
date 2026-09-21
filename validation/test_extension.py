@@ -16,6 +16,8 @@ from unittest.mock import AsyncMock
 import numpy as np
 import pytest
 import torch
+from vllm.config import CompilationMode
+from vllm.distributed.kv_transfer.kv_connector.v1.base import KVConnectorRole
 from vllm.entrypoints.openai.chat_completion.protocol import ChatCompletionRequest
 
 from vllm_last_hidden_state.compat import capture_model_forward
@@ -55,6 +57,51 @@ def runner():
         ),
         query_start_loc=SimpleNamespace(np=np.array([0, 2, 5])),
     )
+
+
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16, torch.float32])
+@pytest.mark.parametrize("quantization", [None, "compressed-tensors", "awq", "gptq"])
+@pytest.mark.parametrize("method", [None, "mtp", "eagle3"])
+def test_runtime_settings_delegate_precision_to_upstream(dtype, quantization, method):
+    config = SimpleNamespace(
+        kv_transfer_config=SimpleNamespace(),
+        parallel_config=SimpleNamespace(
+            distributed_executor_backend="mp",
+            tensor_parallel_size=1,
+            pipeline_parallel_size=1,
+            data_parallel_size=1,
+            decode_context_parallel_size=1,
+            prefill_context_parallel_size=1,
+        ),
+        device_config=SimpleNamespace(device_type="cpu"),
+        model_config=SimpleNamespace(
+            dtype=dtype, quantization=quantization, get_hidden_size=lambda: 3
+        ),
+        speculative_config=SimpleNamespace(method=method) if method else None,
+        compilation_config=SimpleNamespace(mode=CompilationMode.NONE),
+        lora_config=None,
+    )
+    if method == "eagle3":
+        with pytest.raises(ValueError, match="MTP speculative decoding only"):
+            LastHiddenStateConnector(config, KVConnectorRole.WORKER, None)
+    else:
+        connector = LastHiddenStateConnector(config, KVConnectorRole.WORKER, None)
+        assert connector.hidden_size == 3
+
+
+@pytest.mark.parametrize("dtype", [torch.float16, torch.bfloat16, torch.float32])
+def test_precision_and_speculative_verification_preserve_prompt_state(
+    connector, runner, dtype
+):
+    states = torch.arange(15, dtype=dtype).reshape(5, 3) / 8
+    expected = states[4].float().tolist()
+    connector.capture_batch(runner, states)
+    # Drafting may reuse output storage; verification packs several decode rows.
+    states.zero_()
+    runner.input_batch.num_computed_tokens_cpu[:] = [2, 3]
+    runner.query_start_loc.np[:] = [0, 3, 6]
+    connector.capture_batch(runner, torch.full((6, 3), 99, dtype=dtype))
+    assert connector.take("ha")["vector"] == expected
 
 
 def test_final_prompt_rows_follow_batch_order_and_ignore_padding(connector, runner):

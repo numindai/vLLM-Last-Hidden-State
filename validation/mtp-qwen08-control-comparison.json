@@ -1,0 +1,87 @@
+{
+  "model": "mtp-test",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 0,
+    "spec_decode_num_draft_tokens_total": 0,
+    "spec_decode_num_accepted_tokens_total": 0,
+    "prefix_cache_hits_total": 0.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999252557754517,
+      "relative_l2": 0.012286911718547344,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999130964279175,
+      "relative_l2": 0.013223274610936642,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999061822891235,
+      "relative_l2": 0.01370952557772398,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": [
+    {
+      "cosine": 0.9999085068702698,
+      "relative_l2": 0.01355164684355259,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999046325683594,
+      "relative_l2": 0.013836463913321495,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.999866247177124,
+      "relative_l2": 0.016371019184589386,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998987913131714,
+      "relative_l2": 0.014247923158109188,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.999889612197876,
+      "relative_l2": 0.014940835535526276,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998927116394043,
+      "relative_l2": 0.014654843136668205,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

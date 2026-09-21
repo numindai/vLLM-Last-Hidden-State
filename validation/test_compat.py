@@ -7,6 +7,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 
 import pytest
+import torch
 
 from vllm_last_hidden_state.compat import install_capture
 
@@ -82,3 +83,28 @@ def test_unknown_model_is_rejected(upstream_types):
     worker = SimpleNamespace(get_model=lambda: object(), model_runner=cpu_type())
     with pytest.raises(ValueError, match="Only Qwen3.5"):
         install_capture(worker, object())
+
+
+@pytest.mark.parametrize("device", ["cpu", "gpu"])
+def test_mtp_draft_forward_does_not_trigger_target_capture(upstream_types, device):
+    model_type, cpu_type, gpu_type = upstream_types
+
+    class Target(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.model = model_type()
+
+        def forward(self, states):
+            return states + 1
+
+    target = Target()
+    draft = Target()
+    runner = cpu_type() if device == "cpu" else gpu_type()
+    runner._model_forward = target
+    runner.drafter = SimpleNamespace(model=draft)
+    worker = SimpleNamespace(get_model=lambda: target, model_runner=runner)
+    connector = SimpleNamespace(capture_batch=Mock())
+    install_capture(worker, connector)
+    output = runner._model_forward(torch.zeros(2, 3))
+    runner.drafter.model(output)
+    connector.capture_batch.assert_called_once_with(runner, output)

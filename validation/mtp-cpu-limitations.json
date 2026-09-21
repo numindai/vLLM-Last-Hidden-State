@@ -1,0 +1,25 @@
+{
+  "vllm_revision": "98dff2a81d747d1dba01a47f939f48c3526d4206",
+  "model": "Qwen/Qwen3.5-0.8B",
+  "model_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+  "failures": [
+    {
+      "configuration": "mtp=2, eager, default dtype, prefix caching enabled",
+      "extension_enabled": [
+        true,
+        false
+      ],
+      "first_request_http_status": 500,
+      "error": "TypeError: 'function' object is not subscriptable",
+      "location": "mamba_utils.run_fused_precopy: precopy_mamba_align_fused_kernel[grid]",
+      "workaround": "--no-enable-prefix-caching"
+    },
+    {
+      "configuration": "mtp=2, eager, dtype=float16, prefix caching disabled",
+      "extension_enabled": true,
+      "first_request_http_status": 500,
+      "error": "AssertionError: CPU GDN attention requires BF16.",
+      "location": "qwen_gdn_linear_attn CPU forward"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "model": "mtp-test",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 0,
+    "spec_decode_num_draft_tokens_total": 0,
+    "spec_decode_num_accepted_tokens_total": 0,
+    "prefix_cache_hits_total": 0.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.0000004768371582,
+      "relative_l2": 0.0,
+      "prompt_tokens": 43,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 1.0000004768371582,
+      "relative_l2": 0.0,
+      "prompt_tokens": 43,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9999510645866394,
+      "relative_l2": 0.009948328137397766,
+      "prompt_tokens": 121,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9997897744178772,
+      "relative_l2": 0.02052425779402256,
+      "prompt_tokens": 1643,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9998817443847656,
+      "relative_l2": 0.015404611825942993,
+      "prompt_tokens": 1643,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9998028874397278,
+      "relative_l2": 0.019878752529621124,
+      "prompt_tokens": 1721,
+      "hidden_size": 2560
+    }
+  ],
+  "control": [
+    {
+      "cosine": 0.999885082244873,
+      "relative_l2": 0.015202654525637627,
+      "prompt_tokens": 43,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9998927116394043,
+      "relative_l2": 0.014676220715045929,
+      "prompt_tokens": 43,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9998985528945923,
+      "relative_l2": 0.014289331622421741,
+      "prompt_tokens": 121,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9997237920761108,
+      "relative_l2": 0.023520439863204956,
+      "prompt_tokens": 1643,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9996106028556824,
+      "relative_l2": 0.02792753465473652,
+      "prompt_tokens": 1643,
+      "hidden_size": 2560
+    },
+    {
+      "cosine": 0.9993591904640198,
+      "relative_l2": 0.03582225367426872,
+      "prompt_tokens": 1721,
+      "hidden_size": 2560
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

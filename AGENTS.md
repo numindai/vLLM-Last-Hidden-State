@@ -24,7 +24,8 @@ compatibility. Parent repository instructions still apply.
   examples and validation; do not restore a `template_options` helper.
 - Prefix caching, chunked prefill, compilation, and async scheduling are intended
   capabilities. Repair their integration rather than silently disabling them.
-  Keep unsupported configurations explicit; MTP remains outside the agreed scope.
+  MTP is in scope. Capture only the target model's final prompt state, never the
+  draft model's states. Keep upstream runtime limitations explicit.
 - Keep GPU implementation status separate from runtime evidence. CPU tests of
   the GPU wrapper do not establish CUDA graph or async scheduling correctness.
 

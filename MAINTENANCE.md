@@ -65,7 +65,8 @@ these contracts.
 | `compat.py`: packed metadata | `input_batch`, `req_ids`, `requests`, `query_start_loc`, `num_computed_tokens_cpu` | Request order, CPU offsets, query spans, output rows, and padding refer to the same forward pass. |
 | Cache/chunk scheduling | `get_computed_blocks`, `max_cache_hit_length`, `num_computed_tokens`, `async_scheduling` | A cache hit still recomputes the final prompt token; chunk/preemption offsets describe actual computed input tokens. |
 | Model representation | `Qwen3_5Model`, `Qwen3NextModel`, `self.norm`, `language_model` | Trace inherited forwards too: captured output is after final output normalization, before logits, for text and multimodal wrappers. |
-| Runtime validation | `CompilationMode`, `device_config`, `parallel_config`, `speculative_config` | Guard names and meanings still match the supported backend, dtype, quantization, runner, and executor. |
+| MTP | `EagleProposer`, `SpecDecodeBaseProposer`, `Qwen3_5MTP`, `finalize_kv_connector` | Drafter uses a separate outer model, sharing only embeddings/head; target capture precedes drafting and deferred connector finalization. Verify packed prompt offsets during speculative verification. |
+| Runtime validation | `CompilationMode`, `device_config`, `parallel_config`, `speculative_config` | Guard names and meanings still match the supported backend, runner, executor, and normalized MTP method. Dtype/quantization validation belongs to upstream. |
 
 For example:
 

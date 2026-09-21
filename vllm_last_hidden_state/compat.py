@@ -69,7 +69,11 @@ def prompt_batch_rows(runner):
 
 
 def capture_model_forward(runner, connector):
-    """Capture outside compilation and CUDA graph replay on this runner only."""
+    """Capture the target forward, outside compilation and CUDA graph replay.
+
+    In 0.29.0 Qwen MTP's EagleProposer calls its own model directly, not this
+    method. Copying here also precedes drafting and output-buffer reuse.
+    """
     original = runner._model_forward
 
     def forward(*args, **kwargs):
@@ -96,6 +100,8 @@ def install_capture(worker, connector):
     if getattr(worker, "_last_hidden_state_initialized", False):
         return
     if type(runner) is CPUModelRunner:
+        # MTP shares embeddings/lm_head, not this outer target module. Attaching
+        # to an inner shared layer would capture draft forwards as well.
 
         def capture(module, inputs, output):
             connector.capture_batch(runner, output)

@@ -36,10 +36,6 @@ class LastHiddenStateConnector(KVConnectorBase_V1, SupportsHMA):
             )
         if vllm_config.device_config.device_type not in ("cpu", "cuda"):
             raise ValueError("Last hidden state supports CPU or CUDA workers")
-        if vllm_config.model_config.dtype != torch.bfloat16:
-            raise ValueError("The supported Qwen3.5 configuration uses bfloat16")
-        if vllm_config.model_config.quantization not in (None, "compressed-tensors"):
-            raise ValueError("Supported weights are unquantized or compressed-tensors")
         if any(
             size != 1
             for size in (
@@ -51,8 +47,9 @@ class LastHiddenStateConnector(KVConnectorBase_V1, SupportsHMA):
             )
         ):
             raise ValueError("Last hidden state requires a single local worker")
-        if vllm_config.speculative_config is not None:
-            raise ValueError("Last hidden state does not use speculative decoding")
+        speculative = vllm_config.speculative_config
+        if speculative is not None and speculative.method != "mtp":
+            raise ValueError("Last hidden state supports MTP speculative decoding only")
         if vllm_config.compilation_config.mode not in (
             CompilationMode.NONE,
             CompilationMode.DYNAMO_TRACE_ONCE,

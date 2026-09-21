@@ -42,7 +42,7 @@ Start the extension with the same model and runtime options you would give
 
 ```sh
 VLLM_USE_V2_MODEL_RUNNER=0 vllm-last-hidden-state Qwen/Qwen3.5-9B \
-    --dtype bfloat16 --distributed-executor-backend mp
+    --distributed-executor-backend mp
 ```
 
 You can also use `python -m vllm_last_hidden_state.serve`. The launcher chooses
@@ -50,6 +50,29 @@ the Python frontend and activates the endpoint, worker extension, and connector.
 It leaves model, device, scheduling, and compilation settings to you. The example
 explicitly selects the supported V1 runner. CPU-specific environment setup is
 described in the [validation notes](validation/HISTORY.md#cpu-environment-used-by-the-historical-commands).
+
+Enable Qwen3.5 MTP with the ordinary vLLM option:
+
+```sh
+VLLM_USE_V2_MODEL_RUNNER=0 vllm-last-hidden-state numind/NuExtract3-W4A16 \
+    --distributed-executor-backend mp \
+    --speculative-config '{"method":"mtp","num_speculative_tokens":2}'
+```
+
+No `--dtype` or `--quantization` flag is required by this package. vLLM resolves
+the checkpoint defaults and validates its kernels for your hardware. Explicit
+upstream precision options are passed through unchanged. Returned vectors are
+copied to float32 for JSON serialization, independently of model precision.
+MTP drafts tokens for ordinary multi-token generation; extraction still returns the
+target model's last prompt state with a one-token completion.
+
+On the tested CPU build of vLLM 0.29.0, MTP with default prefix caching hits an
+upstream Triton cache-kernel error. Use `--no-enable-prefix-caching` explicitly
+for this CPU MTP configuration. The launcher does not change caching settings.
+This workaround is CPU-specific: on CUDA, leave prefix caching enabled with the
+default Mamba cache mode, `align`. The CUDA kernel path exists in the pinned
+source but has not been tested here; Qwen3.5 MTP rejects cache mode `all`.
+See [MTP validation](validation/MTP-v0.29.0.md) for runtime evidence and limits.
 
 Extraction is opt-in per request:
 
@@ -105,14 +128,20 @@ that replace the same chat handler or worker internals.
   for the exact runtime evidence and remaining gaps. CPU Qwen3.5-0.8B serving
   was exercised in eager and compiled modes. Two image comparisons failed the
   unchanged Transformers numerical thresholds; numerical parity is not guaranteed.
-- Qwen3.5, BF16, unquantized or `compressed-tensors` weights; one local worker
-  using `--distributed-executor-backend mp`.
+- Qwen3.5; one local worker using `--distributed-executor-backend mp`.
+  Dtype and quantization support follow the installed vLLM backend; this extension
+  imposes no additional precision whitelist.
 - Non-streaming extraction with `n=1` and one generated token, via
   `max_completion_tokens=1` or `max_tokens=1`.
 - V1 CPU/GPU runners; eager and compiled capture paths. Prefix caching and chunked
   prefill are implemented. GPU execution, CUDA graphs, and async scheduling need
   hardware validation; CPU execution cannot validate those paths.
-- LoRA, speculative decoding (including MTP), distributed parallelism, and other
+- MTP is accepted; other speculative decoding methods remain unsupported.
+  CPU NuExtract3-W4A16 MTP was exercised with text/images, chunked long prompts,
+  streaming, and mixed requests, using automatic dtype/quantization and the
+  explicit prefix-cache workaround above. Qwen3.5-0.8B MTP also passed in eager
+  and compiled modes. See the [MTP report](validation/MTP-v0.29.0.md).
+- LoRA, distributed parallelism, and other
   KV connectors are unsupported.
 
 Opted-in GPU requests synchronously copy one vector to CPU and use one retrieval
