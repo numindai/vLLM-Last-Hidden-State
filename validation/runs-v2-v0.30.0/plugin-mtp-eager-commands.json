@@ -1,0 +1,108 @@
+{
+  "environment": {
+    "PYTHONPATH": "/home/soren/Documents/numind/vllm_patches/vllm_package:/home/soren/Documents/numind/vllm_patches/vllm_package/vllm",
+    "HF_HUB_OFFLINE": "1",
+    "VLLM_USE_RUST_FRONTEND": "0",
+    "VLLM_USE_V2_MODEL_RUNNER": "1",
+    "VLLM_CPU_KVCACHE_SPACE": "1",
+    "VLLM_CPU_OMP_THREADS_BIND": "nobind",
+    "OMP_NUM_THREADS": "8",
+    "VLLM_WORKER_MULTIPROC_METHOD": "spawn",
+    "VLLM_PLUGINS": "",
+    "VLLM_CACHE_ROOT": "/tmp/vllm-v2-cache",
+    "TRITON_HOME": "/tmp/vllm-v2-triton-cache",
+    "TRITON_CACHE_DIR": "/tmp/vllm-v2-kernels",
+    "TORCHINDUCTOR_CACHE_DIR": "/tmp/vllm-v2-inductor"
+  },
+  "commands": [
+    {
+      "name": "plugin-mtp-eager",
+      "command": [
+        "/tmp/vllm-v2-runtime/bin/python",
+        "-m",
+        "vllm_last_hidden_state.serve",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18430",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "4096",
+        "--max-num-batched-tokens",
+        "1280",
+        "--max-num-seqs",
+        "4",
+        "--skip-mm-profiling",
+        "--enable-chunked-prefill",
+        "--enable-prefix-caching",
+        "--enforce-eager",
+        "--speculative-config",
+        "{\"method\":\"mtp\",\"num_speculative_tokens\":1}"
+      ]
+    },
+    {
+      "name": "mixed-traffic-control",
+      "command": [
+        "/tmp/vllm-v2-runtime/bin/python",
+        "validation/validate_mtp.py",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--url",
+        "http://127.0.0.1:18430",
+        "--snapshot",
+        "/tmp/vllm-v2-plugin-mtp-eager-snapshot.json",
+        "--report",
+        "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v2-v0.30.0/plugin-mtp-eager-mixed.json",
+        "--reference",
+        "/tmp/vllm-v2-plugin-eager-snapshot.json",
+        "--require-mtp"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "short",
+      "command": [
+        "/tmp/vllm-v2-runtime/bin/python",
+        "validation/validate_hidden_state.py",
+        "http",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--url",
+        "http://127.0.0.1:18430",
+        "--reference",
+        "/tmp/vllm-v2-reference.json",
+        "--baseline",
+        "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v2-v0.30.0/baseline-mtp-eager-short.json",
+        "--report",
+        "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v2-v0.30.0/plugin-mtp-eager-short.json"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "long",
+      "command": [
+        "/tmp/vllm-v2-runtime/bin/python",
+        "validation/validate_hidden_state.py",
+        "http",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--url",
+        "http://127.0.0.1:18430",
+        "--reference",
+        "/tmp/vllm-v2-reference-long.json",
+        "--baseline",
+        "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v2-v0.30.0/baseline-mtp-eager-long.json",
+        "--report",
+        "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v2-v0.30.0/plugin-mtp-eager-long.json",
+        "--long-prompts",
+        "--require-prefix-cache-hit"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "ready": true,
+  "server_exit_before_shutdown": null,
+  "server_exit": 0
+}

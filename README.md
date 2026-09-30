@@ -1,107 +1,45 @@
-# vLLM last hidden state
+# vLLM Last Hidden State
 
-An Apache-2.0 licensed extension that returns the final **prompt** token's post-normalization
-hidden state alongside a normal chat completion. It copies one vector from the
-existing forward pass; it does not run a second model pass, pool tokens, or
-normalize the vector to unit length.
+**Get the representation behind the first generated token—through your chat API.**
 
-## Installation
+An open-source extension by [NuMind](https://numind.ai) that returns one hidden-state
+vector alongside a one-token chat completion. Explore instruction-conditioned
+representations of text and images using the model you already serve with vLLM.
+Ordinary generation and streaming continue on the same server.
 
-Use Python 3.12+ and install **vLLM 0.30.0 for your hardware** in your environment
-first. This package deliberately does not install or replace vLLM/PyTorch.
-Install the current GitHub source without Git or SSH credentials:
+[NuExtract Platform](https://nuextract.ai) · [NuExtract3](https://huggingface.co/numind/NuExtract3) · [Upstream PR #57185](https://github.com/vllm-project/vllm/pull/57185) · [Apache-2.0](LICENSE)
+
+## Why use it?
+
+- **One model, two uses.** Serve ordinary chat requests and opt into hidden-state
+  extraction on individual one-token requests.
+- **Text and images.** Capture the final prompt representation after the model
+  processes your instructions, chat template, images, and any assistant prefill.
+- **Reuse the existing computation.** Copy one vector from the target model's
+  forward pass, without a second forward pass, a pooling server, or token-state files.
+- **Use familiar clients.** Send a vLLM-specific extension field through the
+  OpenAI Python client and receive the vector in the same response.
+
+This is a building block for representation analysis and experiments in document
+retrieval, clustering, and classification. It exposes a raw model representation;
+retrieval quality still depends on the model, prompt, and downstream processing.
+
+## Quick start
+
+Use Python 3.12+ with **vLLM 0.30.0 installed for your hardware**. The extension
+keeps your existing vLLM/PyTorch installation intact.
 
 ```sh
 python -m pip install "vllm-last-hidden-state @ https://github.com/numindai/vLLM-Last-Hidden-State/archive/refs/heads/main.zip"
+vllm-last-hidden-state Qwen/Qwen3.5-9B
 ```
 
-For reproducible deployments, replace `refs/heads/main` with a tested full commit
-SHA. The source archive does not download the upstream vLLM submodule, which is
-unnecessary for installation. HTTPS Git installs also work, but require Git and
-may fetch the large upstream submodule:
+For reproducibility, replace `refs/heads/main` with a tested full commit SHA.
+Wheel downloads will also be available through [GitHub releases](https://github.com/numindai/vLLM-Last-Hidden-State/releases)
+as releases are published. See the [maintenance guide](MAINTENANCE.md) for source
+checkouts, development, and release publishing.
 
-```sh
-python -m pip install "vllm-last-hidden-state @ git+https://github.com/numindai/vLLM-Last-Hidden-State.git@main"
-```
-
-Published [GitHub releases](https://github.com/numindai/vLLM-Last-Hidden-State/releases)
-will carry a small `py3-none-any.whl` file. Install its download URL with
-`python -m pip install <wheel-url>`; no source checkout or build is needed.
-PyPI publishing is optional and is not enabled by default. See the
-[release instructions](MAINTENANCE.md#publishing-releases).
-
-To install from a local checkout:
-
-```sh
-python -m pip install .
-```
-
-For development, use `python -m pip install -e .`.
-Both expose the same launcher. Installing the package alone does not enable
-extraction. The package version matches the supported vLLM release: both are
-`0.30.0`. Keep the project version in `pyproject.toml`,
-`compat.SUPPORTED_VLLM_VERSION`, and this compatibility documentation aligned
-when upgrading. The historical extension tag `v0.29.0` is for vLLM 0.29.0 and
-does not contain this upgrade.
-
-The `vllm/` submodule is upstream source pinned to `v0.30.0`
-(`ced6857afa0ea7b2e3f0846a62e1394e90f15607`) for inspection and validation.
-Initialize it when you need that source:
-
-```sh
-git submodule update --init --recursive
-```
-
-The submodule does not control the vLLM installed in your Python environment.
-The launcher, endpoint initialization, and worker initialization check installed
-vLLM metadata. Only `0.30.0` is accepted; local build suffixes such as `+cpu` are
-allowed. Other releases, prereleases, development builds, and missing installations
-produce an error explaining what to install.
-
-## Usage
-
-Start the extension with the same model and runtime options you would give
-`vllm serve`:
-
-```sh
-VLLM_USE_V2_MODEL_RUNNER=0 vllm-last-hidden-state Qwen/Qwen3.5-9B \
-    --distributed-executor-backend mp
-```
-
-You can also use `python -m vllm_last_hidden_state.serve`. The launcher chooses
-the Python frontend and activates the endpoint, worker extension, and connector.
-It leaves model, device, scheduling, and compilation settings to you. The example
-explicitly selects the supported V1 runner. CPU-specific environment setup is
-described in the [validation notes](validation/HISTORY.md#cpu-environment-used-by-the-historical-commands).
-
-Enable Qwen3.5 MTP with the ordinary vLLM option:
-
-```sh
-VLLM_USE_V2_MODEL_RUNNER=0 vllm-last-hidden-state numind/NuExtract3-W4A16 \
-    --distributed-executor-backend mp \
-    --speculative-config '{"method":"mtp","num_speculative_tokens":2}'
-```
-
-No `--dtype` or `--quantization` flag is required by this package. vLLM resolves
-the checkpoint defaults and validates its kernels for your hardware. Explicit
-upstream precision options are passed through unchanged. Returned vectors are
-copied to float32 for JSON serialization, independently of model precision.
-MTP drafts tokens for ordinary multi-token generation; extraction still returns the
-target model's last prompt state with a one-token completion.
-
-CPU MTP is currently blocked on the tested vLLM 0.30.0 build without Triton-CPU.
-The upstream CPU fallbacks do not bind all of the new speculative-kernel
-dispatchers: two speculative tokens fail in draft metadata updates, and one
-speculative token still fails during ordinary multi-token rejection sampling.
-Ordinary vLLM with the extension disabled reproduces the two-token failure.
-Prefix-cached CPU MTP also hits the upstream Mamba precopy kernel error;
-`--no-enable-prefix-caching` alone no longer makes this CPU configuration work.
-The launcher does not alter these settings or patch upstream sampling kernels.
-CUDA MTP remains implemented but untested here; Qwen3.5 MTP rejects Mamba cache
-mode `all`. See the [0.30.0 report](validation/UPGRADE-v0.30.0.md) for failures and
-[historical MTP validation](validation/MTP-v0.29.0.md) for the older working CPU build.
-
-Extraction is opt-in per request:
+With the [OpenAI Python client](https://github.com/openai/openai-python) installed:
 
 ```python
 from openai import OpenAI
@@ -109,7 +47,12 @@ from openai import OpenAI
 client = OpenAI(base_url="http://127.0.0.1:8000/v1", api_key="unused")
 response = client.chat.completions.create(
     model="Qwen/Qwen3.5-9B",
-    messages=[{"role": "user", "content": "Describe a yellow bicycle briefly."}],
+    messages=[
+        {
+            "role": "user",
+            "content": "Summarize this text in one word: A yellow bicycle beside a stone wall.",
+        }
+    ],
     max_completion_tokens=1,
     n=1,
     stream=False,
@@ -119,80 +62,155 @@ response = client.chat.completions.create(
     },
 )
 vector = response.model_dump()["kv_transfer_params"]["last_hidden_state"]
+print(len(vector), vector[:5])
 ```
 
-The vector represents the last input token, including any assistant prefill,
-not the generated token. Images and assistant prefill use ordinary chat request
-fields. Requests without the extraction flag follow the ordinary response path;
-the enabled capture hook still performs a small metadata check.
+Leave out `return_last_hidden_state` for ordinary generation, with your usual
+output length and streaming settings. This flag is an extension to vLLM's
+OpenAI-compatible API, not a standard OpenAI API parameter.
 
-Existing `VLLM_PLUGINS` entries are preserved and `last_hidden_state` is added
-once. If unset, normally enabled non-endpoint plugins are preserved; other endpoint
-plugins are not automatically enabled. Set `VLLM_PLUGINS=""` before launching
-if you want only this extension.
+### Using `vllm serve` directly
 
-The launcher checks effective worker/connector settings using vLLM's parser,
-including YAML configuration and CLI overrides. Matching settings are retained.
-A different worker or connector is rejected instead of silently overwritten.
-If supplying `--kv-transfer-config` yourself, include all three required fields:
+You can use the standard `vllm serve` command instead of the
+`vllm-last-hidden-state` launcher. Install the package in the **same Python
+environment as vLLM**, then supply its activation settings explicitly:
 
-```json
-{
-  "kv_connector": "LastHiddenStateConnector",
-  "kv_connector_module_path": "vllm_last_hidden_state.connector",
-  "kv_role": "kv_producer"
-}
+```sh
+VLLM_PLUGINS=last_hidden_state \
+VLLM_USE_RUST_FRONTEND=0 \
+vllm serve Qwen/Qwen3.5-9B \
+    --distributed-executor-backend mp \
+    --worker-extension-cls vllm_last_hidden_state.worker.LastHiddenStateWorker \
+    --kv-transfer-config '{"kv_connector":"LastHiddenStateConnector","kv_connector_module_path":"vllm_last_hidden_state.connector","kv_role":"kv_producer"}' \
+    --host 127.0.0.1 \
+    --port 8000
 ```
 
-Additional connector options are preserved. An explicit
-`VLLM_USE_RUST_FRONTEND=1` is rejected because this endpoint requires the Python
-frontend. Preserving other plugins does not establish compatibility with plugins
-that replace the same chat handler or worker internals.
+| Setting | Purpose |
+| --- | --- |
+| `VLLM_PLUGINS=last_hidden_state` | Enables the installed endpoint plugin that handles the extraction flag and adds the vector to the chat response. |
+| `VLLM_USE_RUST_FRONTEND=0` | Selects the Python frontend required by this package. |
+| `--distributed-executor-backend mp` | Selects the local multiprocess executor required for worker RPCs. Keep parallelism at one worker. |
+| `--worker-extension-cls …LastHiddenStateWorker` | Adds worker initialization, vector retrieval, and cleanup methods. |
+| `--kv-transfer-config …` | Registers the package's connector by module/class and sets its required `kv_producer` role. Include all three JSON fields exactly as shown. |
+| `--host`, `--port` | Optional ordinary vLLM server settings; the example serves the client above on localhost port 8000. |
+
+Replace the model and append your usual compatible vLLM options, such as
+`--max-model-len` or `--dtype`. Runner selection follows upstream defaults;
+set `VLLM_USE_V2_MODEL_RUNNER=0` or `1` yourself if you want an explicit choice.
+The [supported configurations](#supported-configurations) apply to either launch
+method, including the Triton CPU requirement for CPU V2.
+
+The example enables only this plugin. If you also need other installed plugins,
+include their entry-point names in the comma-separated `VLLM_PLUGINS` value,
+for example `VLLM_PLUGINS=other_plugin,last_hidden_state`. Compatibility with
+plugins that replace the same handler or worker internals is not established.
+
+Use the **same client request shown above**: the launch settings enable the
+capability, while `kv_transfer_params.return_last_hidden_state=true` opts in
+per request. Running plain `vllm serve` without these activation settings does
+not enable this package's extraction endpoint. The convenience launcher supplies
+these required settings for you; direct invocation requires you to keep them
+consistent with any YAML configuration or other CLI options.
+
+## What exactly is returned?
+
+For a fully processed prompt with T active positions, the vector is the final
+layer's state at position T−1, **after the decoder's final output normalization**.
+It is the state used to predict the first generated token, not that generated
+token's own state. The response contains a JSON list of `hidden_size` float32
+values. No token pooling or L2 normalization is applied.
+
+The prompt includes the chat template and assistant boundary. To extract at an
+unfinished assistant message, use `continue_final_message=True` and
+`add_generation_prompt=False` in `extra_body`. Images use the usual chat
+`image_url` content items. The same final-position rule applies in both cases.
+Choose and evaluate your prompting and normalization strategy for your task.
 
 ## Supported configurations
 
-- Version policy: vLLM **0.30.0** only. See the [upgrade report](validation/UPGRADE-v0.30.0.md)
-  for source audit, runtime evidence, and remaining gaps. CPU 9B BF16 short
-  text/image and INT4 text suites passed in eager and compiled modes. Four BF16
-  image comparisons failed the unchanged Transformers thresholds; numerical
-  parity is not guaranteed. Historical 0.29.0 results remain separate.
-- Qwen3.5; one local worker using `--distributed-executor-backend mp`.
-  Dtype and quantization support follow the installed vLLM backend; this extension
-  imposes no additional precision whitelist.
-- Non-streaming extraction with `n=1` and one generated token, via
-  `max_completion_tokens=1` or `max_tokens=1`.
-- V1 CPU/GPU runners; eager and compiled capture paths. Prefix caching and chunked
-  prefill are implemented. GPU execution, CUDA graphs, and async scheduling need
-  hardware validation; CPU execution cannot validate those paths.
-- MTP target-state capture is retained; other speculative methods remain
-  unsupported. CPU MTP on the tested 0.30.0 backend has the upstream failures
-  above. Historical CPU MTP successes on 0.29.0 do not validate 0.30.0.
-- LoRA, distributed parallelism, and other
-  KV connectors are unsupported.
+| Setting | Current scope |
+| --- | --- |
+| vLLM version | **0.30.0**; local build suffixes such as `+cpu` are accepted |
+| Models | Native Qwen3.5 architecture |
+| API | Python `/v1/chat/completions`; extraction requires `n=1`, `stream=False`, and one output token |
+| Execution | One local `mp` worker; CPU or CUDA adapters; V1 and experimental V2 |
+| Scheduling | Prefix caching and chunked prefill implemented and tested on CPU |
+| Speculation | MTP target-state capture; other speculative methods unsupported |
+| Precision | Model dtype/quantization follow the installed vLLM backend |
+| Exclusions | LoRA, distributed parallelism, other KV connectors, and the Rust frontend |
 
-Opted-in GPU requests synchronously copy one vector to CPU and use one retrieval
-RPC. No zero-overhead claim is made. Historical CPU results and their numerical
-limitations are in [HISTORY.md](validation/HISTORY.md).
+The launcher activates the extension and Python frontend and supplies
+`--distributed-executor-backend mp` automatically. It leaves runner selection,
+model precision, scheduling, and compilation to upstream vLLM and your settings.
+Conflicting executor/worker/connector settings are rejected. See
+[advanced configuration](MAINTENANCE.md#launcher-and-advanced-configuration).
 
-## Development
-
-With a hardware-appropriate vLLM installation already available:
+V2 has real CPU eager and compiled coverage on Qwen3.5-0.8B BF16, including mixed
+traffic, streaming, and measured prefix-cache hits. Eager V2 MTP also passes a
+comparison with non-MTP target states while drafting and accepting tokens. CPU
+V2 requires Triton CPU. For example, select V2 and MTP explicitly with:
 
 ```sh
-python -m pip install -e '.[dev]'
-python -m pytest
-ruff check .
-ruff format --check .
+VLLM_USE_V2_MODEL_RUNNER=1 vllm-last-hidden-state Qwen/Qwen3.5-0.8B \
+    --speculative-config '{"method":"mtp","num_speculative_tokens":1}'
 ```
 
-Pytest collects only this package's tests in `validation/`; Ruff excludes the
-upstream submodule. No distribution wheel is required for this workflow.
+**Validation limits:** V2 remains experimental. Some image vectors exceed the
+strict Transformers comparison tolerance on both V1 and V2. GPU execution,
+CUDA graph replay, and async scheduling are not runtime-validated for this
+package. The synchronous vector copy and retrieval RPC have a cost; these checks
+are not performance benchmarks. See the [V2 results](validation/V2-v0.30.0.md)
+and [v0.30.0 validation report](validation/UPGRADE-v0.30.0.md) for exact coverage,
+including older CPU MTP failures without Triton CPU.
 
-`compat.py` owns version checks, upstream CLI parsing, runner inspection,
-batch metadata access, and CPU/GPU capture installation. `connector.py` selects
-and stores the vector, `worker.py` exposes retrieval/cleanup RPCs, and
-`endpoint.py` augments the existing chat response.
+## Research background
 
-For upgrades and actual model/HTTP validation, use [MAINTENANCE.md](MAINTENANCE.md),
-the [report template](validation/UPGRADE_REPORT_TEMPLATE.md), and the
-[historical reproduction commands](validation/HISTORY.md#validation).
+Prompt-conditioned hidden-state representations have an established academic
+history. This package makes one such readout available through a serving API;
+it does not introduce a new embedding method or reproduce the papers' results.
+
+- **[Scaling Sentence Embeddings with Large Language Models (PromptEOL)](https://aclanthology.org/2024.findings-emnlp.181/)**
+  (Findings of EMNLP 2024) studies one-word completion prompts for causal-language-model
+  sentence representations, including settings with and without fine-tuning.
+- **[PromptReps](https://aclanthology.org/2024.emnlp-main.250/)** (EMNLP 2024)
+  uses the final prompt token's hidden state and next-token logits for zero-shot
+  document retrieval. Its dense representation is closely related to the state
+  exposed here; this package does not implement its sparse retrieval component.
+- **[E5-V: Universal Embeddings with Multimodal Large Language Models](https://arxiv.org/abs/2407.12580)**
+  (2024) explores prompted text/image representations, including a training-free
+  setting and a model trained contrastively on text pairs.
+- **[FreeRet: MLLMs as Training-Free Retrievers](https://arxiv.org/abs/2509.24621)**
+  (2025) investigates prompting and representation choice for multimodal retrieval.
+  Its attention-level readout differs from the final post-normalization state
+  returned here and is not implemented by this extension.
+
+A correctly extracted state is not automatically a good similarity embedding.
+Evaluate retrieval quality separately from tensor correctness, and cite the
+underlying methods when using them in research.
+
+## Built by NuMind
+
+We build [NuExtract](https://nuextract.ai) to turn documents into usable data.
+[NuExtract3](https://huggingface.co/numind/NuExtract3) is our open-weight 4B
+vision-language model for structured extraction and document-to-Markdown
+conversion, with multilingual text and image inputs.
+
+Working with invoices, receipts, forms, or contracts? **[Try the NuExtract
+platform and API](https://nuextract.ai)** to extract structured JSON and document
+content without managing an inference server. For deployment in your own
+environment, explore [NuExtract Enterprise](https://about.nuextract.ai/).
+
+## Upstream and contributing
+
+We are proposing native support in **[vLLM PR #57185](https://github.com/vllm-project/vllm/pull/57185)**.
+The standalone package provides an alternative installation path for this
+capability. Both use `kv_transfer_params.return_last_hidden_state` and
+`kv_transfer_params.last_hidden_state`; supported configurations and transport
+implementations differ. The PR includes additional position/layer metadata,
+offline generation, and Python/Rust completion interfaces. Package tests do not
+certify the PR, and the plugin is not required to use a build containing it.
+
+Issues and contributions are welcome on [GitHub](https://github.com/numindai/vLLM-Last-Hidden-State).
+For implementation details, tests, and releases, see [MAINTENANCE.md](MAINTENANCE.md).
+The package is licensed under [Apache-2.0](LICENSE).

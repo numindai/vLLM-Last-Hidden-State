@@ -1,0 +1,200 @@
+[
+  {
+    "case": 0,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.28125,
+    "mean_abs_error": 0.059240132570266724,
+    "cosine": 0.9998272657394409,
+    "relative_l2_error": 0.01866019517183304,
+    "seconds": 1.1460910929890815,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  },
+  {
+    "case": 1,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.25,
+    "mean_abs_error": 0.04615122079849243,
+    "cosine": 0.9998947381973267,
+    "relative_l2_error": 0.014545422047376633,
+    "seconds": 0.9286220819922164,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  },
+  {
+    "case": 2,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1704,
+    "last_token_id": 328,
+    "max_abs_error": 0.625,
+    "mean_abs_error": 0.08869749307632446,
+    "cosine": 0.9996007680892944,
+    "relative_l2_error": 0.0284019336104393,
+    "seconds": 0.9990228139795363,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  },
+  {
+    "case": 0,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.34375,
+    "mean_abs_error": 0.06414484977722168,
+    "cosine": 0.9997930526733398,
+    "relative_l2_error": 0.020351676270365715,
+    "seconds": 2.640895502991043,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  },
+  {
+    "case": 1,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1627,
+    "last_token_id": 328,
+    "max_abs_error": 0.25,
+    "mean_abs_error": 0.04611670970916748,
+    "cosine": 0.999895453453064,
+    "relative_l2_error": 0.014473828487098217,
+    "seconds": 2.809440593002364,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  },
+  {
+    "case": 2,
+    "reference_backend": "transformers",
+    "hidden_size": 1024,
+    "position": 1704,
+    "last_token_id": 328,
+    "max_abs_error": 0.5,
+    "mean_abs_error": 0.09627911448478699,
+    "cosine": 0.9995454549789429,
+    "relative_l2_error": 0.03029664047062397,
+    "seconds": 2.809805999015225,
+    "completion": {
+      "finish_reason": "length",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "A",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning": null
+      },
+      "stop_reason": null,
+      "token_ids": [
+        32
+      ],
+      "routed_experts": null
+    },
+    "prefix_cache_hit_tokens_during_suite": 7040.0
+  }
+]

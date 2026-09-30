@@ -3,6 +3,22 @@
 Date: 2026-09-23. Historical [0.29.0](UPGRADE-v0.29.0.md) and
 [MTP](MTP-v0.29.0.md) results remain unchanged and do not certify this release.
 
+## Current status — 2026-09-30
+
+This report retains the chronological upgrade evidence below. The package now
+has V1 and experimental V2 adapters; [V2 runtime validation](V2-v0.30.0.md)
+adds CPU eager/compiled, mixed-traffic, and eager MTP results with Triton CPU.
+The earlier missing-Triton and MTP failures describe the environments tested at
+those stages, not a blanket inability to run CPU MTP. Image numerical failures
+remain visible; GPU/graphs/async are not certified by the CPU runs.
+
+The launcher now leaves `VLLM_USE_V2_MODEL_RUNNER` untouched and supplies `mp`
+when omitted. After removing the V1 default and its local runner-value check,
+49 startup tests and targeted Ruff checks passed. Earlier 113-test results
+refer to the suite before removal of the obsolete invalid-runner test.
+See the [README](../README.md) for current user guidance and
+[MAINTENANCE.md](../MAINTENANCE.md) for development and releases.
+
 ## Revisions and environment
 
 - Starting extension commit: `d188f611372224e27ed3bacc2759fd4cdfed17c7` (`0.1.0`); upgrade branch:
@@ -348,3 +364,103 @@ This packaging smoke test does not add model or GPU runtime evidence.
 Only `main` is intended for the initial GitHub push. Historical local release
 tags are not migrated: the old local `v0.30.0` still has package version `0.1.0`.
 New public releases must target the prepared source with matching metadata.
+
+
+## Experimental V2 adapter — 2026-09-30
+
+Implementation is in the `v2-support` working tree based on extension commit
+`0d33283f2d586d897def3b49672d41b38c82d99b`, alongside the pending launcher defaults
+and tag-release workflow changes. The upstream submodule remains unmodified at
+`ced6857afa0ea7b2e3f0846a62e1394e90f15607` (vLLM 0.30.0).
+
+At this initial adapter stage the launcher defaulted to V1, but preserved explicit
+`VLLM_USE_V2_MODEL_RUNNER=1`. Both runners use the existing request flag,
+connector result store, response handle, and retrieval RPC. No vLLM core changes
+or new hidden-state cache were introduced.
+
+### Source audit
+
+- `gpu/model_runner.py:execute_model` stores target hidden states and their
+  `InputBatch` in a new `ExecuteModelState` after eager, piecewise, or full-graph
+  execution. `sample_tokens` subsequently clears that state, samples, drafts MTP
+  tokens, and finalizes connector output. The adapter wraps the instance's
+  execute call and synchronously owns selected CPU rows before that next phase.
+- `cpu/model_runner.py:CPUModelRunner` inherits V2 GPU execution unchanged and
+  only overrides warmup. Both concrete V2 classes are accepted; arbitrary
+  subclasses are still rejected. V1 keeps its previous CPU hook/GPU wrapper.
+- `InputBatch.req_ids`, `num_computed_tokens_np`, and `query_start_loc_np` are in
+  batch order. `idx_mapping_np` indexes request-state slots and must not be used
+  to index those arrays. The adapter passes normalized rows to the same selector
+  and vector validator as V1.
+- The scheduler sends resumed V2 requests in `scheduled_new_reqs` with original
+  prompt IDs and sampling parameters. The adapter retains only these capture
+  fields for opted-in requests, excluding multimodal features and intermediate
+  tensors. Finished/preempted IDs are removed before replacements are added.
+  Result retention remains independent so completion cleanup cannot race the RPC.
+- Dummy calls do not update capture metadata or copy rows. No-forward calls and
+  unchanged/stale execute states cannot trigger capture. The concrete model,
+  single-worker executor, precision, LoRA, and speculative-method guards remain.
+
+### Local validation
+
+```sh
+# Run from the package root against its pinned upstream source.
+HF_HUB_OFFLINE=1 PYTHONPATH="$PWD:$PWD/vllm" ../vllm/.venv/bin/python -m pytest -q
+# 113 passed, 15 warnings.
+/tmp/vllm-public-check/bin/python -m ruff check .
+/tmp/vllm-public-check/bin/python -m ruff format --check .
+git diff --check
+# Passed. The temporary lint environment has Ruff 0.16.9.
+```
+
+Tests use real `NewRequestData`, `SchedulerOutput`, and `SamplingParams` with
+CPU tensors replacing model execution. New coverage includes reordered batches,
+padded output, cached-prefix offsets, chunk completion, preemption/recomputation,
+finish cleanup before retrieval, cancellation, reused request IDs, invalid vectors,
+dummy/no-forward steps, and owned target vectors surviving simulated draft buffer
+reuse. CPU/GPU V2 installation is idempotent and uses no model forward hook.
+At this stage launcher tests checked default V1 and explicit V1/V2 selection before CLI parsing; the later launcher change above supersedes that policy.
+These fixtures do not establish real MTP or GPU correctness.
+
+The runtime probe imported the actual V2 CPU/GPU classes and confirmed that their
+`execute_model` implementation is shared. Source resolved to this package's pinned
+submodule; installed metadata reported `0.30.0+cpu`, with PyTorch `2.13.0+cpu`,
+`torch.cuda.is_available() == False`, and `HAS_TRITON == False`.
+
+With `HF_HUB_OFFLINE=1`, `VLLM_USE_V2_MODEL_RUNNER=1`, and the same `PYTHONPATH`,
+the following ordinary upstream configuration (without installing any capture
+hook) fails before model execution:
+
+```python
+from vllm.config import ModelConfig, VllmConfig
+
+model = ModelConfig(
+    model="/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+    max_model_len=1024,
+)
+VllmConfig(model_config=model)
+# ValidationError: Model Runner V2 requires Triton.
+```
+
+No native rebuild was performed for this adapter. CPU V2 model inference requires
+a Triton CPU backend; the environment used for this initial probe had none. GPU eager execution,
+compilation/graph replay, async scheduling, real MTP, Transformers text/image
+parity, quantized inference, HTTP concurrency, and real preemption are **untested
+for V2**. Historical V1 results do not certify V2.
+
+Next validation should use a hardware-appropriate 0.30.0 installation. Run the
+existing reference/baseline/HTTP helpers with V2 explicitly selected in both the
+ordinary baseline and extension server, first eager, then compiled/graph modes.
+Include cold chunked prefill and measured prefix hits, concurrent ordinary and
+extraction requests, cancellation, real preemption, and MTP target/draft isolation.
+Keep V2 experimental until those runtime checks pass. Nothing was pushed.
+
+### Runtime follow-up
+
+The initial missing-Triton prerequisite above was subsequently resolved in an
+isolated environment by building the CPU backend pinned by vLLM 0.30.0. Real
+CPU eager and compiled V2 inference, mixed traffic, and long-prompt HTTP checks
+now have runtime evidence. The short image reference still exceeds the strict
+numerical tolerance. See [V2 runtime validation](V2-v0.30.0.md) for the results,
+commands, and remaining gaps; the initial source/fixture-only status above is
+historical.

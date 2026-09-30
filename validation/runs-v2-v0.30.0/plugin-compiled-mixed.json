@@ -1,0 +1,87 @@
+{
+  "model": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 0,
+    "spec_decode_num_draft_tokens_total": 0,
+    "spec_decode_num_accepted_tokens_total": 0,
+    "prefix_cache_hits_total": 6400.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0,
+      "relative_l2": 0.0,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999627470970154,
+      "relative_l2": 0.008639024570584297,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999649524688721,
+      "relative_l2": 0.00840197503566742,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999609589576721,
+      "relative_l2": 0.008869069628417492,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": [
+    {
+      "cosine": 0.9999300241470337,
+      "relative_l2": 0.011840704828500748,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999397993087769,
+      "relative_l2": 0.011005581356585026,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9995690584182739,
+      "relative_l2": 0.02935842052102089,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998908042907715,
+      "relative_l2": 0.014806986786425114,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999078512191772,
+      "relative_l2": 0.013584289699792862,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9995433688163757,
+      "relative_l2": 0.03025929629802704,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

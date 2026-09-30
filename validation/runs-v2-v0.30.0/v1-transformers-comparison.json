@@ -1,0 +1,44 @@
+[
+  {
+    "case": 0,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.999894917011261,
+    "relative_l2": 0.014521858654916286
+  },
+  {
+    "case": 1,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.9998923540115356,
+    "relative_l2": 0.014687181450426579
+  },
+  {
+    "case": 2,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.9985449314117432,
+    "relative_l2": 0.05399680137634277
+  },
+  {
+    "case": 3,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.9998037219047546,
+    "relative_l2": 0.01982603594660759
+  },
+  {
+    "case": 4,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.9998695850372314,
+    "relative_l2": 0.01616152748465538
+  },
+  {
+    "case": 5,
+    "token_ids_match": true,
+    "first_token_match": true,
+    "cosine": 0.9991185069084167,
+    "relative_l2": 0.042003847658634186
+  }
+]

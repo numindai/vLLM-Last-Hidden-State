@@ -28,6 +28,13 @@ def prepare_arguments(arguments):
         for part in (arg.split("=", 1) if arg.startswith("--config=") else [arg])
     ]
     settings = parse_serve_settings(arguments)
+    executor = settings.distributed_executor_backend
+    if executor not in (None, "mp"):
+        raise ValueError(
+            "--distributed-executor-backend conflicts with hidden-state extraction: "
+            f"expected 'mp', got {executor!r}. Remove the option or use 'mp' "
+            "(also check your YAML config)."
+        )
     worker = settings.worker_extension_cls
     if worker and worker != WORKER_CLASS:
         raise ValueError(
@@ -46,6 +53,8 @@ def prepare_arguments(arguments):
                     "to use the extension's connector, or provide all three "
                     "required connector fields (also check your YAML config)."
                 )
+    if executor is None:
+        arguments += ["--distributed-executor-backend", "mp"]
     if not worker:
         arguments += ["--worker-extension-cls", WORKER_CLASS]
     if connector is None:

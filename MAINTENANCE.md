@@ -1,10 +1,91 @@
 # Updating alongside vLLM
 
-This is the upgrade runbook for the open-source package. The
-[README](README.md#development) describes each implementation file and
-the request lifecycle; its [compatibility section](README.md#supported-configurations)
-describes current restrictions. Version and activation conflicts are checked at startup; model/runtime
+This is the contributor, configuration, and release guide for the open-source
+package. The [README](README.md) introduces the public API, research background,
+and [supported configurations](README.md#supported-configurations).
+[EMBEDDINGS.md](EMBEDDINGS.md) specifies the tensor contract and implementation.
+Version and activation conflicts are checked at startup; model/runtime
 restrictions are checked in the connector and compatibility module.
+
+Current evidence: [vLLM 0.30.0](validation/UPGRADE-v0.30.0.md) and
+[V2 CPU runtime tests](validation/V2-v0.30.0.md). Native integration is proposed
+in [vLLM PR #57185](https://github.com/vllm-project/vllm/pull/57185); package
+validation does not certify that separate implementation.
+
+## Development
+
+Use Python 3.12+ and a hardware-appropriate vLLM 0.30.0 installation. The package
+version and supported vLLM release are both `0.30.0`; hardware suffixes such as
+`+cpu` are accepted, while development/prerelease/post releases are rejected.
+Installing this extension does not install or replace vLLM or PyTorch.
+
+From a source checkout:
+
+```sh
+python -m pip install -e '.[dev]'
+python -m pytest
+ruff check .
+ruff format --check .
+```
+
+For a non-editable local install, use `python -m pip install .`. Pytest collects
+only `validation/`; Ruff excludes the upstream submodule. To inspect or validate
+against the pinned upstream source, initialize it separately:
+
+```sh
+git submodule update --init --recursive
+```
+
+The `vllm/` submodule is pinned to v0.30.0 (`ced6857afa0ea7b2e3f0846a62e1394e90f15607`).
+It does not select the vLLM installed in your environment. Source archive and
+wheel installations need no submodule; `git+https` installs may fetch it, so a
+release wheel or GitHub archive is preferable for users.
+
+`compat.py` owns version checks, upstream parsing, and runner-specific capture.
+`connector.py` selects/stores vectors and returns completion handles; `worker.py`
+provides retrieval/cleanup RPCs. `endpoint.py` augments the ordinary chat handler.
+Read the [implementation contract](EMBEDDINGS.md) before changing these boundaries.
+
+## Launcher and advanced configuration
+
+`vllm-last-hidden-state MODEL ...` and
+`python -m vllm_last_hidden_state.serve MODEL ...` expose the same launcher.
+Installation alone does not enable the endpoint. Runtime/model options are
+forwarded to upstream, with activation arguments added when omitted.
+
+- The launcher supplies `--distributed-executor-backend mp` and the required
+  worker extension/connector. It validates effective YAML, dotted JSON, aliases,
+  and CLI precedence using upstream's parser. Conflicting settings fail rather
+  than being silently overwritten.
+- Runner selection follows upstream and the caller's environment;
+  `VLLM_USE_V2_MODEL_RUNNER` is neither set nor validated by the launcher.
+- The Python frontend is required. An explicit `VLLM_USE_RUST_FRONTEND=1`
+  conflicts; otherwise the launcher sets it to `0`.
+- Existing `VLLM_PLUGINS` entries are retained and `last_hidden_state` is added
+  once. When unset, normally enabled non-endpoint plugins are preserved; other
+  endpoint plugins are not automatically enabled. Set `VLLM_PLUGINS=""` to
+  activate only this extension. This does not establish interoperability with
+  plugins that replace the same chat handler or worker internals.
+- No dtype, quantization, compilation, cache, or scheduling option is forced.
+  CPU-specific runtime requirements are operator-owned; see the recorded
+  environments in the validation reports.
+
+If supplying `--kv-transfer-config` explicitly, include all three fields below.
+Additional connector options are preserved:
+
+```json
+{
+  "kv_connector": "LastHiddenStateConnector",
+  "kv_connector_module_path": "vllm_last_hidden_state.connector",
+  "kv_role": "kv_producer"
+}
+```
+
+MTP is the only accepted speculative method. Capture must remain on the target
+model before drafting. Eager CPU V2 with Triton CPU and one draft token passed
+real MTP checks; earlier CPU configurations without Triton CPU failed upstream
+sampling kernels. These are different runtime configurations, not contradictory
+results. Compiled/GPU MTP remain unvalidated in the V2 report.
 
 ## Start an upgrade
 
@@ -14,9 +95,8 @@ restrictions are checked in the connector and compatibility module.
    `vllm/` submodule. Keep the package and its validation history together. An
    upstream clone alone does not contain this extension.
 2. Read this package's `AGENTS.md` and the target checkout's applicable agent
-   instructions. `EMBEDDINGS.md` in this repository is the original
-   brief; the README records later decisions on launcher behavior and supported
-   execution modes.
+   instructions. `EMBEDDINGS.md` in this repository is the current implementation
+   contract; the README records the public API and supported execution modes.
 3. Record the target with `git -C vllm rev-parse HEAD`, `git -C vllm describe --always --dirty`,
    and `git -C vllm status --short`. Record Python and installed dependencies with
    `.venv/bin/python --version` and `uv pip freeze`. A checkout SHA alone does not
@@ -43,8 +123,16 @@ the submodule alone does not certify compatibility. Never change installation
 metadata to bypass the guard for an old native build.
 
 The launcher uses the upstream serve parser for preflight checks, then executes
-upstream with the original runtime options and missing activation flags. Test YAML,
+upstream with the original runtime options and missing activation flags, including
+the required `--distributed-executor-backend mp`. Reject other effective executors;
+preserve explicit `mp` and CLI overrides of YAML. Test YAML,
 dotted JSON, aliases, and CLI precedence when upgrading this parser integration.
+
+The launcher leaves `VLLM_USE_V2_MODEL_RUNNER` untouched; upstream vLLM owns
+its default and validation. V2 is experimental. Retain the concrete-runner
+guard because upstream features can require or force a runner. Test that an
+unset or explicitly selected runner stays unchanged before upstream argument
+parsing and before executing the server.
 
 ## Audit the upstream contracts
 
@@ -64,6 +152,8 @@ these contracts.
 | `worker.py` initialization | `worker_extension_cls`, `get_model`, `get_kv_transfer_group` | Extension methods do not conflict with worker methods; initialization reaches the actual runner after model warmup. |
 | `compat.py`: CPU capture | `CPUModelRunner`, `register_forward_hook`, `execute_model` | Outer-model hook still runs outside the compiled decoder and sees its final normalized states. |
 | `compat.py`: GPU capture | `GPUModelRunner`, `_model_forward`, `CUDAGraphWrapper`, `execute_model` | Wrapped method executes on every real batch, including graph replay, before corresponding batch metadata or output storage can be reused. |
+| `compat.py`: V2 capture | `gpu/model_runner.py:execute_model/sample_tokens`, `cpu/model_runner.py`, `ExecuteModelState`, `InputBatch` | CPU V2 inherits GPU V2 execution. Capture fresh target state after the real execute call, before sampling/drafting, with batch-ordered computed offsets/query spans; do not use request-state slot indices as batch indices. |
+| `compat.py`: V2 request lifecycle | `SchedulerOutput`, `NewRequestData`, `finish_requests`, `scheduled_resumed_reqs` | V2 resends resumed requests as new data. Retain only capture metadata, remove finished/preempted IDs, then add replacements. Skip dummy/no-forward steps without reading stale execution state. |
 | `compat.py`: packed metadata | `input_batch`, `req_ids`, `requests`, `query_start_loc`, `num_computed_tokens_cpu` | Request order, CPU offsets, query spans, output rows, and padding refer to the same forward pass. |
 | Cache/chunk scheduling | `get_computed_blocks`, `max_cache_hit_length`, `num_computed_tokens`, `async_scheduling` | A cache hit still recomputes the final prompt token; chunk/preemption offsets describe actual computed input tokens. |
 | Model representation | `Qwen3_5Model`, `Qwen3NextModel`, `self.norm`, `language_model` | Trace inherited forwards too: captured output is after final output normalization, before logits, for text and multimodal wrappers. |
@@ -234,7 +324,8 @@ Suggested prompt for the next Codex session (replace the target placeholder):
 
 The public repository is
 https://github.com/numindai/vLLM-Last-Hidden-State. Its `release.yml` workflow
-builds and checks a wheel and source distribution on main pushes and pull requests.
+builds and checks a wheel and source distribution on main pushes, pull requests,
+and `v*` tag pushes. Only tag pushes create GitHub releases; a main push does not.
 It does not initialize the upstream submodule or run GPU/model validation.
 Keep running the applicable validation above before releasing a supported upgrade.
 
@@ -242,22 +333,33 @@ To publish a GitHub release:
 
 1. Ensure the package version, supported vLLM version, and validation report agree.
 2. Commit and push the prepared source to `main` and check the build workflow.
-3. Create a GitHub release with a new tag `v<package-version>` targeting that
-   commit. The workflow checks the tag against `pyproject.toml`, then attaches
-   the wheel and source distribution to the release.
+3. Create and push a new tag `v<package-version>` targeting that commit. The
+   workflow checks the tag against `pyproject.toml`, builds and validates the
+   packages, then creates a GitHub release with generated notes and attaches
+   the wheel and source distribution. No manual release creation is needed.
 4. Users can install the wheel's download URL with `python -m pip install URL`.
    The vLLM backend must already be installed in the same environment.
 
-The migration checkout has a historical local `v0.30.0` tag whose package
-metadata is still `0.1.0`. It was not published to the new repository. Do not
-push that old tag or use `git push --tags`; create the public release from the
-prepared GitHub commit instead. Preserve historical validation records.
+Create a signed tag on the prepared release commit, then push only the intended
+branch and tag. If the tag already exists locally, inspect its target first;
+do not recreate a correct tag or overwrite a published release.
+
+```sh
+git tag -s v0.30.0 -m 'vLLM Last Hidden State 0.30.0'
+git push origin main
+git push origin v0.30.0
+```
+
+Pushing the tag triggers the release workflow. These commands do not overwrite
+an existing remote tag. For later versions, substitute the new package version.
+Avoid `git push --tags` so historical migration tags are not published by
+accident. Preserve historical validation records.
 
 ### Optional PyPI publishing
 
 PyPI gives users the shortest installation command:
 `python -m pip install vllm-last-hidden-state==0.30.0`. This becomes available
-only after a successful PyPI publication; a GitHub push alone does not publish
+only after a successful PyPI publication; pushing `main` alone does not publish
 to PyPI. Install hardware-appropriate vLLM 0.30.0 first.
 
 The workflow's PyPI job is disabled unless the repository Actions variable
@@ -272,7 +374,7 @@ The workflow's PyPI job is disabled unless the repository Actions variable
    - Environment: `pypi`
 2. Create the GitHub environment `pypi` and configure its required reviewers.
 3. Set `PYPI_PUBLISH=true` under repository Actions variables.
-4. Publish the GitHub release. The dedicated PyPI job downloads the same checked
+4. Push the version tag. The dedicated PyPI job downloads the same checked
    distributions and publishes them using OIDC; no stored PyPI API token is needed.
 
 PyPI project-name availability and publisher configuration must be checked by

@@ -2,8 +2,10 @@
 
 Archived on 2026-09-21 before the package maintenance update. Runtime results
 below apply to vLLM `23cfaad49701c497def53552b23317335431f72a`, not v0.29.0.
-Use the [current README](../README.md) for installation and activation and the
-[v0.29.0 report](UPGRADE-v0.29.0.md) for current evidence. Historical descriptions
+Use the [current README](../README.md) for installation and activation, the
+[v0.30.0 report](UPGRADE-v0.30.0.md) for release evidence, and the
+[V2 report](V2-v0.30.0.md) for CPU eager/compiled/MTP follow-up. The
+[v0.29.0 report](UPGRADE-v0.29.0.md) is also historical. Historical descriptions
 of launcher behavior and file locations are preserved as context.
 
 ## CPU environment used by the historical commands

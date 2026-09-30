@@ -6,6 +6,16 @@ read [MAINTENANCE.md](MAINTENANCE.md) before editing, then use the
 The [README](README.md) owns the client contract, launch examples, and recorded
 compatibility. Parent repository instructions still apply.
 
+## Public documentation
+
+Keep the README focused on users: purpose, API, a short quick start, supported
+scope, published research references, and a concise NuMind/NuExtract platform
+introduction. Keep contributor setup, internal architecture, and release
+operations in MAINTENANCE.md and EMBEDDINGS.md. Link upstream PR #57185 and
+separate the package's validation from the core proposal. Do not publish private
+research results as benchmark claims. Preserve dated evidence in validation
+reports and put current-status links before superseded guidance.
+
 ## Decisions to preserve
 
 - Keep changes additive within this package. If an upstream change removes a
@@ -13,7 +23,9 @@ compatibility. Parent repository instructions still apply.
   expanding into vLLM core. This project is an independently distributed extension, not a vLLM fork.
 - Keep `vllm_last_hidden_state/serve.py` a pass-through launcher: upstream argument
   parsing for conflict checks, plugin/worker/connector activation, and selection
-  of the Python frontend. Preserve compatible plugin settings. Model, device,
+  of the Python frontend. Leave runner selection and its environment variables
+  to upstream vLLM and the caller. Supply the required `mp` executor when omitted and
+  reject incompatible effective executor settings. Preserve compatible plugin settings. Model, device,
   compilation, scheduling, and performance defaults belong to the caller.
 - Keep vLLM version policy and runner-specific assumptions in `compat.py`. The
   submodule pin does not prove which vLLM is installed or validate its native build.
@@ -28,6 +40,10 @@ compatibility. Parent repository instructions still apply.
   draft model's states. Keep upstream runtime limitations explicit.
 - Keep GPU implementation status separate from runtime evidence. CPU tests of
   the GPU wrapper do not establish CUDA graph or async scheduling correctness.
+- Keep the V2 adapter outside model forward hooks: capture fresh target
+  `execute_model_state` before sampling/drafting and output-buffer reuse. Track
+  opted-in request metadata across chunks; remove it on finish/preemption and
+  re-register resumed requests. Dummy/no-forward steps must not capture stale state.
 
 ## Completing an upgrade
 

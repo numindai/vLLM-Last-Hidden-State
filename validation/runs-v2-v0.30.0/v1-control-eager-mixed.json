@@ -1,0 +1,50 @@
+{
+  "model": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 0,
+    "spec_decode_num_draft_tokens_total": 0,
+    "spec_decode_num_accepted_tokens_total": 0,
+    "prefix_cache_hits_total": 6400.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999197721481323,
+      "relative_l2": 0.01268043089658022,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999273419380188,
+      "relative_l2": 0.012064860202372074,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.999884307384491,
+      "relative_l2": 0.015232549048960209,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": null,
+  "streaming": true,
+  "mixed_traffic": true
+}

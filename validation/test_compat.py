@@ -23,10 +23,18 @@ def upstream_types(monkeypatch):
     class GPU:
         pass
 
+    class GPUV2:
+        pass
+
+    class CPUV2(GPUV2):
+        pass
+
     for path, symbol, cls in [
         ("vllm.model_executor.models.qwen3_5", "Qwen3_5Model", Model),
         ("vllm.v1.worker.cpu_model_runner", "CPUModelRunner", CPU),
         ("vllm.v1.worker.gpu_model_runner", "GPUModelRunner", GPU),
+        ("vllm.v1.worker.gpu.model_runner", "GPUModelRunner", GPUV2),
+        ("vllm.v1.worker.cpu.model_runner", "CPUModelRunner", CPUV2),
     ]:
         monkeypatch.setitem(sys.modules, path, SimpleNamespace(**{symbol: cls}))
     return Model, CPU, GPU
@@ -73,8 +81,26 @@ def test_unknown_runner_is_rejected_before_installing_hook(upstream_types):
     model_type, _, _ = upstream_types
     outer = SimpleNamespace(model=model_type(), register_forward_hook=Mock())
     worker = SimpleNamespace(get_model=lambda: outer, model_runner=object())
-    with pytest.raises(ValueError, match="V1 CPU or GPU model runner"):
+    with pytest.raises(ValueError, match="supported V1 or V2 model runner"):
         install_capture(worker, object())
+    outer.register_forward_hook.assert_not_called()
+
+
+@pytest.mark.parametrize("device", ["cpu", "gpu"])
+def test_v2_capture_is_installed_once_without_model_forward_hook(
+    upstream_types, device
+):
+    model_type, _, _ = upstream_types
+    module = sys.modules[f"vllm.v1.worker.{device}.model_runner"]
+    runner_type = getattr(module, f"{device.upper()}ModelRunner")
+    runner = runner_type()
+    runner.execute_model = Mock()
+    outer = SimpleNamespace(model=model_type(), register_forward_hook=Mock())
+    worker = SimpleNamespace(get_model=lambda: outer, model_runner=runner)
+    install_capture(worker, object())
+    wrapper = runner.execute_model
+    install_capture(worker, object())
+    assert runner.execute_model is wrapper
     outer.register_forward_hook.assert_not_called()
 
 

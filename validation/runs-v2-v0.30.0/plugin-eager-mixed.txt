@@ -1,0 +1,87 @@
+{
+  "model": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 0,
+    "spec_decode_num_draft_tokens_total": 0,
+    "spec_decode_num_accepted_tokens_total": 0,
+    "prefix_cache_hits_total": 6400.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999135136604309,
+      "relative_l2": 0.01320035569369793,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999303221702576,
+      "relative_l2": 0.011811284348368645,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999223351478577,
+      "relative_l2": 0.012470479123294353,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": [
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9995764493942261,
+      "relative_l2": 0.02911430224776268,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9995306134223938,
+      "relative_l2": 0.030681531876325607,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

@@ -96,12 +96,16 @@ class LastHiddenStateConnector(KVConnectorBase_V1, SupportsHMA):
     def request_finished_all_groups(self, request, block_ids):
         return self.request_finished(request, block_ids)
 
-    @torch.inference_mode()
     def capture_batch(self, runner, output):
         """Copy the final prompt row from each opted-in request's packed span."""
+        self.capture_rows(prompt_batch_rows(runner), output)
+
+    @torch.inference_mode()
+    def capture_rows(self, rows, output):
+        """Copy final prompt rows using metadata from the same target forward."""
         self._expire()
         hidden_states = output[0] if isinstance(output, tuple) else output
-        for request, computed_tokens, span_start, span_end in prompt_batch_rows(runner):
+        for request, computed_tokens, span_start, span_end in rows:
             sampling = request.sampling_params
             params = (sampling.extra_args or {}).get("kv_transfer_params") or {}
             handle = params.get(HANDLE)

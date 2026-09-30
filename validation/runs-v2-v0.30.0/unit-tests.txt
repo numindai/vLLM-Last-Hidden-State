@@ -1,0 +1,14 @@
+Running 113 items in this shard
+........................................................................ [ 63%]
+.........................................                                [100%]
+=============================== warnings summary ===============================
+../vllm/.venv/lib/python3.12/site-packages/torch/jit/_script.py:365: 14 warnings
+  /home/soren/Documents/numind/vllm_patches/vllm/.venv/lib/python3.12/site-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+validation/test_extension.py::test_cancelled_chat_discards_the_same_internal_handle
+  /home/soren/Documents/numind/vllm_patches/vllm_package/vllm_last_hidden_state/endpoint.py:35: DeprecationWarning: max_tokens is deprecated in favor of the max_completion_tokens field
+    else request.max_tokens
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+113 passed, 15 warnings in 8.79s

@@ -14,6 +14,11 @@ from vllm_last_hidden_state import compat, serve
 from vllm_last_hidden_state.endpoint import LastHiddenStatePlugin
 
 
+@pytest.fixture(autouse=True)
+def isolate_runner_selection(monkeypatch):
+    monkeypatch.delenv("VLLM_USE_V2_MODEL_RUNNER", raising=False)
+
+
 @pytest.mark.parametrize("version", ["0.30.0", "0.30.0+cpu", "0.30.0+cu130"])
 def test_supported_release_with_hardware_suffix(monkeypatch, version):
     monkeypatch.setattr(compat.metadata, "version", lambda _: version)
@@ -100,6 +105,7 @@ def test_original_arguments_are_preserved_and_activation_is_added():
     args = serve.prepare_arguments(original)
     assert args[: len(original)] == original
     settings = compat.parse_serve_settings(args)
+    assert settings.distributed_executor_backend == "mp"
     assert settings.worker_extension_cls == serve.WORKER_CLASS
     assert settings.kv_transfer_config.kv_connector == "LastHiddenStateConnector"
     assert settings.port == 8123
@@ -118,12 +124,61 @@ def test_matching_configuration_preserves_extra_connector_options():
     config = {**serve.CONNECTOR_CONFIG, "kv_buffer_size": 2048}
     args = [
         "example/model",
+        "--distributed-executor-backend",
+        "mp",
         "--worker-extension-cls",
         serve.WORKER_CLASS,
         "--kv-transfer-config",
         json.dumps(config),
     ]
     assert serve.prepare_arguments(args) == args
+
+
+@pytest.mark.parametrize(
+    "option", ["--distributed-executor-backend", "--distributed_executor_backend"]
+)
+@pytest.mark.parametrize("executor", ["mp", "uni", "ray"])
+@pytest.mark.parametrize("equals", [False, True])
+def test_executor_configuration_is_preserved_or_rejected(option, executor, equals):
+    args = ["example/model"] + (
+        [f"{option}={executor}"] if equals else [option, executor]
+    )
+    if executor == "mp":
+        forwarded = serve.prepare_arguments(args)
+        assert forwarded[: len(args)] == args
+        assert (
+            compat.parse_serve_settings(forwarded).distributed_executor_backend == "mp"
+        )
+        assert forwarded.count("mp") + forwarded.count(f"{option}=mp") == 1
+    else:
+        with pytest.raises(ValueError, match="distributed-executor-backend conflicts"):
+            serve.prepare_arguments(args)
+
+
+@pytest.mark.parametrize(
+    "executor,override", [("mp", None), ("uni", None), ("uni", "mp"), ("mp", "uni")]
+)
+def test_executor_uses_effective_yaml_and_cli_configuration(
+    tmp_path, executor, override
+):
+    config = tmp_path / "server.yaml"
+    config.write_text(
+        f"model: example/model\ndistributed-executor-backend: {executor}\n"
+    )
+    args = ["--config", str(config)]
+    if override is not None:
+        args += ["--distributed-executor-backend", override]
+    if (override or executor) == "mp":
+        forwarded = serve.prepare_arguments(args)
+        assert (
+            compat.parse_serve_settings(forwarded).distributed_executor_backend == "mp"
+        )
+        assert forwarded.count("--distributed-executor-backend") == (
+            override is not None
+        )
+    else:
+        with pytest.raises(ValueError, match="distributed-executor-backend conflicts"):
+            serve.prepare_arguments(args)
 
 
 @pytest.mark.parametrize(
@@ -186,7 +241,10 @@ def test_yaml_connector_conflict(tmp_path):
         serve.prepare_arguments(["--config", str(config)])
 
 
-def test_main_executes_same_python_with_forwarded_arguments(monkeypatch):
+@pytest.mark.parametrize("runner", [None, "0", "1"])
+def test_main_executes_same_python_with_forwarded_arguments(monkeypatch, runner):
+    if runner is not None:
+        monkeypatch.setenv("VLLM_USE_V2_MODEL_RUNNER", runner)
     monkeypatch.setattr(compat.metadata, "version", lambda _: "0.30.0+cpu")
     monkeypatch.setenv("VLLM_PLUGINS", "other")
     monkeypatch.delenv("VLLM_USE_RUST_FRONTEND", raising=False)
@@ -195,6 +253,13 @@ def test_main_executes_same_python_with_forwarded_arguments(monkeypatch):
     )
     execute = Mock()
     monkeypatch.setattr(serve.os, "execv", execute)
+    original_parse = serve.parse_serve_settings
+
+    def parse_with_selected_runner(arguments):
+        assert serve.os.environ.get("VLLM_USE_V2_MODEL_RUNNER") == runner
+        return original_parse(arguments)
+
+    monkeypatch.setattr(serve, "parse_serve_settings", parse_with_selected_runner)
     serve.main()
     executable, args = execute.call_args.args
     assert executable == sys.executable
@@ -208,3 +273,4 @@ def test_main_executes_same_python_with_forwarded_arguments(monkeypatch):
         "8123",
     ]
     assert serve.os.environ["VLLM_PLUGINS"] == "other,last_hidden_state"
+    assert serve.os.environ.get("VLLM_USE_V2_MODEL_RUNNER") == runner

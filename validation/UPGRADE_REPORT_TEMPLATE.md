@@ -23,7 +23,9 @@ preserve relevant failed-run output. See the [runbook](../MAINTENANCE.md).
 | Endpoint loading, Python frontend, route delegation | TODO | TODO |
 | Request metadata, connector lifecycle, response handle | TODO | TODO |
 | Worker initialization and RPC ordering | TODO | TODO |
-| CPU/GPU capture boundary, output normalization | TODO | TODO |
+| V1/V2 CPU/GPU capture boundary, output normalization | TODO | TODO |
+| V2 fresh execution state, batch order, preemption/resume metadata | TODO | TODO |
+| MTP target/draft ownership and capture-before-drafting | TODO | TODO |
 | Packed rows, cached prefix, chunks, preemption | TODO | TODO |
 | Async scheduling, graph replay, buffer ownership | TODO | TODO |
 | Runtime guards, quantization, runner selection | TODO | TODO |
@@ -39,6 +41,9 @@ or include the necessary excerpts; temporary absolute paths alone are insufficie
 | Check | Status | Evidence / failure / reason untested |
 | --- | --- | --- |
 | Unit checks and repository hooks | untested | TODO |
+| Launcher leaves runner environment untouched; supplies/validates mp | untested | TODO |
+| V2 CPU eager and compiled with Triton CPU | untested | TODO |
+| MTP vs non-MTP control with measured draft/accepted counters | untested | TODO |
 | CPU BF16 eager: text + image | untested | TODO |
 | CPU BF16 compiled: text + image | untested | TODO |
 | CPU INT4 eager and compiled: text | untested | TODO |
@@ -67,3 +72,5 @@ as well as successful controls. A same-vLLM control is not Transformers parity.
 - Failures, regressions, or environment blockers and next reproduction steps:
 - Unsupported configurations / changed requirements:
 - README/runbook updates and any core changes (with justification):
+- Relationship to upstream PR #57185; distinguish package evidence from core evidence:
+- Earlier reports superseded for current guidance (preserve original results):

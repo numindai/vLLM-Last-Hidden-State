@@ -1,0 +1,87 @@
+{
+  "model": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 49.0,
+    "spec_decode_num_draft_tokens_total": 49.0,
+    "spec_decode_num_accepted_tokens_total": 27.0,
+    "prefix_cache_hits_total": 2560.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.0000003576278687,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999333620071411,
+      "relative_l2": 0.011657933704555035,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999384880065918,
+      "relative_l2": 0.011107547208666801,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999340176582336,
+      "relative_l2": 0.011495644226670265,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999332427978516,
+      "relative_l2": 0.011580479331314564,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": [
+    {
+      "cosine": 0.9999085068702698,
+      "relative_l2": 0.013558775186538696,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999046325683594,
+      "relative_l2": 0.013847005553543568,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998538494110107,
+      "relative_l2": 0.017107445746660233,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998970627784729,
+      "relative_l2": 0.014369322918355465,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998997449874878,
+      "relative_l2": 0.014174935407936573,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998648762702942,
+      "relative_l2": 0.01647832989692688,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

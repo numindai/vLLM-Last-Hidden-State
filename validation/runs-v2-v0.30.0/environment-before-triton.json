@@ -1,0 +1,12 @@
+{
+  "python": "3.12.13",
+  "vllm_file": "/home/soren/Documents/numind/vllm_patches/vllm_package/vllm/vllm/__init__.py",
+  "packages": {
+    "vllm": "0.30.0+cpu",
+    "torch": "2.13.0+cpu",
+    "transformers": "5.16.1",
+    "triton": "3.8.0",
+    "vllm-last-hidden-state": "0.30.0"
+  },
+  "cuda": false
+}

@@ -1,5 +1,10 @@
 # vLLM 0.29.0 compatibility report
 
+> Historical v0.29.0 evidence. Current release coverage is in
+> [UPGRADE-v0.30.0.md](UPGRADE-v0.30.0.md) and [V2-v0.30.0.md](V2-v0.30.0.md).
+> Commands, versions, and results below are preserved for their original runs;
+> they do not describe current launcher defaults or certify v0.30.0.
+
 Date: 2026-09-21. This report supersedes no historical numerical results; the
 previous results remain in [HISTORY.md](HISTORY.md) and their original JSON files.
 
