@@ -9,7 +9,7 @@ preserve relevant failed-run output. See the [runbook](../MAINTENANCE.md).
 
 - Previous tested vLLM revision/report:
 - Target vLLM revision and dirty state:
-- Package version and private commit or saved source artifact:
+- Extension package version (must equal `compat.SUPPORTED_VLLM_VERSION` and target vLLM release) and extension commit or saved source artifact:
 - Installed vLLM version/source path and native build provenance:
 - Python, PyTorch, Transformers, compressed-tensors, OpenAI client versions:
 - OS, CPU/GPU, accelerator runtime/driver, available memory:

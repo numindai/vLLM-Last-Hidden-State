@@ -20,9 +20,11 @@ Do not return all token states, all layer states, pooled embeddings, input token
 embeddings, or logits. Despite this file's name, this is a generation feature,
 not a request to implement or use `/v1/embeddings`.
 
-This is for private use. Do not open an upstream issue or PR, publish anything,
-or maintain a vLLM fork. Upstream acceptance and a general-purpose implementation
-are not goals. Minimize installation effort and maintenance across upgrades.
+This extension is distributed publicly at
+https://github.com/numindai/vLLM-Last-Hidden-State under Apache-2.0. Keep it
+independently installable without maintaining a vLLM fork. Minimize installation
+effort and maintenance across upgrades. The README owns the current public API
+and supported configurations; this brief records the original implementation scope.
 
 ## Required API behavior
 

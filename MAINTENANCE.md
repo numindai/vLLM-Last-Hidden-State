@@ -1,6 +1,6 @@
 # Updating alongside vLLM
 
-This is the upgrade runbook for the private package. The
+This is the upgrade runbook for the open-source package. The
 [README](README.md#development) describes each implementation file and
 the request lifecycle; its [compatibility section](README.md#supported-configurations)
 describes current restrictions. Version and activation conflicts are checked at startup; model/runtime
@@ -34,11 +34,13 @@ a dedicated directory, with separate filenames per checkpoint and configuration.
 Use [UPGRADE_REPORT_TEMPLATE.md](validation/UPGRADE_REPORT_TEMPLATE.md) for the
 durable report; raw vectors and full environment dumps need not enter the package.
 
-The supported version is centralized in `compat.SUPPORTED_VLLM_VERSION`. Hardware
-local suffixes are accepted, but prereleases/dev/post releases are not. Update the
-version policy only alongside the source audit and a new report; changing the
-submodule alone does not certify compatibility. Never change installation metadata
-to bypass the guard for an old native build.
+Keep the extension package version in `pyproject.toml`,
+`compat.SUPPORTED_VLLM_VERSION`, and the README compatibility summary equal to the
+supported vLLM release (for example, all are `0.30.0`). Bump them together for an
+upgrade, alongside the source audit and a new report. Hardware local suffixes are
+accepted for the installed vLLM, but prereleases/dev/post releases are not. Changing
+the submodule alone does not certify compatibility. Never change installation
+metadata to bypass the guard for an old native build.
 
 The launcher uses the upstream serve parser for preflight checks, then executes
 upstream with the original runtime options and missing activation flags. Test YAML,
@@ -227,3 +229,55 @@ Suggested prompt for the next Codex session (replace the target placeholder):
 > maintenance guide, audit the upstream contracts, implement compatibility fixes,
 > run available validation, and save an upgrade report. Preserve the API and
 > pass-through launcher. Document unavailable GPU validation explicitly.
+
+## Publishing releases
+
+The public repository is
+https://github.com/numindai/vLLM-Last-Hidden-State. Its `release.yml` workflow
+builds and checks a wheel and source distribution on main pushes and pull requests.
+It does not initialize the upstream submodule or run GPU/model validation.
+Keep running the applicable validation above before releasing a supported upgrade.
+
+To publish a GitHub release:
+
+1. Ensure the package version, supported vLLM version, and validation report agree.
+2. Commit and push the prepared source to `main` and check the build workflow.
+3. Create a GitHub release with a new tag `v<package-version>` targeting that
+   commit. The workflow checks the tag against `pyproject.toml`, then attaches
+   the wheel and source distribution to the release.
+4. Users can install the wheel's download URL with `python -m pip install URL`.
+   The vLLM backend must already be installed in the same environment.
+
+The migration checkout has a historical local `v0.30.0` tag whose package
+metadata is still `0.1.0`. It was not published to the new repository. Do not
+push that old tag or use `git push --tags`; create the public release from the
+prepared GitHub commit instead. Preserve historical validation records.
+
+### Optional PyPI publishing
+
+PyPI gives users the shortest installation command:
+`python -m pip install vllm-last-hidden-state==0.30.0`. This becomes available
+only after a successful PyPI publication; a GitHub push alone does not publish
+to PyPI. Install hardware-appropriate vLLM 0.30.0 first.
+
+The workflow's PyPI job is disabled unless the repository Actions variable
+`PYPI_PUBLISH` is exactly `true`. Before enabling it:
+
+1. On PyPI, configure a pending Trusted Publisher for a new project (or an
+   existing publisher if you already own the project):
+   - Project: `vllm-last-hidden-state`
+   - Owner: `numindai`
+   - Repository: `vLLM-Last-Hidden-State`
+   - Workflow: `release.yml`
+   - Environment: `pypi`
+2. Create the GitHub environment `pypi` and configure its required reviewers.
+3. Set `PYPI_PUBLISH=true` under repository Actions variables.
+4. Publish the GitHub release. The dedicated PyPI job downloads the same checked
+   distributions and publishes them using OIDC; no stored PyPI API token is needed.
+
+PyPI project-name availability and publisher configuration must be checked by
+the owner. PyPI does not allow replacing an uploaded version. Do not enable the
+job until the account and environment are configured.
+
+See the [PyPA publishing guide](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
+for Trusted Publishing setup.

@@ -1,0 +1,96 @@
+name: Build and publish package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          submodules: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check release version
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+          from pathlib import Path
+          version = tomllib.loads(Path('pyproject.toml').read_text())['project']['version']
+          if os.environ['RELEASE_TAG'] != f'v{version}':
+              raise SystemExit(f'Release tag must be v{version}')
+          PY
+      - name: Build and validate distributions
+        run: |
+          python -m pip install build twine
+          python -m build
+          python -m twine check --strict dist/*
+      - name: Smoke-test the wheel without vLLM
+        run: |
+          python -m pip install dist/*.whl
+          cd /tmp
+          python - <<'PY'
+          from importlib.metadata import distribution
+          from vllm_last_hidden_state import FLAG
+          from vllm_last_hidden_state.compat import SUPPORTED_VLLM_VERSION
+          package = distribution('vllm-last-hidden-state')
+          assert package.version == SUPPORTED_VLLM_VERSION
+          assert FLAG == 'return_last_hidden_state'
+          assert any(ep.name == 'vllm-last-hidden-state' and ep.group == 'console_scripts'
+                     for ep in package.entry_points)
+          assert any(ep.name == 'last_hidden_state' and ep.group == 'vllm.endpoint_plugins'
+                     for ep in package.entry_points)
+          PY
+      - uses: actions/upload-artifact@v5
+        with:
+          name: distributions
+          path: dist/*
+          if-no-files-found: error
+
+  github-release:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          name: distributions
+          path: dist
+      - name: Attach wheel and source distribution
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/*
+
+  pypi:
+    if: github.event_name == 'release' && vars.PYPI_PUBLISH == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/vllm-last-hidden-state
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          name: distributions
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1

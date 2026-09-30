@@ -7,6 +7,9 @@ Date: 2026-09-23. Historical [0.29.0](UPGRADE-v0.29.0.md) and
 
 - Starting extension commit: `d188f611372224e27ed3bacc2759fd4cdfed17c7` (`0.1.0`); upgrade branch:
   `codex/vllm-0.30.0`. The package changes and this report are the upgrade artifact.
+- The extension metadata was initially left at `0.1.0`; corrected to `0.30.0`
+  afterward so it matches the supported vLLM release. Future upgrades must keep
+  `pyproject.toml`, `compat.SUPPORTED_VLLM_VERSION`, and the README version aligned.
 - Previous upstream: `98dff2a81d747d1dba01a47f939f48c3526d4206` (v0.29.0).
 - Target: tag `v0.30.0`, commit `ced6857afa0ea7b2e3f0846a62e1394e90f15607`.
   `git describe --always --dirty` returns `ced6857` because the release tag is
@@ -320,3 +323,28 @@ All temporary validation servers were stopped; ports 18330 and 18331 were
 verified closed. Final upstream `git status --short` is empty. Package changes
 and new evidence remain in the working tree on `codex/vllm-0.30.0`; no tag,
 push, or upstream PR was created.
+
+
+## Public GitHub packaging — 2026-09-30
+
+Prepared publication to `numindai/vLLM-Last-Hidden-State`. Added an Apache-2.0
+license matching the source SPDX headers, public repository metadata, archive
+installation instructions, and GitHub build/release automation. The PyPI job is
+opt-in and requires an owner-configured Trusted Publisher. No capture or serving
+behavior changed. Existing package-version corrections to `0.30.0` are retained.
+
+Validation against the pinned source with the existing CPU test environment:
+`HF_HUB_OFFLINE=1 PYTHONPATH="$PWD:$PWD/vllm" ../vllm/.venv/bin/python -m pytest -q`
+passed all 86 tests. Ruff check/format and `git diff --check` passed.
+
+An isolated Python 3.12 environment built both distributions with
+`python -m build --no-isolation`, then ran `python -m twine check --strict`.
+Both passed. The wheel was installed without vLLM into that environment;
+imports, version, console entry point, and endpoint-plugin entry point passed
+from outside the source tree. Wheel size was 17,910 bytes and source distribution
+19,041 bytes. Both exclude the upstream checkout and validation artifacts.
+This packaging smoke test does not add model or GPU runtime evidence.
+
+Only `main` is intended for the initial GitHub push. Historical local release
+tags are not migrated: the old local `v0.30.0` still has package version `0.1.0`.
+New public releases must target the prepared source with matching metadata.

@@ -1,6 +1,6 @@
 # vLLM last hidden state
 
-A private extension that returns the final **prompt** token's post-normalization
+An Apache-2.0 licensed extension that returns the final **prompt** token's post-normalization
 hidden state alongside a normal chat completion. It copies one vector from the
 existing forward pass; it does not run a second model pass, pool tokens, or
 normalize the vector to unit length.
@@ -9,7 +9,28 @@ normalize the vector to unit length.
 
 Use Python 3.12+ and install **vLLM 0.30.0 for your hardware** in your environment
 first. This package deliberately does not install or replace vLLM/PyTorch.
-Install the extension from this checkout:
+Install the current GitHub source without Git or SSH credentials:
+
+```sh
+python -m pip install "vllm-last-hidden-state @ https://github.com/numindai/vLLM-Last-Hidden-State/archive/refs/heads/main.zip"
+```
+
+For reproducible deployments, replace `refs/heads/main` with a tested full commit
+SHA. The source archive does not download the upstream vLLM submodule, which is
+unnecessary for installation. HTTPS Git installs also work, but require Git and
+may fetch the large upstream submodule:
+
+```sh
+python -m pip install "vllm-last-hidden-state @ git+https://github.com/numindai/vLLM-Last-Hidden-State.git@main"
+```
+
+Published [GitHub releases](https://github.com/numindai/vLLM-Last-Hidden-State/releases)
+will carry a small `py3-none-any.whl` file. Install its download URL with
+`python -m pip install <wheel-url>`; no source checkout or build is needed.
+PyPI publishing is optional and is not enabled by default. See the
+[release instructions](MAINTENANCE.md#publishing-releases).
+
+To install from a local checkout:
 
 ```sh
 python -m pip install .
@@ -17,9 +38,11 @@ python -m pip install .
 
 For development, use `python -m pip install -e .`.
 Both expose the same launcher. Installing the package alone does not enable
-extraction. The Python package version remains `0.1.0`; the compatibility policy
-below identifies the required vLLM release. The historical extension tag
-`v0.29.0` is for vLLM 0.29.0 and does not contain this upgrade.
+extraction. The package version matches the supported vLLM release: both are
+`0.30.0`. Keep the project version in `pyproject.toml`,
+`compat.SUPPORTED_VLLM_VERSION`, and this compatibility documentation aligned
+when upgrading. The historical extension tag `v0.29.0` is for vLLM 0.29.0 and
+does not contain this upgrade.
 
 The `vllm/` submodule is upstream source pinned to `v0.30.0`
 (`ced6857afa0ea7b2e3f0846a62e1394e90f15607`) for inspection and validation.

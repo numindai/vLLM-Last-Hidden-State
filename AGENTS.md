@@ -1,6 +1,6 @@
 # Maintaining the last-hidden-state package
 
-This directory is a private, separately installable vLLM extension. For an upgrade,
+This directory is an open-source, separately installable vLLM extension. For an upgrade,
 read [MAINTENANCE.md](MAINTENANCE.md) before editing, then use the
 [upgrade report template](validation/UPGRADE_REPORT_TEMPLATE.md) to record evidence.
 The [README](README.md) owns the client contract, launch examples, and recorded
@@ -10,7 +10,7 @@ compatibility. Parent repository instructions still apply.
 
 - Keep changes additive within this package. If an upstream change removes a
   necessary hook, explain the missing contract and smallest fallback before
-  expanding into vLLM core. This project is for private use, not an upstream PR.
+  expanding into vLLM core. This project is an independently distributed extension, not a vLLM fork.
 - Keep `vllm_last_hidden_state/serve.py` a pass-through launcher: upstream argument
   parsing for conflict checks, plugin/worker/connector activation, and selection
   of the Python frontend. Preserve compatible plugin settings. Model, device,
