@@ -1,0 +1,210 @@
+[
+  {
+    "suite": "eager-short",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 0.9990071058273315,
+    "max_relative_l2": 0.04467019811272621,
+    "cache_hit_tokens": null,
+    "evidence": "eager-short.json"
+  },
+  {
+    "suite": "eager-long",
+    "status": "fail",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 3,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.9989632368087769,
+    "max_relative_l2": 0.04553864151239395,
+    "cache_hit_tokens": null,
+    "evidence": "eager-long-failure.json"
+  },
+  {
+    "suite": "compiled-short",
+    "status": "fail",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 3,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 0.9984844326972961,
+    "max_relative_l2": 0.0551551952958107,
+    "cache_hit_tokens": null,
+    "evidence": "compiled-short-failure.json"
+  },
+  {
+    "suite": "compiled-long",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.999233603477478,
+    "max_relative_l2": 0.03915105387568474,
+    "cache_hit_tokens": 12800.0,
+    "evidence": "compiled-long.json"
+  },
+  {
+    "suite": "eager-bf16-9b-short",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 6,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 0.9991515874862671,
+    "max_relative_l2": 0.04121046140789986,
+    "cache_hit_tokens": null,
+    "evidence": "eager-bf16-9b-short.json"
+  },
+  {
+    "suite": "eager-bf16-9b-long",
+    "status": "fail",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 3,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.9982903003692627,
+    "max_relative_l2": 0.05850378796458244,
+    "cache_hit_tokens": null,
+    "evidence": "eager-bf16-9b-long-failure.json"
+  },
+  {
+    "suite": "compiled-bf16-9b-short",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 6,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 0.9991725087165833,
+    "max_relative_l2": 0.04074007645249367,
+    "cache_hit_tokens": null,
+    "evidence": "compiled-bf16-9b-short.json"
+  },
+  {
+    "suite": "compiled-bf16-9b-long",
+    "status": "fail",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 3,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.9983974695205688,
+    "max_relative_l2": 0.05662646144628525,
+    "cache_hit_tokens": null,
+    "evidence": "compiled-bf16-9b-long-failure.json"
+  },
+  {
+    "suite": "eager-int4-short",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 4,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      28
+    ],
+    "min_cosine": 0.9998770952224731,
+    "max_relative_l2": 0.015794437378644943,
+    "cache_hit_tokens": null,
+    "evidence": "eager-int4-short.json"
+  },
+  {
+    "suite": "compiled-int4-short",
+    "status": "pass",
+    "reference_backend": "transformers",
+    "comparisons_recorded": 4,
+    "hidden_size": 4096,
+    "prompt_lengths": [
+      28
+    ],
+    "min_cosine": 0.9997698664665222,
+    "max_relative_l2": 0.021593770012259483,
+    "cache_hit_tokens": null,
+    "evidence": "compiled-int4-short.json"
+  },
+  {
+    "suite": "eager-control-short",
+    "status": "pass",
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 1.0000001192092896,
+    "max_relative_l2": 0.0,
+    "cache_hit_tokens": null,
+    "evidence": "eager-control-short.json"
+  },
+  {
+    "suite": "eager-control-long",
+    "status": "pass",
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.9998893141746521,
+    "max_relative_l2": 0.014940513297915459,
+    "cache_hit_tokens": 12800.0,
+    "evidence": "eager-control-long.json"
+  },
+  {
+    "suite": "compiled-control-short",
+    "status": "pass",
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      28,
+      105
+    ],
+    "min_cosine": 0.9998270273208618,
+    "max_relative_l2": 0.018619045615196228,
+    "cache_hit_tokens": null,
+    "evidence": "compiled-control-short.json"
+  },
+  {
+    "suite": "compiled-control-long",
+    "status": "pass",
+    "reference_backend": "vllm_control_eager_no_cache_no_chunk",
+    "comparisons_recorded": 6,
+    "hidden_size": 1024,
+    "prompt_lengths": [
+      1628,
+      1705
+    ],
+    "min_cosine": 0.9998592138290405,
+    "max_relative_l2": 0.01686158776283264,
+    "cache_hit_tokens": 12800.0,
+    "evidence": "compiled-control-long.json"
+  }
+]

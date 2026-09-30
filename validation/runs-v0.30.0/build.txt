@@ -1,0 +1,645 @@
+/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_scm/_integration/version_inference.py:222: UserWarning: version of None already set
+  warnings.warn(f"version of {self.dist_name} already set")
+running build_ext
+Using MAX_JOBS=8 as the number of jobs.
+-- The CXX compiler identification is GNU 16.2.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Build type: RelWithDebInfo
+-- Target device: cpu
+-- Found Python: /home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python (found version "3.12.13") found components: Interpreter Development.Module Development.SABIModule
+-- Found python matching: /home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python.
+CMake Warning at .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:22 (message):
+  library kineto not found.
+Call Stack (most recent call first):
+  .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:119 (append_torchlib_if_found)
+  CMakeLists.txt:112 (find_package)
+
+
+-- Found Torch: /home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/torch/lib/libtorch.so
+-- Performing Test COMPILER_SUPPORTS_AMX_FP8_FLAG
+-- Performing Test COMPILER_SUPPORTS_AMX_FP8_FLAG - Success
+-- Downloading oneDNN from GitHub
+CMake Warning (deprecated) at /tmp/hidden-state-v030-deps/onednn-src/CMakeLists.txt:36 (cmake_policy):
+  The OLD behavior for policy CMP0146 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- The C compiler identification is GNU 16.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- DNNL_TARGET_ARCH: X64
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found OpenMP_C: -fopenmp (found version "5.2")
+-- Found OpenMP_CXX: -fopenmp (found version "5.2")
+-- Found OpenMP: TRUE (found version "5.2")
+-- Found OpenCL headers: /tmp/hidden-state-v030-deps/onednn-src/third_party/opencl
+-- Found Git: /usr/bin/git (found version "2.55.0")
+-- Enabled testing coverage: CI
+-- Enabled workload: INFERENCE
+-- Enabled primitives: MATMUL;REORDER
+-- Enabled primitive CPU ISA: ALL
+-- Enabled primitive GPU ISA: ALL
+-- Enabled GeMM kernels ISA: ALL
+-- Primitive cache is enabled
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- CPU extension (AVX512F + BF16 + VNNI + AMX) compile flags: -fopenmp;-DVLLM_CPU_EXTENSION;-fno-tree-pre;-mf16c;-mavx512f;-mavx512vl;-mavx512bw;-mavx512dq;-mamx-bf16;-mamx-tile;-mavx512bf16;-mavx512vnni;-mamx-fp8
+-- CPU extension (AVX512F) compile flags: -fopenmp;-DVLLM_CPU_EXTENSION;-fno-tree-pre;-mf16c;-mavx512f;-mavx512vl;-mavx512bw;-mavx512dq
+-- CPU extension (AVX2) compile flags: -fopenmp;-DVLLM_CPU_EXTENSION;-fno-tree-pre;-mf16c;-mavx2
+-- Generating CPU attention dispatch header
+-- CPU extension (AVX512F + BF16 + VNNI + AMX) source files: csrc/cpu/sgl-kernels/fla.cpp;csrc/cpu/shm.cpp;csrc/cpu/cpu_wna16.cpp;csrc/cpu/cpu_fused_moe.cpp;csrc/cpu/utils.cpp;csrc/cpu/spec_decode_utils.cpp;csrc/cpu/cpu_attn.cpp;csrc/cpu/dnnl_kernels.cpp;csrc/cpu/mamba_cpu.cpp;csrc/cpu/torch_bindings.cpp;csrc/cpu/activation.cpp;csrc/cpu/layernorm.cpp;csrc/cpu/mla_decode.cpp;csrc/cpu/pos_encoding.cpp;csrc/moe/dynamic_4bit_int_moe_cpu.cpp csrc/cpu/sgl-kernels/conv.cpp;csrc/cpu/sgl-kernels/gemm.cpp;csrc/cpu/sgl-kernels/gemm_int8.cpp;csrc/cpu/sgl-kernels/gemm_fp8.cpp;csrc/cpu/sgl-kernels/gemm_int4.cpp;csrc/cpu/sgl-kernels/moe.cpp;csrc/cpu/sgl-kernels/moe_int8.cpp;csrc/cpu/sgl-kernels/moe_int4.cpp;csrc/cpu/sgl-kernels/moe_fp8.cpp;csrc/cpu/sgl-kernels/bmm.cpp;csrc/cpu/sgl-kernels/decode.cpp;csrc/cpu/sgl-kernels/extend.cpp;csrc/cpu/sgl-kernels/mla_cache.cpp;csrc/cpu/sgl-kernels/mhc.cpp;csrc/cpu/sgl-kernels/store_cache.cpp;csrc/cpu/sgl-kernels/flash_mla.cpp;csrc/cpu/sgl-kernels/compressor.cpp;csrc/cpu/sgl-kernels/paged_mqa_logits.cpp;csrc/cpu/sgl-kernels/topk.cpp;csrc/cpu/sgl-kernels/indexer.cpp
+-- CPU extension (AVX512F) source files: csrc/cpu/sgl-kernels/fla.cpp;csrc/cpu/shm.cpp;csrc/cpu/cpu_wna16.cpp;csrc/cpu/cpu_fused_moe.cpp;csrc/cpu/utils.cpp;csrc/cpu/spec_decode_utils.cpp;csrc/cpu/cpu_attn.cpp;csrc/cpu/dnnl_kernels.cpp;csrc/cpu/mamba_cpu.cpp;csrc/cpu/torch_bindings.cpp;csrc/cpu/activation.cpp;csrc/cpu/layernorm.cpp;csrc/cpu/mla_decode.cpp;csrc/cpu/pos_encoding.cpp;csrc/moe/dynamic_4bit_int_moe_cpu.cpp
+-- CPU extension (AVX2) source files: csrc/cpu/sgl-kernels/fla.cpp;csrc/cpu/cpu_fused_moe.cpp;csrc/cpu/utils.cpp;csrc/cpu/spec_decode_utils.cpp;csrc/cpu/cpu_attn.cpp;csrc/cpu/mamba_cpu.cpp;csrc/cpu/dnnl_kernels.cpp;csrc/cpu/torch_bindings.cpp;csrc/cpu/activation.cpp;csrc/cpu/layernorm.cpp;csrc/cpu/mla_decode.cpp;csrc/cpu/pos_encoding.cpp;csrc/moe/dynamic_4bit_int_moe_cpu.cpp
+-- AMX-FP8 (Diamond Rapids) enabled
+-- Enabling C extension.
+-- Configuring done (3.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/soren/Documents/numind/vllm_package/vllm/build/temp-v030
+Using MAX_JOBS=8 as the number of jobs.
+[1/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/bfloat16.cpp.o
+[2/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/convolution_pd.cpp.o
+[3/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/broadcast_strategy.cpp.o
+[4/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/dnnl_debug_autogenerated.cpp.o
+[5/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/cache_blob_id.cpp.o
+[6/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/dnnl_threadpool.cpp.o
+[7/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/batch_normalization.cpp.o
+[8/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/concat.cpp.o
+[9/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/binary.cpp.o
+[10/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/dnnl_debug.cpp.o
+[11/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/experimental.cpp.o
+[12/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/convolution.cpp.o
+[13/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/deconvolution.cpp.o
+[14/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/float4.cpp.o
+[15/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/engine.cpp.o
+[16/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/float8.cpp.o
+[17/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/fpmath_mode.cpp.o
+[18/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/eltwise.cpp.o
+[19/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/ittnotify.cpp.o
+[20/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/gated_mlp_iface.cpp.o
+[21/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/impl_list_item.cpp.o
+[22/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/gemm.cpp.o
+[23/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/group_normalization.cpp.o
+[24/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/kernel_cache.cpp.o
+[25/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/inner_product.cpp.o
+[26/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/lrn.cpp.o
+[27/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_debug.cpp.o
+[28/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/layer_normalization.cpp.o
+[29/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_storage.cpp.o
+[30/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory.cpp.o
+[31/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_tracking.cpp.o
+[32/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/matmul.cpp.o
+[33/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/pooling.cpp.o
+[34/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/prelu.cpp.o
+[35/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_attr_quant.cpp.o
+[36/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_cache.cpp.o
+[37/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_desc_iface.cpp.o
+[38/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_desc_wrapper.cpp.o
+[39/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_attr.cpp.o
+[40/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_exec_types.cpp.o
+[41/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_desc.cpp.o
+[42/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_hashing.cpp.o
+[43/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/query.cpp.o
+[44/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_iface.cpp.o
+[45/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/rw_mutex.cpp.o
+[46/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/reduction.cpp.o
+[47/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/resampling.cpp.o
+[48/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/reorder.cpp.o
+[49/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/primitive_serialization.cpp.o
+[50/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/scratchpad.cpp.o
+[51/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/scratchpad_debug.cpp.o
+[52/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/stream.cpp.o
+[53/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/shuffle.cpp.o
+[54/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/stream_profiler.cpp.o
+[55/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/softmax.cpp.o
+[56/499] Building C object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/tmp/hidden-state-v030-deps/onednn-src/third_party/ittnotify/ittnotify/jitprofiling.c.o
+[57/499] Building ASM object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/tmp/hidden-state-v030-deps/onednn-src/third_party/ittnotify/ittnotify/ittptmark64.S.o
+[58/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/sdpa_test_iface.cpp.o
+[59/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/sum.cpp.o
+[60/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/utils.cpp.o
+[61/499] Building C object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/tmp/hidden-state-v030-deps/onednn-src/third_party/ittnotify/ittnotify/ittnotify_static.c.o
+[62/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/rnn.cpp.o
+[63/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/binary_injector_utils.cpp.o
+[64/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_batch_normalization_utils.cpp.o
+[65/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_concat.cpp.o
+[66/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_batch_normalization_list.cpp.o
+[67/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_binary_list.cpp.o
+[68/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_engine.cpp.o
+[69/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_eltwise_list.cpp.o
+[70/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_deconvolution_list.cpp.o
+[71/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_group_normalization_list.cpp.o
+[72/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/bfloat16.cpp.o
+[73/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_convolution_list.cpp.o
+[74/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_layer_normalization_list.cpp.o
+[75/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_inner_product_list.cpp.o
+[76/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_lrn_list.cpp.o
+[77/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_pooling_list.cpp.o
+[78/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_prelu_list.cpp.o
+[79/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_reduction_list.cpp.o
+[80/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/verbose.cpp.o
+[81/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_shuffle_list.cpp.o
+[82/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_resampling_list.cpp.o
+[83/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_rnn_list.cpp.o
+[84/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_softmax_list.cpp.o
+[85/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/cpu_sum.cpp.o
+[86/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_inner_product_utils.cpp.o
+[87/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_x8s8s32x_conv_zp_src_pad_comp.cpp.o
+[88/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_convolution.cpp.o
+[89/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/float16.cpp.o
+[90/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_inner_product.cpp.o
+[91/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_x8s8s32x_convolution.cpp.o
+[92/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_x8s8s32x_convolution_utils.cpp.o
+[93/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_x8s8s32x_inner_product.cpp.o
+[94/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ncsp_group_normalization.cpp.o
+[95/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm_convolution_utils.cpp.o
+[96/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/platform.cpp.o
+[97/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/primitive_attr_postops.cpp.o
+[98/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ncsp_batch_normalization.cpp.o
+[99/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_binary.cpp.o
+[100/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/nchw_pooling.cpp.o
+[101/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/nspc_batch_normalization.cpp.o
+[102/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/nhwc_pooling.cpp.o
+[103/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_convolution.cpp.o
+[104/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_convolution_int8.cpp.o
+[105/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_eltwise.cpp.o
+[106/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_inner_product.cpp.o
+[107/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_deconvolution.cpp.o
+[108/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_inner_product_int8.cpp.o
+[109/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_batch_normalization.cpp.o
+[110/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_group_normalization.cpp.o
+[111/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_layer_normalization.cpp.o
+[112/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_pooling.cpp.o
+[113/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_prelu.cpp.o
+[114/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_reduction.cpp.o
+[115/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/scale_utils.cpp.o
+[116/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_shuffle.cpp.o
+[117/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_lrn.cpp.o
+[118/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_resampling.cpp.o
+[119/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/zero_point_utils.cpp.o
+[120/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ref_softmax.cpp.o
+[121/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/simple_layer_normalization.cpp.o
+[122/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/f32/gemm_utils_f32.cpp.o
+[123/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/bf16/ref_gemm_bf16.cpp.o
+[124/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/simple_resampling.cpp.o
+[125/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/s8x8s32/ref_gemm_s8x8s32.cpp.o
+[126/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/gemm.cpp.o
+[127/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/gemm_pack.cpp.o
+[128/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/simple_concat.cpp.o
+[129/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/f32/ref_gemm_f32.cpp.o
+[130/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/ref_grouped_gemm.cpp.o
+[131/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/simple_sum.cpp.o
+[132/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/gemm/s8x8s32/simple_gemm_s8s8s32.cpp.o
+[133/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/ref_matmul_int8.cpp.o
+[134/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/ref_sparse_matmul.cpp.o
+[135/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/ref_matmul.cpp.o
+[136/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/gemm_f32_matmul.cpp.o
+[137/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/gemm_x8s8s32x_matmul.cpp.o
+[138/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/gemm_bf16_matmul.cpp.o
+[139/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder.cpp.o
+[140/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/common/CMakeFiles/dnnl_common.dir/memory_zero_pad.cpp.o
+[141/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/matmul/cpu_matmul_list.cpp.o
+[142/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_bf16.cpp.o
+[143/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_f16.cpp.o
+[144/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_bf16.cpp.o
+[145/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f16.cpp.o
+[146/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_f32.cpp.o
+[147/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_comp_bf16_s8.cpp.o
+[148/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_comp_f32_s8.cpp.o
+[149/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_comp_s8_s8.cpp.o
+[150/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_s32.cpp.o
+[151/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_fp8.cpp.o
+[152/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_u8.cpp.o
+[153/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_f32_s8.cpp.o
+[154/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_fp4.cpp.o
+[155/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_s32.cpp.o
+[156/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_s4.cpp.o
+[157/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_fp8.cpp.o
+[158/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_u4.cpp.o
+[159/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_u8.cpp.o
+[160/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/brgemm_cell_common.cpp.o
+[161/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/reorder/cpu_reorder_regular_s8.cpp.o
+[162/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/cell_gru.cpp.o
+[163/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/cell_common.cpp.o
+[164/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/cell_gru_lbr.cpp.o
+[165/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ukernel/attr_params.cpp.o
+[166/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_postgemm_gru_lbr.cpp.o
+[167/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_postgemm_gru.cpp.o
+[168/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_postgemm_lstm_projection.cpp.o
+[169/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/jit_utils/jit_utils.cpp.o
+[170/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ukernel/brgemm.cpp.o
+[171/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_postgemm_lstm.cpp.o
+[172/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/jit_utils/linux_perf/linux_perf.cpp.o
+[173/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/rnn_utils.cpp.o
+[174/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/ukernel/transform.cpp.o
+[175/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_postgemm_rnn.cpp.o
+[176/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/brgemm_containers.cpp.o
+[177/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/brgemm.cpp.o
+[178/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/brgemm_utils.cpp.o
+[179/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/amx_tile_configure.cpp.o
+[180/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/cpu_isa_traits.cpp.o
+[181/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/cpu_barrier.cpp.o
+[182/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/cpu_reducer.cpp.o
+[183/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/jit_brgemm_amx_uker.cpp.o
+[184/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/amx/jit_avx512_core_amx_gemm_kern.cpp.o
+[185/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/amx/jit_avx512_core_amx_copy_kern.cpp.o
+[186/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/jit_brdgmm_kernel.cpp.o
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp: In instantiation of ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::brdgmm_microkernel(int, int, bool, bool, bool, int) [with Wmm = Xbyak::Ymm]’:
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1278:5:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::call_brdgmm_microkernel(int, int, bool, int) [with Wmm = Xbyak::Ymm]’
+ 1278 |     brdgmm_microkernel(m_blocks, n_blocks, false, false, has_n_tail, shift_a);
+      |     ^~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1320:9:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::batch_loop(int, int, bool) [with Wmm = Xbyak::Ymm]’
+ 1320 |         call_brdgmm_microkernel(m_blocks, n_blocks, has_n_tail, shift_a);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1380:13:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::compute_loop() [with Wmm = Xbyak::Ymm]’
+ 1380 |             batch_loop(m_blocks, n_blocks, vlen_tail_in_loop);
+      |             ^~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1485:5:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::generate() [with Wmm = Xbyak::Ymm]’
+ 1485 |     compute_loop();
+      |     ^~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1475:6:   required from here
+ 1475 | void jit_brdgmm_kernel_base_t<Wmm>::generate() {
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1151:35: warning: variable ‘p_b_i’ set but not used [-Wunused-but-set-variable=]
+ 1151 |                 for_(int v_i = 0, p_b_i = 0; v_i < v_substep; ++v_i)
+      |                                   ^~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp: In instantiation of ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::brdgmm_microkernel(int, int, bool, bool, bool, int) [with Wmm = Xbyak::Zmm]’:
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1278:5:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::call_brdgmm_microkernel(int, int, bool, int) [with Wmm = Xbyak::Zmm]’
+ 1278 |     brdgmm_microkernel(m_blocks, n_blocks, false, false, has_n_tail, shift_a);
+      |     ^~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1320:9:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::batch_loop(int, int, bool) [with Wmm = Xbyak::Zmm]’
+ 1320 |         call_brdgmm_microkernel(m_blocks, n_blocks, has_n_tail, shift_a);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1380:13:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::compute_loop() [with Wmm = Xbyak::Zmm]’
+ 1380 |             batch_loop(m_blocks, n_blocks, vlen_tail_in_loop);
+      |             ^~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1485:5:   required from ‘void dnnl::impl::cpu::x64::jit_brdgmm_kernel_base_t<Vmm>::generate() [with Wmm = Xbyak::Zmm]’
+ 1485 |     compute_loop();
+      |     ^~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1475:6:   required from here
+ 1475 | void jit_brdgmm_kernel_base_t<Wmm>::generate() {
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/brgemm/jit_brdgmm_kernel.cpp:1151:35: warning: variable ‘p_b_i’ set but not used [-Wunused-but-set-variable=]
+ 1151 |                 for_(int v_i = 0, p_b_i = 0; v_i < v_substep; ++v_i)
+      |                                   ^~~~~
+[187/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_gemm_bf16bf16f32_kern.cpp.o
+[188/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_24x8_copy_an_kern_autogen.cpp.o
+[189/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_24x8_copy_bn_kern_autogen.cpp.o
+[190/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_24x8_copy_bt_kern_autogen.cpp.o
+[191/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_24x8_copy_at_kern_autogen.cpp.o
+[192/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_gemv_bf16bf16f32_kern.cpp.o
+[193/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_48x8_copy_bn_kern_autogen.cpp.o
+[194/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_48x8_copy_bt_kern_autogen.cpp.o
+[195/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_48x8_copy_an_kern_autogen.cpp.o
+[196/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/brgemm/jit_brgemm_kernel.cpp.o
+[197/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/bf16/jit_avx512_core_s16_48x8_copy_at_kern_autogen.cpp.o
+[198/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx2_f32_copy_bn_kern_autogen.cpp.o
+[199/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx2_f32_copy_bt_kern_autogen.cpp.o
+[200/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx2_f32_copy_at_kern_autogen.cpp.o
+[201/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx2_f32_copy_an_kern_autogen.cpp.o
+[202/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_common_gemm_f32.cpp.o
+[203/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_f32_copy_bn_kern_autogen.cpp.o
+[204/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx2_kernel_sgemm_kern.cpp.o
+[205/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_f32_copy_bt_kern_autogen.cpp.o
+[206/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_f32_copy_at_kern_part1_autogen.cpp.o
+[207/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_f32_copy_an_kern_autogen.cpp.o
+[208/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_gemm_smalln_tn_f32_kern.cpp.o
+[209/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx512_core_f32_copy_at_kern_part2_autogen.cpp.o
+[210/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_f32_copy_at_kern_autogen.cpp.o
+[211/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_f32_copy_bn_kern_autogen.cpp.o
+[212/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_f32_copy_an_kern_autogen.cpp.o
+[213/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_f32_copy_bt_kern_autogen.cpp.o
+[214/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_gemv_t_f32_kern.cpp.o
+[215/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_gemm_f32.cpp.o
+[216/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_kernel_b0_sgemm_kern_part1_autogen.cpp.o
+[217/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_kernel_sgemm_kern_part1_autogen.cpp.o
+[218/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_f32_copy_at_kern_autogen.cpp.o
+[219/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_f32_copy_an_kern_autogen.cpp.o
+[220/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_f32_copy_bn_kern_autogen.cpp.o
+[221/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_kernel_b0_sgemm_kern_part2_autogen.cpp.o
+[222/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_f32_copy_bt_kern_autogen.cpp.o
+[223/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_gemv_t_f32_kern.cpp.o
+[224/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_avx_kernel_sgemm_kern_part2_autogen.cpp.o
+[225/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_gemv_n_f32_kern.cpp.o
+[226/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_kernel_b0_sgemm_kern_autogen.cpp.o
+[227/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/gemm_pack.cpp.o
+[228/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/gemm_driver.cpp.o
+[229/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/gemv_driver.cpp.o
+[230/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/gemm_info.cpp.o
+[231/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/f32/jit_sse41_kernel_sgemm_kern_autogen.cpp.o
+[232/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_an_kern_autogen.cpp.o
+[233/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_bn_kern_autogen.cpp.o
+[234/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_at_kern_autogen.cpp.o
+[235/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_gemm_s8u8s32_kern.cpp.o
+[236/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_bt_kern_autogen.cpp.o
+[237/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_sum_an_kern_autogen.cpp.o
+[238/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_sum_at_kern_autogen.cpp.o
+[239/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_sum_bn_kern_autogen.cpp.o
+[240/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_u8_copy_sum_bt_kern_autogen.cpp.o
+[241/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_an_kern_autogen.cpp.o
+[242/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_bn_kern_autogen.cpp.o
+[243/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_bt_kern_autogen.cpp.o
+[244/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_at_kern_autogen.cpp.o
+[245/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_sum_an_kern_autogen.cpp.o
+[246/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_sum_bn_kern_autogen.cpp.o
+[247/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_gemv_s8x8s32.cpp.o
+[248/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_sum_bt_kern_autogen.cpp.o
+[249/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx2_vnni_u8_copy_sum_at_kern_autogen.cpp.o
+[250/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_kernel_gemv_s8x8s32_kern.cpp.o
+[251/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_an_kern_autogen.cpp.o
+[252/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_gemm_s8u8s32_kern.cpp.o
+[253/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_bn_kern_autogen.cpp.o
+[254/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_bt_kern_autogen.cpp.o
+[255/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_sum_bt_kern_autogen.cpp.o
+[256/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_sum_an_kern_autogen.cpp.o
+[257/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_sum_bn_kern_autogen.cpp.o
+[258/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_at_kern_autogen.cpp.o
+[259/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_b0_b_gemm_s8u8s32_kern_autogen.cpp.o
+[260/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_b0_c_gemm_s8u8s32_kern_autogen.cpp.o
+[261/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx512_core_u8_copy_sum_at_kern_autogen.cpp.o
+[262/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_b0_gemm_s8u8s32_kern_autogen.cpp.o
+[263/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_b_gemm_s8u8s32_kern_autogen.cpp.o
+[264/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_b0_r_gemm_s8u8s32_kern_autogen.cpp.o
+[265/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_an_kern_autogen.cpp.o
+[266/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_c_gemm_s8u8s32_kern_autogen.cpp.o
+[267/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_bn_kern_autogen.cpp.o
+[268/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_bt_kern_autogen.cpp.o
+[269/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_at_kern_autogen.cpp.o
+[270/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_gemm_s8u8s32_kern_autogen.cpp.o
+[271/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_kernel_r_gemm_s8u8s32_kern_autogen.cpp.o
+[272/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_sum_an_kern_autogen.cpp.o
+[273/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_sum_at_kern_autogen.cpp.o
+[274/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_sum_bn_kern_autogen.cpp.o
+[275/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_avx_u8_copy_sum_bt_kern_autogen.cpp.o
+[276/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_b0_c_gemm_s8u8s32_kern_autogen.cpp.o
+[277/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_b0_gemm_s8u8s32_kern_autogen.cpp.o
+[278/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_b0_b_gemm_s8u8s32_kern_autogen.cpp.o
+[279/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_b0_r_gemm_s8u8s32_kern_autogen.cpp.o
+[280/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_b_gemm_s8u8s32_kern_autogen.cpp.o
+[281/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_c_gemm_s8u8s32_kern_autogen.cpp.o
+[282/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_gemm_s8u8s32_kern_autogen.cpp.o
+[283/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_an_kern_autogen.cpp.o
+[284/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_bn_kern_autogen.cpp.o
+[285/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_at_kern_autogen.cpp.o
+[286/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_kernel_r_gemm_s8u8s32_kern_autogen.cpp.o
+[287/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_bt_kern_autogen.cpp.o
+[288/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/CMakeFiles/dnnl_cpu.dir/rnn/ref_rnn.cpp.o
+[289/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_sum_an_kern_autogen.cpp.o
+[290/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_sum_bn_kern_autogen.cpp.o
+[291/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_sum_at_kern_autogen.cpp.o
+[292/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm/s8x8s32/jit_sse41_u8_copy_sum_bt_kern_autogen.cpp.o
+[293/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/injectors/injector_utils.cpp.o
+[294/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/ip_convolution.cpp.o
+[295/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm_bf16_inner_product.cpp.o
+[296/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/injectors/jit_uni_postops_injector.cpp.o
+[297/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/gemm_bf16_convolution.cpp.o
+[298/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx2_1x1_conv_kernel_f32.cpp.o
+[299/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx2_convolution.cpp.o
+[300/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx2_1x1_convolution.cpp.o
+[301/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx2_conv_kernel_f32.cpp.o
+[302/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_common_1x1_conv_kernel.cpp.o
+[303/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_amx_1x1_convolution.cpp.o
+[304/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_common_convolution.cpp.o
+[305/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_common_1x1_convolution.cpp.o
+[306/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_amx_1x1_conv_kernel.cpp.o
+[307/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_amx_deconvolution.cpp.o
+[308/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_common_conv_kernel.cpp.o
+[309/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_amx_convolution.cpp.o
+[310/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_bf16_1x1_conv_kernel.cpp.o
+[311/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/injectors/jit_uni_binary_injector.cpp.o
+[312/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_amx_conv_kernel.cpp.o
+[313/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_fp16cvt.cpp.o
+[314/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_bf16_convolution.cpp.o
+[315/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_bf16_1x1_convolution.cpp.o
+[316/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_bf16_dw_conv_kernel.cpp.o
+[317/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_f16_dw_conv_kernel.cpp.o
+[318/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_fp8cvt.cpp.o
+[319/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_x8s8s32x_1x1_convolution.cpp.o
+[320/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_x8s8s32x_convolution.cpp.o
+[321/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_resampling.cpp.o
+[322/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_bf16_conv_kernel.cpp.o
+[323/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/injectors/jit_uni_eltwise_injector.cpp.o
+[324/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_sparse_decompress_kernel.cpp.o
+[325/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_x8s8s32x_1x1_conv_kernel.cpp.o
+[326/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brdgmm_dw_conv.cpp.o
+[327/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd.cpp.o
+[328/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_x8s8s32x_conv_kernel.cpp.o
+[329/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd_copy_kernel.cpp.o
+[330/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_avx512_core_x8s8s32x_deconvolution.cpp.o
+[331/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd_trans_kernel.cpp.o
+[332/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd_utils.cpp.o
+[333/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_1x1_conv.cpp.o
+[334/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd_w.cpp.o
+[335/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_trans_kernel.cpp.o
+[336/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_comp_pad_kernel.cpp.o
+[337/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_utils.cpp.o
+[338/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_primitive_conf.cpp.o
+[339/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_inner_product_utils.cpp.o
+[340/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_deconv.cpp.o
+[341/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_gemm_x8s8s32x_conv_zp_src_pad_comp.cpp.o
+[342/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_transpose_utils.cpp.o
+[343/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_generator.cpp.o
+[344/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_post_ops.cpp.o
+[345/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv_bwd_strided.cpp.o
+[346/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_gemm_x8s8s32x_convolution_utils.cpp.o
+[347/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_gemm_inner_product_utils.cpp.o
+[348/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_sse41_1x1_convolution.cpp.o
+[349/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_sse41_convolution.cpp.o
+[350/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_sse41_1x1_conv_kernel_f32.cpp.o
+[351/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_sse41_conv_kernel_f32.cpp.o
+[352/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_transpose_utils.cpp.o
+[353/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_binary.cpp.o
+[354/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_batch_normalization_s8.cpp.o
+[355/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_inner_product.cpp.o
+[356/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_brgemm_conv.cpp.o
+[357/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_convert_xf16.cpp.o
+[358/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_deconv_zp_pad_str_kernel.cpp.o
+[359/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_dw_conv_kernel_utils.cpp.o
+[360/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_batch_normalization.cpp.o
+[361/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_eltwise_int.cpp.o
+[362/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_dw_conv_kernel_f32.cpp.o
+[363/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_group_normalization.cpp.o
+[364/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_binary_kernel.cpp.o
+[365/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_eltwise.cpp.o
+[366/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_dw_convolution.cpp.o
+[367/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_ncsp_convolution.cpp.o
+[368/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_instance_normalization.cpp.o
+[369/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_reduction.cpp.o
+[370/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_i8i8_pooling.cpp.o
+[371/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_reorder_utils.cpp.o
+[372/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_layer_normalization.cpp.o
+[373/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_resampling.cpp.o
+[374/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_reorder_direct_copy.cpp.o
+[375/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_reduction_kernel.cpp.o
+[376/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_reorder.cpp.o
+[377/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_pool_kernel.cpp.o
+[378/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_pooling.cpp.o
+[379/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_x8s8s32x_1x1_conv_kernel.cpp.o
+[380/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_x8s8s32x_convolution.cpp.o
+[381/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_resampling_kernel.cpp.o
+[382/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_x8s8s32x_1x1_convolution.cpp.o
+[383/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_tbb_batch_normalization.cpp.o
+[384/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_bwd_blocked.cpp.o
+[385/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_x8s8s32x_conv_kernel.cpp.o
+[386/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_bwd_base.cpp.o
+[387/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn.cpp.o
+[388/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_softmax.cpp.o
+[389/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_xf16_sum.cpp.o
+[390/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_fwd_blocked.cpp.o
+[391/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_bwd_nhwc.cpp.o
+[392/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_fwd_nhwc.cpp.o
+[393/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_avx512_common_lrn_fwd_base.cpp.o
+[394/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/amx_blocking_heuristics.cpp.o
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/matmul/amx_blocking_heuristics.cpp: In static member function ‘static void dnnl::impl::cpu::x64::matmul::matmul_amx_blocking_params_micro_t::find_best_blocking(const dnnl::impl::cpu::x64::matmul::brgemm_matmul_conf_t&, const dnnl::impl::cpu::x64::matmul::brgemm_matmul_conf_utils_t&, dnnl::impl::cpu::x64::matmul::matmul_amx_blocking_params_micro_t&)’:
+/tmp/hidden-state-v030-deps/onednn-src/src/cpu/x64/matmul/amx_blocking_heuristics.cpp:1156:9: warning: variable ‘iter’ set but not used [-Wunused-but-set-variable=]
+ 1156 |     int iter = 0;
+      |         ^~~~
+[395/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/jit_uni_x8s8s32x_deconvolution.cpp.o
+[396/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_uni_lrn.cpp.o
+[397/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/brgemm_matmul_reorders.cpp.o
+[398/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/platform.cpp.o
+[399/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/brgemm_matmul_utils.cpp.o
+[400/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/jit_brgemm_matmul_per_mn_comp.cpp.o
+[401/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul_inner_product.cpp.o
+[402/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/jit_uni_sparse_matmul.cpp.o
+[403/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_prelu_backward.cpp.o
+[404/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/lrn/jit_uni_lrn_kernel.cpp.o
+[405/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_prelu_base_kernel.cpp.o
+[406/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_prelu_utils.cpp.o
+[407/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_prelu_forward.cpp.o
+[408/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_prelu_reduction_kernel.cpp.o
+[409/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/brgemm_cell_common_reorders.cpp.o
+[410/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/brgemm_cell_common_bwd.cpp.o
+[411/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_uni_prelu_backward_kernel.cpp.o
+[412/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/brgemm_cell_common_utils.cpp.o
+[413/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/prelu/jit_uni_prelu_forward_kernel.cpp.o
+[414/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/brgemm_matmul_copy_utils.cpp.o
+[415/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/brgemm_cell_common_fwd.cpp.o
+[416/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/ukernel/attr_params.cpp.o
+[417/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/rnn_brgemm_utils.cpp.o
+[418/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/ukernel/brgemm.cpp.o
+[419/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/jit_brgemm_transpose_single_row.cpp.o
+[420/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/ukernel/transform.cpp.o
+[421/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/shuffle/jit_uni_shuffle.cpp.o
+[422/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/jit_diff_weights_peephole.cpp.o
+[423/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/rnn/jit_gates_reduction.cpp.o
+[424/499] Building CXX object CMakeFiles/spinloop.dir/csrc/spinloop.cpp.o
+[425/499] Building CXX object CMakeFiles/fs_io_C.dir/csrc/fs_io.cpp.o
+[426/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/shuffle/jit_uni_shuffle_kernel.cpp.o
+[427/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/utils/jit_regops.cpp.o
+[428/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/utils/jit_io_helper.cpp.o
+[429/499] Building CXX object /tmp/hidden-state-v030-deps/onednn-build/src/cpu/x64/CMakeFiles/dnnl_cpu_x64.dir/matmul/brgemm_matmul.cpp.o
+[430/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/utils.cpp.o
+[431/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/spec_decode_utils.cpp.o
+[432/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/cpu_wna16.cpp.o
+[433/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/shm.cpp.o
+[434/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/cpu_fused_moe.cpp.o
+[435/499] Building CXX object CMakeFiles/dnnl_ext.dir/csrc/cpu/dnnl_helper.cpp.o
+[436/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/dnnl_kernels.cpp.o
+[437/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/activation.cpp.o
+[438/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/layernorm.cpp.o
+[439/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/mamba_cpu.cpp.o
+[440/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/mla_decode.cpp.o
+[441/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/fla.cpp.o
+[442/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/torch_bindings.cpp.o
+[443/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int8.cpp.o
+[444/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/conv.cpp.o
+[445/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/pos_encoding.cpp.o
+[446/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm.cpp.o
+[447/499] Building CXX object CMakeFiles/_C.dir/csrc/moe/dynamic_4bit_int_moe_cpu.cpp.o
+[448/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_fp8.cpp.o
+[449/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/moe_int4.cpp.o
+[450/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/moe_int8.cpp.o
+[451/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/moe.cpp.o
+[452/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/bmm.cpp.o
+[453/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/moe_fp8.cpp.o
+[454/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/gemm_int4.cpp.o
+[455/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/mla_cache.cpp.o
+[456/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/store_cache.cpp.o
+[457/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/flash_mla.cpp.o
+[458/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/mhc.cpp.o
+[459/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/compressor.cpp.o
+[460/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/extend.cpp.o
+[461/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/paged_mqa_logits.cpp.o
+[462/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/indexer.cpp.o
+[463/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/decode.cpp.o
+[464/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/shm.cpp.o
+[465/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/utils.cpp.o
+[466/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/cpu_wna16.cpp.o
+[467/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/sgl-kernels/fla.cpp.o
+[468/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/cpu_fused_moe.cpp.o
+[469/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/spec_decode_utils.cpp.o
+[470/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/sgl-kernels/topk.cpp.o
+[471/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/dnnl_kernels.cpp.o
+[472/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/activation.cpp.o
+[473/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/mamba_cpu.cpp.o
+[474/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/layernorm.cpp.o
+[475/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/torch_bindings.cpp.o
+/home/soren/Documents/numind/vllm_package/vllm/csrc/cpu/torch_bindings.cpp:9:9: warning: ‘TORCH_EXTENSION_NAME’ redefined
+    9 | #define TORCH_EXTENSION_NAME _C
+      |         ^~~~~~~~~~~~~~~~~~~~
+<command-line>: note: this is the location of the previous definition
+[476/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/mla_decode.cpp.o
+[477/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/pos_encoding.cpp.o
+[478/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/moe/dynamic_4bit_int_moe_cpu.cpp.o
+[479/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/utils.cpp.o
+[480/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/spec_decode_utils.cpp.o
+[481/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/sgl-kernels/fla.cpp.o
+[482/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/cpu_fused_moe.cpp.o
+[483/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/mamba_cpu.cpp.o
+[484/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/dnnl_kernels.cpp.o
+[485/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/activation.cpp.o
+[486/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/layernorm.cpp.o
+[487/499] Linking CXX static library /tmp/hidden-state-v030-deps/onednn-build/src/libdnnl.a
+[488/499] Linking CXX shared module spinloop.abi3.so
+[489/499] Linking CXX shared module fs_io_C.abi3.so
+[490/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/torch_bindings.cpp.o
+/home/soren/Documents/numind/vllm_package/vllm/csrc/cpu/torch_bindings.cpp:9:9: warning: ‘TORCH_EXTENSION_NAME’ redefined
+    9 | #define TORCH_EXTENSION_NAME _C
+      |         ^~~~~~~~~~~~~~~~~~~~
+<command-line>: note: this is the location of the previous definition
+[491/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/mla_decode.cpp.o
+[492/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/pos_encoding.cpp.o
+[493/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/moe/dynamic_4bit_int_moe_cpu.cpp.o
+[494/499] Building CXX object CMakeFiles/_C_AVX2.dir/csrc/cpu/cpu_attn.cpp.o
+[495/499] Linking CXX shared module _C_AVX2.abi3.so
+[496/499] Building CXX object CMakeFiles/_C_AVX512.dir/csrc/cpu/cpu_attn.cpp.o
+[497/499] Linking CXX shared module _C_AVX512.abi3.so
+[498/499] Building CXX object CMakeFiles/_C.dir/csrc/cpu/cpu_attn.cpp.o
+[499/499] Linking CXX shared module _C.abi3.so
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/spinloop.abi3.so
+-- Set non-toolchain portion of runtime path of "/home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/spinloop.abi3.so" to ""
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/fs_io_C.abi3.so
+-- Set non-toolchain portion of runtime path of "/home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/fs_io_C.abi3.so" to ""
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C.abi3.so
+-- Set non-toolchain portion of runtime path of "/home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C.abi3.so" to ""
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C_AVX512.abi3.so
+-- Set non-toolchain portion of runtime path of "/home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C_AVX512.abi3.so" to ""
+-- Install configuration: "RelWithDebInfo"
+-- Installing: /home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C_AVX2.abi3.so
+-- Set non-toolchain portion of runtime path of "/home/soren/Documents/numind/vllm_package/vllm/build/lib.linux-x86_64-cpython-312/vllm/_C_AVX2.abi3.so" to ""
+copying build/lib.linux-x86_64-cpython-312/vllm/spinloop.abi3.so -> vllm
+copying build/lib.linux-x86_64-cpython-312/vllm/fs_io_C.abi3.so -> vllm
+copying build/lib.linux-x86_64-cpython-312/vllm/_C.abi3.so -> vllm
+copying build/lib.linux-x86_64-cpython-312/vllm/_C_AVX512.abi3.so -> vllm
+copying build/lib.linux-x86_64-cpython-312/vllm/_C_AVX2.abi3.so -> vllm
+Bundled tcmalloc into wheel: build/lib.linux-x86_64-cpython-312/vllm/libs/libtcmalloc_minimal.so.4
+running build_rust
+Skipping local Rust build: using precompiled /home/soren/Documents/numind/vllm_package/vllm/vllm/vllm-rs and [PosixPath('/home/soren/Documents/numind/vllm_package/vllm/vllm/_rust_tool_parser.abi3.so')]

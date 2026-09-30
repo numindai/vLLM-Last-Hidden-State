@@ -1,0 +1,74 @@
+/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_scm/_integration/version_inference.py:222: UserWarning: version of None already set
+  warnings.warn(f"version of {self.dist_name} already set")
+running build_ext
+Using MAX_JOBS=8 as the number of jobs.
+-- Build type: RelWithDebInfo
+-- Target device: cpu
+-- Found python matching: /home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python.
+CMake Warning at .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:22 (message):
+  library kineto not found.
+Call Stack (most recent call first):
+  .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:119 (append_torchlib_if_found)
+  CMakeLists.txt:112 (find_package)
+
+
+-- Downloading oneDNN from GitHub
+CMake Warning (deprecated) at /tmp/hidden-state-v030-deps/onednn-src/CMakeLists.txt:36 (cmake_policy):
+  The OLD behavior for policy CMP0146 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+This warning is for project developers.  Use -Wno-author or -Wno-deprecated
+to suppress it.
+
+-- DNNL_TARGET_ARCH: X64
+-- ONEDNN_LIBRARY_TYPE: STATIC (default: SHARED)
+-- ONEDNN_BUILD_GRAPH: OFF (default: ON)
+-- ONEDNN_ENABLE_WORKLOAD: INFERENCE (default: TRAINING)
+-- ONEDNN_ENABLE_PRIMITIVE: MATMUL;REORDER (default: ALL)
+-- ONEDNN_OCL_INCLUDE_DIR: /tmp/hidden-state-v029-deps/onednn-src/third_party/opencl (default: /tmp/hidden-state-v030-deps/onednn-src/third_party/opencl)
+-- ONEDNN_ZE_INCLUDE_DIR: /tmp/hidden-state-v029-deps/onednn-src/third_party/level_zero (default: /tmp/hidden-state-v030-deps/onednn-src/third_party/level_zero)
+CMake Error at /tmp/hidden-state-v030-deps/onednn-src/cmake/OpenCL.cmake:32 (message):
+  OpenCL headers not found at
+  '/tmp/hidden-state-v029-deps/onednn-src/third_party/opencl'.  Set
+  DNNL_OCL_INCLUDE_DIR to a directory containing 'CL/cl.h'.
+Call Stack (most recent call first):
+  /tmp/hidden-state-v030-deps/onednn-src/CMakeLists.txt:95 (include)
+
+
+-- Configuring incomplete, errors occurred!
+Traceback (most recent call last):
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 1505, in <module>
+    setup(
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/__init__.py", line 117, in setup
+    return distutils.core.setup(**attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 186, in setup
+    return run_commands(dist)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 202, in run_commands
+    dist.run_commands()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1002, in run_commands
+    self.run_command(cmd)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/dist.py", line 1105, in run_command
+    super().run_command(command)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1021, in run_command
+    cmd_obj.run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_rust/setuptools_ext.py", line 177, in run
+    super().run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 389, in run
+    super().run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/command/build_ext.py", line 99, in run
+    _build_ext.run(self)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 368, in run
+    self.build_extensions()
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 346, in build_extensions
+    self.configure(ext)
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 323, in configure
+    subprocess.check_call(
+  File "/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 413, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['cmake', '/home/soren/Documents/numind/vllm_package/vllm', '-G', 'Ninja', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DVLLM_TARGET_DEVICE=cpu', '-DVLLM_PYTHON_EXECUTABLE=/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python', '-DVLLM_PYTHON_PATH=/home/soren/Documents/numind/vllm_package/vllm:/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python312.zip:/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12:/home/soren/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/lib-dynload:/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages:__editable__.vllm-0.1.dev1+g23cfaad49.cpu.finder.__path_hook__:/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_vendor', '-DFETCHCONTENT_BASE_DIR=/home/soren/Documents/numind/vllm_package/vllm/.deps', '-DCMAKE_JOB_POOL_COMPILE:STRING=compile', '-DCMAKE_JOB_POOLS:STRING=compile=8', '-DFETCHCONTENT_BASE_DIR=/tmp/hidden-state-v030-deps']' returned non-zero exit status 1.

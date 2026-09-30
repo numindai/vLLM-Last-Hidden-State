@@ -1,0 +1,16 @@
+{"case": 0, "reference_backend": "transformers", "hidden_size": 1024, "position": 27, "last_token_id": 328, "max_abs_error": 0.2578125, "mean_abs_error": 0.04600943624973297, "cosine": 0.9998849034309387, "relative_l2_error": 0.01519231777638197, "seconds": 0.2764097040053457, "completion": {"finish_reason": "length", "index": 0, "logprobs": null, "message": {"content": "A", "refusal": null, "role": "assistant", "annotations": null, "audio": null, "function_call": null, "tool_calls": null, "reasoning": null}, "stop_reason": null, "token_ids": [32], "routed_experts": null}}
+{"ordinary_case": 0, "baseline_seconds": 0.26510614099970553, "plugin_seconds": 0.050078605010639876}
+{"case": 1, "reference_backend": "transformers", "hidden_size": 1024, "position": 27, "last_token_id": 328, "max_abs_error": 0.328125, "mean_abs_error": 0.053072646260261536, "cosine": 0.9998633861541748, "relative_l2_error": 0.016565511003136635, "seconds": 0.04798037100408692, "completion": {"finish_reason": "length", "index": 0, "logprobs": null, "message": {"content": "A", "refusal": null, "role": "assistant", "annotations": null, "audio": null, "function_call": null, "tool_calls": null, "reasoning": null}, "stop_reason": null, "token_ids": [32], "routed_experts": null}}
+{"ordinary_case": 1, "baseline_seconds": 0.04713980200176593, "plugin_seconds": 0.04809771099826321}
+{"case": 2, "reference_backend": "transformers", "hidden_size": 1024, "position": 104, "last_token_id": 328, "max_abs_error": 2.5625, "mean_abs_error": 0.14481857419013977, "cosine": 0.9984844326972961, "relative_l2_error": 0.0551551952958107, "seconds": 0.14594079399830662, "completion": {"finish_reason": "length", "index": 0, "logprobs": null, "message": {"content": "A", "refusal": null, "role": "assistant", "annotations": null, "audio": null, "function_call": null, "tool_calls": null, "reasoning": null}, "stop_reason": null, "token_ids": [32], "routed_experts": null}}
+Traceback (most recent call last):
+  File "/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py", line 307, in <module>
+    main()
+  File "/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py", line 303, in main
+    (reference if args.mode == "reference" else check_http)(args)
+  File "/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py", line 234, in check_http
+    compare(index, *request(messages))
+  File "/home/soren/Documents/numind/vllm_package/validation/validate_hidden_state.py", line 229, in compare
+    assert cosine >= args.min_cosine
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

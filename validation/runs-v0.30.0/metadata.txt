@@ -1,0 +1,11 @@
+/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_scm/_integration/version_inference.py:222: UserWarning: version of None already set
+  warnings.warn(f"version of {self.dist_name} already set")
+running egg_info
+writing vllm.egg-info/PKG-INFO
+writing dependency_links to vllm.egg-info/dependency_links.txt
+writing entry points to vllm.egg-info/entry_points.txt
+writing requirements to vllm.egg-info/requires.txt
+writing top-level names to vllm.egg-info/top_level.txt
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'vllm.egg-info/SOURCES.txt'

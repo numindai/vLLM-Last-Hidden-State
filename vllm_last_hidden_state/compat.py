@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
-"""vLLM 0.29.0 assumptions; audit this module when changing the upstream pin."""
+"""vLLM 0.30.0 assumptions; audit this module when changing the upstream pin."""
 
 from importlib import metadata
 
 from packaging.version import InvalidVersion, Version
 
-SUPPORTED_VLLM_VERSION = "0.29.0"
+SUPPORTED_VLLM_VERSION = "0.30.0"
 
 
 def require_supported_vllm():
@@ -15,8 +15,9 @@ def require_supported_vllm():
         installed = metadata.version("vllm")
     except metadata.PackageNotFoundError:
         raise RuntimeError(
-            "vLLM is not installed. Install vLLM 0.29.0 for your hardware in "
-            "this Python environment before using vllm-last-hidden-state."
+            f"vLLM is not installed. Install vLLM {SUPPORTED_VLLM_VERSION} "
+            "for your hardware in this Python environment before using "
+            "vllm-last-hidden-state."
         ) from None
     try:
         # Local hardware suffixes (e.g. +cpu) are allowed; dev/rc/post releases
@@ -71,7 +72,7 @@ def prompt_batch_rows(runner):
 def capture_model_forward(runner, connector):
     """Capture the target forward, outside compilation and CUDA graph replay.
 
-    In 0.29.0 Qwen MTP's EagleProposer calls its own model directly, not this
+    In 0.30.0 Qwen MTP's EagleProposer calls its own model directly, not this
     method. Copying here also precedes drafting and output-buffer reuse.
     """
     original = runner._model_forward

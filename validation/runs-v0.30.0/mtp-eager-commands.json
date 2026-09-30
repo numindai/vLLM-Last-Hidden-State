@@ -1,0 +1,63 @@
+{
+  "environment": {
+    "PYTHONPATH": "/home/soren/Documents/numind/vllm_package:/home/soren/Documents/numind/vllm_package/vllm",
+    "HF_HUB_OFFLINE": "1",
+    "VLLM_USE_RUST_FRONTEND": "0",
+    "VLLM_USE_V2_MODEL_RUNNER": "0",
+    "VLLM_CPU_KVCACHE_SPACE": "1",
+    "VLLM_CPU_OMP_THREADS_BIND": "nobind",
+    "OMP_NUM_THREADS": "8",
+    "VLLM_WORKER_MULTIPROC_METHOD": "spawn",
+    "VLLM_PLUGINS": ""
+  },
+  "commands": [
+    {
+      "name": "mtp-eager-server",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "-m",
+        "vllm_last_hidden_state.serve",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18330",
+        "--dtype",
+        "bfloat16",
+        "--distributed-executor-backend",
+        "mp",
+        "--max-model-len",
+        "4096",
+        "--max-num-batched-tokens",
+        "1280",
+        "--max-num-seqs",
+        "4",
+        "--skip-mm-profiling",
+        "--enable-chunked-prefill",
+        "--no-enable-prefix-caching",
+        "--enforce-eager",
+        "--speculative-config",
+        "{\"method\":\"mtp\",\"num_speculative_tokens\":2}"
+      ]
+    },
+    {
+      "name": "mtp-eager",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_mtp.py",
+        "--url",
+        "http://127.0.0.1:18330",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--snapshot",
+        "/tmp/v030-mtp-eager-snapshot.json",
+        "--report",
+        "/home/soren/Documents/numind/vllm_package/validation/runs-v0.30.0/mtp-eager.json",
+        "--reference",
+        "/tmp/v030-control-snapshot.json",
+        "--require-mtp"
+      ],
+      "exit_code": 1
+    }
+  ]
+}

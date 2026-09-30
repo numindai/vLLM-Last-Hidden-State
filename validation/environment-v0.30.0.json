@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-23",
+  "package_base_commit": "d188f611372224e27ed3bacc2759fd4cdfed17c7",
+  "vllm_commit": "ced6857afa0ea7b2e3f0846a62e1394e90f15607",
+  "vllm_version": "0.30.0+cpu",
+  "vllm_source": "/home/soren/Documents/numind/vllm_package/vllm/vllm/__init__.py",
+  "metadata_source": "/home/soren/Documents/numind/vllm_package/vllm/vllm.egg-info",
+  "python": "3.12.13",
+  "platform": "Linux-7.2.5-1-cachyos-x86_64-with-glibc2.44",
+  "cuda_available": false,
+  "packages": {
+    "torch": "2.13.0+cpu",
+    "transformers": "5.17.0",
+    "compressed-tensors": "0.17.0",
+    "openai": "3.13.0",
+    "packaging": "26.3",
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "ruff": "0.16.7"
+  },
+  "cpu_native_sha256": {
+    "_C.abi3.so": "1f3c088d8a96c5b6a0df4ea3cb2a947696b426f32ff4f125d6e39e7b9b917397",
+    "_C_AVX512.abi3.so": "fac4110b1d260b946d797a7a553573164956187c5f3b4341de1fcdee8e9876fa",
+    "_C_AVX2.abi3.so": "99a0ec57bbe73acd84325ee6ae019821aa478906cec76cecc9da03577664aa7f"
+  },
+  "notes": [
+    "Native CPU extensions freshly built from v0.30.0 in build/temp-v030; source metadata regenerated only after successful build.",
+    "Inherited site-packages vLLM editable registration is stale. Explicit PYTHONPATH selects target source and metadata.",
+    "Extension reinstalled editable from current path. No wheel or clean pip-install test.",
+    "Upstream reused existing Rust binaries; Python frontend selected. Tool calling and Rust not validated."
+  ],
+  "model_snapshots": {
+    "Qwen/Qwen3.5-0.8B": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+    "Qwen/Qwen3.5-9B": "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "drawais/Qwen3.5-9B-AWQ-INT4": "/home/soren/.cache/huggingface/hub/models--drawais--Qwen3.5-9B-AWQ-INT4/snapshots/b3b888195917f6224e3a97e84e7f64c6b1ec8731"
+  }
+}

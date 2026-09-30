@@ -1,0 +1,7 @@
+{
+  "pass_check": true,
+  "max_tokens": 3,
+  "max_completion_tokens": 1,
+  "completion_tokens": 1,
+  "hidden_size": 1024
+}

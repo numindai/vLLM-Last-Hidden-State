@@ -1,0 +1,82 @@
+{
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "8"
+  },
+  "commands": [
+    {
+      "name": "reference-short",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_hidden_state.py",
+        "reference",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--reference",
+        "/tmp/v030-reference.json"
+      ],
+      "exit_code": 0,
+      "output": "reference-short.txt"
+    },
+    {
+      "name": "reference-long",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_hidden_state.py",
+        "reference",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+        "--long-prompts",
+        "--reference",
+        "/tmp/v030-reference-long.json"
+      ],
+      "exit_code": 0,
+      "output": "reference-long.txt"
+    },
+    {
+      "name": "reference-int4",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_hidden_state.py",
+        "reference",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--drawais--Qwen3.5-9B-AWQ-INT4/snapshots/b3b888195917f6224e3a97e84e7f64c6b1ec8731",
+        "--text-only",
+        "--dequantize",
+        "--reference",
+        "/tmp/v030-int4-reference.json"
+      ],
+      "exit_code": 0,
+      "output": "reference-int4.txt"
+    },
+    {
+      "name": "reference-9b-short",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_hidden_state.py",
+        "reference",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "--reference",
+        "/tmp/v030-9b-reference.json"
+      ],
+      "exit_code": 0,
+      "output": "reference-9b-short.txt"
+    },
+    {
+      "name": "reference-9b-long",
+      "command": [
+        "/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python",
+        "validation/validate_hidden_state.py",
+        "reference",
+        "--model",
+        "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "--long-prompts",
+        "--reference",
+        "/tmp/v030-9b-reference-long.json"
+      ],
+      "exit_code": 0,
+      "output": "reference-9b-long.txt"
+    }
+  ]
+}

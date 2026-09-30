@@ -168,6 +168,21 @@ def test_ordinary_request_does_not_capture_or_delay_blocks(connector, runner):
     assert connector.build_connector_meta(None) == VectorMetadata()
 
 
+def test_completion_returns_handle_without_reporting_kv_transfers(connector):
+    """0.30's transfer snapshot must not turn extraction into an async KV send."""
+    request = SimpleNamespace(kv_transfer_params={FLAG: True, HANDLE: "handle"})
+    assert connector.request_finished_all_groups(request, ([1], [2])) == (
+        False,
+        {HANDLE: "handle"},
+    )
+    transfers = connector.get_transfer_results({"request-id"})
+    assert not transfers.finished_sending
+    assert not transfers.finished_recving
+    assert not transfers.failed_recving
+    assert not connector.register_finished_partial_tail(request, ([1],), [(0, 1, 2)])
+    assert not connector.has_pending_block_frees()
+
+
 def test_recomputed_final_prompt_replaces_state_from_a_preempted_forward(
     connector, runner
 ):

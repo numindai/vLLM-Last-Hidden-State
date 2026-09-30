@@ -1,0 +1,80 @@
+/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_scm/_integration/version_inference.py:222: UserWarning: version of None already set
+  warnings.warn(f"version of {self.dist_name} already set")
+running build_ext
+Using MAX_JOBS=8 as the number of jobs.
+-- Build type: RelWithDebInfo
+-- Target device: cpu
+-- Found python matching: /home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python.
+CMake Warning at .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:22 (message):
+  library kineto not found.
+Call Stack (most recent call first):
+  .venv/lib/python3.12/site-packages/torch/share/cmake/Torch/TorchConfig.cmake:119 (append_torchlib_if_found)
+  CMakeLists.txt:112 (find_package)
+
+
+-- Performing Test COMPILER_SUPPORTS_AMX_FP8_FLAG
+-- Performing Test COMPILER_SUPPORTS_AMX_FP8_FLAG - Success
+-- Downloading oneDNN from GitHub
+[1/9] Creating directories for 'onednn-populate'
+[1/9] Performing download step (git clone) for 'onednn-populate'
+Cloning into 'onednn-src'...
+fatal: unable to access 'https://github.com/oneapi-src/oneDNN.git/': Could not resolve host: github.com
+Cloning into 'onednn-src'...
+fatal: unable to access 'https://github.com/oneapi-src/oneDNN.git/': Could not resolve host: github.com
+Cloning into 'onednn-src'...
+fatal: unable to access 'https://github.com/oneapi-src/oneDNN.git/': Could not resolve host: github.com
+Had to git clone more than once: 3 times.
+CMake Error at onednn-subbuild/onednn-populate-prefix/tmp/onednn-populate-gitclone.cmake:55 (message):
+  Failed to clone repository:
+
+    'https://github.com/oneapi-src/oneDNN.git'
+
+
+FAILED: [code=1] onednn-populate-prefix/src/onednn-populate-stamp/onednn-populate-download /tmp/hidden-state-v030-deps/onednn-subbuild/onednn-populate-prefix/src/onednn-populate-stamp/onednn-populate-download 
+cd /tmp/hidden-state-v030-deps && /usr/bin/cmake -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P /tmp/hidden-state-v030-deps/onednn-subbuild/onednn-populate-prefix/tmp/onednn-populate-gitclone.cmake && /usr/bin/cmake -E touch /tmp/hidden-state-v030-deps/onednn-subbuild/onednn-populate-prefix/src/onednn-populate-stamp/onednn-populate-download
+ninja: build stopped: subcommand failed.
+
+CMake Error at /usr/share/cmake/Modules/FetchContent.cmake:1933 (message):
+  Build step for onednn failed: 1
+Call Stack (most recent call first):
+  /usr/share/cmake/Modules/FetchContent.cmake:1622 (__FetchContent_populateSubbuild)
+  /usr/share/cmake/Modules/FetchContent.cmake:2160:EVAL:2 (__FetchContent_doPopulation)
+  /usr/share/cmake/Modules/FetchContent.cmake:2160 (cmake_language)
+  /usr/share/cmake/Modules/FetchContent.cmake:2401 (__FetchContent_Populate)
+  cmake/cpu_extension.cmake:411 (FetchContent_MakeAvailable)
+  CMakeLists.txt:178 (include)
+
+
+-- Configuring incomplete, errors occurred!
+Traceback (most recent call last):
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 1505, in <module>
+    setup(
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/__init__.py", line 117, in setup
+    return distutils.core.setup(**attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 186, in setup
+    return run_commands(dist)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/core.py", line 202, in run_commands
+    dist.run_commands()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1002, in run_commands
+    self.run_command(cmd)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/dist.py", line 1105, in run_command
+    super().run_command(command)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/dist.py", line 1021, in run_command
+    cmd_obj.run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools_rust/setuptools_ext.py", line 177, in run
+    super().run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 389, in run
+    super().run()
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/command/build_ext.py", line 99, in run
+    _build_ext.run(self)
+  File "/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_distutils/command/build_ext.py", line 368, in run
+    self.build_extensions()
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 346, in build_extensions
+    self.configure(ext)
+  File "/home/soren/Documents/numind/vllm_package/vllm/setup.py", line 323, in configure
+    subprocess.check_call(
+  File "/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 413, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['cmake', '/home/soren/Documents/numind/vllm_package/vllm', '-G', 'Ninja', '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DVLLM_TARGET_DEVICE=cpu', '-DVLLM_PYTHON_EXECUTABLE=/home/soren/Documents/numind/vllm_package/vllm/.venv/bin/python', '-DVLLM_PYTHON_PATH=/home/soren/Documents/numind/vllm_package/vllm:/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python312.zip:/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12:/home/soren/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/lib-dynload:/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages:__editable__.vllm-0.1.dev1+g23cfaad49.cpu.finder.__path_hook__:/home/soren/Documents/numind/vllm_package/vllm/.venv/lib/python3.12/site-packages/setuptools/_vendor', '-DFETCHCONTENT_BASE_DIR=/home/soren/Documents/numind/vllm_package/vllm/.deps', '-DCMAKE_JOB_POOL_COMPILE:STRING=compile', '-DCMAKE_JOB_POOLS:STRING=compile=8', '-DFETCHCONTENT_BASE_DIR=/tmp/hidden-state-v030-deps']' returned non-zero exit status 1.

@@ -7,22 +7,22 @@ normalize the vector to unit length.
 
 ## Installation
 
-Use Python 3.12+ and install **vLLM 0.29.0 for your hardware** in your environment
+Use Python 3.12+ and install **vLLM 0.30.0 for your hardware** in your environment
 first. This package deliberately does not install or replace vLLM/PyTorch.
-Install this extension from the tagged GitLab revision using an SSH key with
-access to the repository:
+Install the extension from this checkout:
 
 ```sh
-python -m pip install "git+ssh://git@gitlab.com/numind.tech/vllm_last_hidden_state.git@v0.29.0"
+python -m pip install .
 ```
 
-For development from a local checkout, use `python -m pip install -e .`.
+For development, use `python -m pip install -e .`.
 Both expose the same launcher. Installing the package alone does not enable
-extraction. The Git tag selects the extension revision; it is independent of the
-Python package version (`0.1.0`).
+extraction. The Python package version remains `0.1.0`; the compatibility policy
+below identifies the required vLLM release. The historical extension tag
+`v0.29.0` is for vLLM 0.29.0 and does not contain this upgrade.
 
-The `vllm/` submodule is upstream source pinned to `v0.29.0`
-(`98dff2a81d747d1dba01a47f939f48c3526d4206`) for inspection and validation.
+The `vllm/` submodule is upstream source pinned to `v0.30.0`
+(`ced6857afa0ea7b2e3f0846a62e1394e90f15607`) for inspection and validation.
 Initialize it when you need that source:
 
 ```sh
@@ -31,7 +31,7 @@ git submodule update --init --recursive
 
 The submodule does not control the vLLM installed in your Python environment.
 The launcher, endpoint initialization, and worker initialization check installed
-vLLM metadata. Only `0.29.0` is accepted; local build suffixes such as `+cpu` are
+vLLM metadata. Only `0.30.0` is accepted; local build suffixes such as `+cpu` are
 allowed. Other releases, prereleases, development builds, and missing installations
 produce an error explaining what to install.
 
@@ -66,13 +66,17 @@ copied to float32 for JSON serialization, independently of model precision.
 MTP drafts tokens for ordinary multi-token generation; extraction still returns the
 target model's last prompt state with a one-token completion.
 
-On the tested CPU build of vLLM 0.29.0, MTP with default prefix caching hits an
-upstream Triton cache-kernel error. Use `--no-enable-prefix-caching` explicitly
-for this CPU MTP configuration. The launcher does not change caching settings.
-This workaround is CPU-specific: on CUDA, leave prefix caching enabled with the
-default Mamba cache mode, `align`. The CUDA kernel path exists in the pinned
-source but has not been tested here; Qwen3.5 MTP rejects cache mode `all`.
-See [MTP validation](validation/MTP-v0.29.0.md) for runtime evidence and limits.
+CPU MTP is currently blocked on the tested vLLM 0.30.0 build without Triton-CPU.
+The upstream CPU fallbacks do not bind all of the new speculative-kernel
+dispatchers: two speculative tokens fail in draft metadata updates, and one
+speculative token still fails during ordinary multi-token rejection sampling.
+Ordinary vLLM with the extension disabled reproduces the two-token failure.
+Prefix-cached CPU MTP also hits the upstream Mamba precopy kernel error;
+`--no-enable-prefix-caching` alone no longer makes this CPU configuration work.
+The launcher does not alter these settings or patch upstream sampling kernels.
+CUDA MTP remains implemented but untested here; Qwen3.5 MTP rejects Mamba cache
+mode `all`. See the [0.30.0 report](validation/UPGRADE-v0.30.0.md) for failures and
+[historical MTP validation](validation/MTP-v0.29.0.md) for the older working CPU build.
 
 Extraction is opt-in per request:
 
@@ -124,10 +128,11 @@ that replace the same chat handler or worker internals.
 
 ## Supported configurations
 
-- Version policy: vLLM **0.29.0** only. See the [validation report](validation/UPGRADE-v0.29.0.md)
-  for the exact runtime evidence and remaining gaps. CPU Qwen3.5-0.8B serving
-  was exercised in eager and compiled modes. Two image comparisons failed the
-  unchanged Transformers numerical thresholds; numerical parity is not guaranteed.
+- Version policy: vLLM **0.30.0** only. See the [upgrade report](validation/UPGRADE-v0.30.0.md)
+  for source audit, runtime evidence, and remaining gaps. CPU 9B BF16 short
+  text/image and INT4 text suites passed in eager and compiled modes. Four BF16
+  image comparisons failed the unchanged Transformers thresholds; numerical
+  parity is not guaranteed. Historical 0.29.0 results remain separate.
 - Qwen3.5; one local worker using `--distributed-executor-backend mp`.
   Dtype and quantization support follow the installed vLLM backend; this extension
   imposes no additional precision whitelist.
@@ -136,11 +141,9 @@ that replace the same chat handler or worker internals.
 - V1 CPU/GPU runners; eager and compiled capture paths. Prefix caching and chunked
   prefill are implemented. GPU execution, CUDA graphs, and async scheduling need
   hardware validation; CPU execution cannot validate those paths.
-- MTP is accepted; other speculative decoding methods remain unsupported.
-  CPU NuExtract3-W4A16 MTP was exercised with text/images, chunked long prompts,
-  streaming, and mixed requests, using automatic dtype/quantization and the
-  explicit prefix-cache workaround above. Qwen3.5-0.8B MTP also passed in eager
-  and compiled modes. See the [MTP report](validation/MTP-v0.29.0.md).
+- MTP target-state capture is retained; other speculative methods remain
+  unsupported. CPU MTP on the tested 0.30.0 backend has the upstream failures
+  above. Historical CPU MTP successes on 0.29.0 do not validate 0.30.0.
 - LoRA, distributed parallelism, and other
   KV connectors are unsupported.
 

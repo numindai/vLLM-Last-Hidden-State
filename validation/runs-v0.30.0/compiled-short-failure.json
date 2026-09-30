@@ -1,0 +1,104 @@
+{
+  "status": "fail",
+  "min_cosine": 0.999,
+  "max_relative_l2": 0.05,
+  "cases_before_failure": [
+    {
+      "case": 0,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 27,
+      "last_token_id": 328,
+      "max_abs_error": 0.2578125,
+      "mean_abs_error": 0.04600943624973297,
+      "cosine": 0.9998849034309387,
+      "relative_l2_error": 0.01519231777638197,
+      "seconds": 0.2764097040053457,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    },
+    {
+      "case": 1,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 27,
+      "last_token_id": 328,
+      "max_abs_error": 0.328125,
+      "mean_abs_error": 0.053072646260261536,
+      "cosine": 0.9998633861541748,
+      "relative_l2_error": 0.016565511003136635,
+      "seconds": 0.04798037100408692,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    },
+    {
+      "case": 2,
+      "reference_backend": "transformers",
+      "hidden_size": 1024,
+      "position": 104,
+      "last_token_id": 328,
+      "max_abs_error": 2.5625,
+      "mean_abs_error": 0.14481857419013977,
+      "cosine": 0.9984844326972961,
+      "relative_l2_error": 0.0551551952958107,
+      "seconds": 0.14594079399830662,
+      "completion": {
+        "finish_reason": "length",
+        "index": 0,
+        "logprobs": null,
+        "message": {
+          "content": "A",
+          "refusal": null,
+          "role": "assistant",
+          "annotations": null,
+          "audio": null,
+          "function_call": null,
+          "tool_calls": null,
+          "reasoning": null
+        },
+        "stop_reason": null,
+        "token_ids": [
+          32
+        ],
+        "routed_experts": null
+      }
+    }
+  ],
+  "later_checks": "not reached; see traceback in matching txt file"
+}
