@@ -1,0 +1,94 @@
+{
+  "plugin-v1-eager": {
+    "metrics_delta": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    },
+    "repeated": {
+      "min_cosine": 0.9999188780784607,
+      "max_relative_l2": 0.012787106446921825
+    },
+    "short": {
+      "min_cosine": 0.9986095428466797,
+      "max_relative_l2": 0.05286160483956337
+    },
+    "long": {
+      "min_cosine": 0.9994751811027527,
+      "max_relative_l2": 0.032440878450870514
+    }
+  },
+  "plugin-v2-eager": {
+    "metrics_delta": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    },
+    "repeated": {
+      "min_cosine": 0.9999135136604309,
+      "max_relative_l2": 0.01320035569369793
+    },
+    "control": {
+      "min_cosine": 1.0000001192092896,
+      "max_relative_l2": 0.0
+    },
+    "short": {
+      "min_cosine": 0.9986095428466797,
+      "max_relative_l2": 0.05286160483956337
+    },
+    "long": {
+      "min_cosine": 0.9994751811027527,
+      "max_relative_l2": 0.032440878450870514
+    }
+  },
+  "plugin-v2-compiled": {
+    "metrics_delta": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    },
+    "repeated": {
+      "min_cosine": 0.999950647354126,
+      "max_relative_l2": 0.009952698834240437
+    },
+    "control": {
+      "min_cosine": 0.9998645782470703,
+      "max_relative_l2": 0.01647154614329338
+    },
+    "short": {
+      "min_cosine": 0.9985131025314331,
+      "max_relative_l2": 0.05461708456277847
+    },
+    "long": {
+      "min_cosine": 0.9995627999305725,
+      "max_relative_l2": 0.029606500640511513
+    }
+  },
+  "plugin-v2-mtp-eager": {
+    "metrics_delta": {
+      "spec_decode_num_drafts_total": 49.0,
+      "spec_decode_num_draft_tokens_total": 49.0,
+      "spec_decode_num_accepted_tokens_total": 27.0,
+      "prefix_cache_hits_total": 2560.0
+    },
+    "repeated": {
+      "min_cosine": 0.9999194741249084,
+      "max_relative_l2": 0.012720253318548203
+    },
+    "control": {
+      "min_cosine": 0.9998538494110107,
+      "max_relative_l2": 0.017107445746660233
+    },
+    "short": {
+      "min_cosine": 0.9986143112182617,
+      "max_relative_l2": 0.05276096612215042
+    },
+    "long": {
+      "min_cosine": 0.9994534254074097,
+      "max_relative_l2": 0.03316965326666832
+    }
+  }
+}

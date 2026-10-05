@@ -1,0 +1,1 @@
+/tmp/vllm031-runtime/lib/python3.12/site-packages/vllm/__init__.py 0.31.0 2.13.0+cpu 3.8.0 ['amd', 'cpu', 'nvidia']

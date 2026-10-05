@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
-"""vLLM 0.30.0 assumptions; audit this module when changing the upstream pin."""
+"""vLLM 0.31.0 assumptions; audit this module when changing the upstream pin."""
 
 from dataclasses import dataclass
 from importlib import metadata
@@ -10,7 +10,7 @@ from packaging.version import InvalidVersion, Version
 
 from . import FLAG, HANDLE
 
-SUPPORTED_VLLM_VERSION = "0.30.0"
+SUPPORTED_VLLM_VERSION = "0.31.0"
 
 
 def require_supported_vllm():
@@ -76,7 +76,7 @@ def prompt_batch_rows(runner):
 def capture_model_forward(runner, connector):
     """Capture the target forward, outside compilation and CUDA graph replay.
 
-    In 0.30.0 Qwen MTP's EagleProposer calls its own model directly, not this
+    In 0.31.0 Qwen MTP's EagleProposer calls its own model directly, not this
     method. Copying here also precedes drafting and output-buffer reuse.
     """
     original = runner._model_forward

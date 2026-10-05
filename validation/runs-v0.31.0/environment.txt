@@ -1,0 +1,10 @@
+Python: 3.12.13 (main, Apr 14 2026, 14:29:00) [Clang 22.1.3 ]
+OS: Linux-7.2.8-2-cachyos-x86_64-with-glibc2.44
+vLLM imported source: /home/soren/Documents/numind/vllm_patches/vllm_package/vllm/vllm/__init__.py
+vllm 0.30.0+cpu
+torch 2.13.0+cpu
+transformers 5.16.1
+compressed-tensors 0.17.0
+openai 3.14.1
+triton 3.8.0
+CUDA available: False

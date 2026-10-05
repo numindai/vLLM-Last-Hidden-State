@@ -1,5 +1,8 @@
 # vLLM 0.30.0 compatibility report
 
+> Current release guidance: [v0.31.0 upgrade report](UPGRADE-v0.31.0.md).
+> This report preserves historical 0.30.0 results.
+
 Date: 2026-09-23. Historical [0.29.0](UPGRADE-v0.29.0.md) and
 [MTP](MTP-v0.29.0.md) results remain unchanged and do not certify this release.
 

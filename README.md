@@ -26,7 +26,7 @@ retrieval quality still depends on the model, prompt, and downstream processing.
 
 ## Quick start
 
-Use Python 3.12+ with **vLLM 0.30.0 installed for your hardware**. The extension
+Use Python 3.12+ with **vLLM 0.31.0 installed for your hardware**. The extension
 keeps your existing vLLM/PyTorch installation intact.
 
 ```sh
@@ -131,11 +131,11 @@ Choose and evaluate your prompting and normalization strategy for your task.
 
 | Setting | Current scope |
 | --- | --- |
-| vLLM version | **0.30.0**; local build suffixes such as `+cpu` are accepted |
+| vLLM version | **0.31.0**; local build suffixes such as `+cpu` are accepted |
 | Models | Native Qwen3.5 architecture |
 | API | Python `/v1/chat/completions`; extraction requires `n=1`, `stream=False`, and one output token |
 | Execution | One local `mp` worker; CPU or CUDA adapters; V1 and experimental V2 |
-| Scheduling | Prefix caching and chunked prefill implemented and tested on CPU |
+| Scheduling | Prefix caching and chunked prefill tested on CPU with 0.31.0 |
 | Speculation | MTP target-state capture; other speculative methods unsupported |
 | Precision | Model dtype/quantization follow the installed vLLM backend |
 | Exclusions | LoRA, distributed parallelism, other KV connectors, and the Rust frontend |
@@ -146,9 +146,10 @@ model precision, scheduling, and compilation to upstream vLLM and your settings.
 Conflicting executor/worker/connector settings are rejected. See
 [advanced configuration](MAINTENANCE.md#launcher-and-advanced-configuration).
 
-V2 has real CPU eager and compiled coverage on Qwen3.5-0.8B BF16, including mixed
-traffic, streaming, and measured prefix-cache hits. Eager V2 MTP also passes a
-comparison with non-MTP target states while drafting and accepting tokens. CPU
+On vLLM 0.31.0, V1 eager and V2 eager/compiled CPU runs pass the long-prompt
+text/image suite, mixed traffic, streaming, and measured prefix-cache checks on
+Qwen3.5-0.8B BF16. V2 ordinary output matches plugin-disabled baselines. Eager
+V2 MTP passes target-state comparison while drafting and accepting tokens. CPU
 V2 requires Triton CPU. For example, select V2 and MTP explicitly with:
 
 ```sh
@@ -156,13 +157,14 @@ VLLM_USE_V2_MODEL_RUNNER=1 vllm-last-hidden-state Qwen/Qwen3.5-0.8B \
     --speculative-config '{"method":"mtp","num_speculative_tokens":1}'
 ```
 
-**Validation limits:** V2 remains experimental. Some image vectors exceed the
+**Validation limits:** See the [0.31.0 upgrade report](validation/UPGRADE-v0.31.0.md)
+for current checks. V2 remains experimental. Short image vectors exceed the
 strict Transformers comparison tolerance on both V1 and V2. GPU execution,
 CUDA graph replay, and async scheduling are not runtime-validated for this
 package. The synchronous vector copy and retrieval RPC have a cost; these checks
-are not performance benchmarks. See the [V2 results](validation/V2-v0.30.0.md)
-and [v0.30.0 validation report](validation/UPGRADE-v0.30.0.md) for exact coverage,
-including older CPU MTP failures without Triton CPU.
+are not performance benchmarks. The [earlier V2 results](validation/V2-v0.30.0.md)
+and [v0.30.0 report](validation/UPGRADE-v0.30.0.md) retain historical coverage and
+failures; they do not certify newer releases.
 
 ## Research background
 

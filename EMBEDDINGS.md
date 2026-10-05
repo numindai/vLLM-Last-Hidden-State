@@ -54,7 +54,7 @@ Do not modify upstream source in the package's `vllm/` submodule.
    frontend. Runner selection and precision remain upstream/caller decisions.
 2. `endpoint.py` validates opt-in requests, creates request handles, delegates
    ordinary chat work, and includes the retrieved vector in the response.
-3. `compat.py` checks vLLM 0.30.0 and installs an instance-local V1 CPU model
+3. `compat.py` checks vLLM 0.31.0 and installs an instance-local V1 CPU model
    hook, V1 GPU forward wrapper, or V2 execute wrapper. V2 captures fresh target
    `execute_model_state` before sampling/drafting; it tracks only opted-in
    metadata through chunking and preemption.
@@ -75,7 +75,8 @@ compatible compilation modes, and MTP only among speculative methods. LoRA,
 distributed parallelism, other KV connectors, and other model families remain
 unsupported. Dtype/quantization validation belongs to upstream vLLM.
 
-V2 remains experimental. Real CPU eager/compiled and eager MTP evidence is in
+Current upgrade evidence is in [UPGRADE-v0.31.0.md](validation/UPGRADE-v0.31.0.md).
+V2 remains experimental. Historical 0.30.0 CPU eager/compiled and eager MTP evidence is in
 [V2-v0.30.0.md](validation/V2-v0.30.0.md). The [release report](validation/UPGRADE-v0.30.0.md)
 records V1/precision coverage and earlier failures. Preserve the failed image
 comparisons; do not infer numerical parity or retrieval quality from passing

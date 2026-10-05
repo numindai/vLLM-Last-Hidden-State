@@ -1,0 +1,157 @@
+# vLLM 0.31.0 compatibility upgrade — 2026-10-05
+
+## Revisions and environment
+
+- Previous release: v0.30.0, `ced6857afa0ea7b2e3f0846a62e1394e90f15607`.
+  Preserve [its report](UPGRADE-v0.30.0.md) and [V2 runtime results](V2-v0.30.0.md),
+  including failed image comparisons; they do not certify this release.
+- Target: v0.31.0, `db9527a46873454610df6dbedf79a36d6bf1a7f6`.
+  The upstream submodule is detached at this revision and unmodified.
+- Extension: 0.31.0, local changes above `3d5885a`. Package metadata, version guard,
+  tests, installation guidance, and submodule pin updated together.
+- Source-level checks use the existing sibling checkout's Python environment
+  with `PYTHONPATH="$PWD/vllm:$PWD"`. The imported vLLM source is the package
+  submodule, not the native PR checkout. Its older installed native artifacts
+  are **not** a v0.31.0 runtime certification. See
+  [environment](runs-v0.31.0/environment.txt).
+- Host: AMD Ryzen AI MAX+ 395, 32 logical CPUs, approximately 121 GiB RAM,
+  Linux x86_64. No CUDA device available.
+
+## Contract audit and changes
+
+Paths below are relative to the pinned upstream submodule. Compared v0.30.0 to
+v0.31.0 and traced the current implementations and callers, rather than checking
+imports alone. No upstream source changes or capture/transport redesign needed.
+
+| Integration | Target source / symbols | Finding |
+| --- | --- | --- |
+| Endpoint loading and route delegation | `plugins/endpoint_plugins/interface.py`, `entrypoints/launchers/api_server/app_state.py`, `entrypoints/generate/api_router.py` | Generate/chat state is initialized before endpoint plugin state. Existing chat route resolves the delegated handler. Explicit plugin selection and Python frontend remain required. |
+| CLI/version guards | `entrypoints/cli/serve.py`, `utils/argparse_utils.py`, `config/parallel.py`, `config/compilation.py` | Parser aliases, YAML/dotted JSON, precedence, local mp executor, and compilation enums remain compatible. Runner environment remains caller-owned. Guard accepts 0.31.0 and local hardware suffixes, rejects older/newer/dev/rc/post releases. |
+| Request and response metadata | `entrypoints/openai/chat_completion/protocol.py:to_sampling_params`, `v1/request.py`, `v1/core/sched/scheduler.py` | KV parameters still reach sampling extra args/request metadata; completion returns connector handle through EngineCoreOutput. Sampling-default refactor preserves this transport. |
+| Connector lifecycle | `distributed/kv_transfer/kv_connector/v1/base.py`, `v1/worker/gpu/kv_connector.py` | Abstract methods and SupportsHMA unchanged. New optional memory-pool context defaults to None. wait_for_save is called after target/draft work, including empty steps; package has no transfers or delayed block release. |
+| Worker initialization/RPC | `v1/worker/worker_base.py`, `v1/executor/multiproc_executor.py` | Extension injection and named RPC dispatch preserved; single worker executes RPCs sequentially. CPU Triton overrides moved to platform registration during worker initialization. |
+| V1 capture | `v1/worker/cpu_model_runner.py`, `v1/worker/gpu_model_runner.py:_model_forward` | CPU outer target hook and GPU instance forward wrapper remain outside decoder compilation/graph replay. Target execution precedes drafting and buffer reuse. |
+| V2 capture | `v1/worker/gpu/model_runner.py:execute_model/sample_tokens`, `v1/worker/cpu/model_runner.py` | CPU still inherits GPU V2. Fresh ExecuteModelState holds target hidden_states and InputBatch after execution; sampling clears it and drafts later. New auxiliary-output connector replaces routed-expert bookkeeping without removing this boundary. |
+| V2 lifecycle/packed rows | `v1/core/sched/scheduler.py`, `v1/worker/gpu/model_runner.py:add_requests/prepare_inputs` | Resumed requests still become NewRequestData in V2. CPU computed-token arrays are gathered into batch order; query spans and req_ids identify the same forward. Adapter removes finished/preempted IDs and skips stale/no-forward state. |
+| Prefix cache/chunks | `v1/core/kv_cache_manager.py:get_computed_blocks` | Cache hit capped at request.num_tokens - 1, forcing final prompt recomputation for one-token requests. Existing chunk offset and owned-copy selection remains applicable. |
+| Representation/MTP | `model_executor/models/qwen3_5.py`, inherited `qwen3_next.py:forward`, V1 EagleProposer and V2 autoregressive speculator | Final target states remain post-output-normalization. Drafter uses its own model; target capture happens before drafting. Only MTP accepted. |
+| Graphs/async | V1 forward wrapper, V2 execute wrapper, multiprocess worker dispatch | Synchronous owned CPU copy retained; no new nonblocking lifetime assumptions. GPU execution, graph replay, and async scheduling require separate runtime evidence. |
+
+## Source-level checks
+
+From the package root:
+
+```sh
+PYTHONPATH="$PWD/vllm:$PWD" HF_HUB_OFFLINE=1 ../vllm/.venv/bin/python -m pytest -q --tb=short
+ruff check .
+ruff format --check .
+git -C vllm status --short
+git diff --check
+```
+
+- **Pass:** 112 tests, 15 warnings; [full output](runs-v0.31.0/unit-tests.txt).
+  This includes real upstream CLI parsing, version policy, request validation,
+  packed-row ownership, chunk/cache offsets, V2 stale-state/preemption cleanup,
+  mixed request metadata, and cancellation/RPC failure fixtures.
+- **Pass:** Ruff check and formatting (11 Python files); whitespace checks.
+- **Pass:** pinned upstream source remains unmodified.
+- Fixtures do not establish real model execution or CUDA behavior.
+
+## Runtime validation
+
+The fresh isolated environment uses the official v0.31.0 CPU release wheel,
+PyTorch 2.13.0+cpu, Transformers 5.17.0, and official Triton CPU 3.8.0+cpu.
+See [runtime metadata](runs-v0.31.0/runtime-environment.txt),
+[installation output](runs-v0.31.0/runtime-install.txt), and
+[112 passing tests against the installed wheel](runs-v0.31.0/runtime-unit-tests.txt).
+The native PR checkout is not on this runtime's Python path.
+
+```sh
+uv venv --python /path/to/python3.12 --system-site-packages /tmp/vllm031-runtime
+uv pip install --python /tmp/vllm031-runtime/bin/python \
+  'https://github.com/vllm-project/vllm/releases/download/v0.31.0/vllm-0.31.0%2Bcpu-cp38-abi3-manylinux_2_39_x86_64.whl' \
+  'https://github.com/triton-lang/triton-cpu/releases/download/v3.8.0/triton-3.8.0+cpu-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl' --torch-backend cpu
+uv pip install --python /tmp/vllm031-runtime/bin/python -e '.[dev]' build twine
+```
+
+The documented older manylinux_2_34 wheel URL returned 404; GitHub's release
+assets identify the actual manylinux_2_39 wheel above. An initial generic package
+resolution selected CUDA artifacts and was stopped before installation. Neither
+attempt changed the existing development environment or the package guard.
+
+Model/processor: Qwen/Qwen3.5-0.8B snapshot
+`2fc06364715b967f1860aea9cf38778875588b17`, BF16, native model implementation,
+eight CPU threads, 1 GiB KV cache, four sequences, max model length 4096,
+batch-token budget 1280, prefix caching/chunked prefill enabled. Thinking disabled;
+assistant-prefill template is shared between references and HTTP clients.
+Fresh eager Transformers references are retained for
+[short](runs-v0.31.0/reference-short.json) and
+[long](runs-v0.31.0/reference-long.json) text/image cases. Long inputs contain
+1628/1628/1705 tokens, exceeding the 1280-token chunk budget; vector size is 1024.
+Thresholds remain cosine >= 0.999 and relative L2 <= 0.05.
+
+Every server run has a `*-commands.json` file with exact environment, launch and
+client commands, exit codes, and a `*-server.txt` log. The server is stopped after
+each configuration. Failed clients retain their output even when no final JSON
+report is produced. Temporary reference paths in those commands correspond to
+the durable reference files linked above.
+
+**Packaging checks:** wheel and sdist build and strict Twine validation passed;
+see [build](runs-v0.31.0/build.txt), [Twine](runs-v0.31.0/twine.txt), and
+[Ruff](runs-v0.31.0/lint.txt). No artifacts were published.
+
+## Runtime results
+
+| Check | Result / evidence |
+| --- | --- |
+| Plugin-disabled V2 eager, compiled, and eager MTP ordinary baselines | **Pass**, short and long; `baseline-*-commands.json` and response JSON files in [run artifacts](runs-v0.31.0) |
+| V1 eager and V2 eager/compiled/MTP long-prompt HTTP suite | **Pass**, text/image vector shape, exact input tokens and first token, usage, chunking, measured prefix hits, concurrency, streaming, and invalid-request rejection |
+| V2 ordinary output versus matching plugin-disabled baseline | **Pass** for eager, compiled, and eager MTP; choices, usage, and prompt IDs unchanged |
+| V1/V2 mixed ordinary decoding and extraction | **Pass**, all six short/long text/image cases, repeated vectors within tolerance; V2 eager vectors equal the V1 control in the sequential snapshot |
+| V2 compiled versus V1 control | **Pass**, minimum cosine 0.999865, maximum relative L2 1.647%; logs confirm AOT compilation with DYNAMO_TRACE_ONCE/Inductor |
+| V2 eager MTP versus V2 non-MTP | **Pass**, minimum cosine 0.999854, maximum relative L2 1.711%; **49 draft tokens and 27 accepted tokens**, not merely an enabled option |
+| Short text versus fresh Transformers | **Pass** for all four configurations |
+| Short image versus fresh Transformers | **Fail** for all four configurations; preserve metrics below and failed `*-short.txt` outputs |
+
+Each non-MTP long HTTP suite measures 14,080 prefix-cache hit tokens; MTP measures
+7,040. The mixed suites measure 6,400 non-MTP or 2,560 MTP prefix-hit tokens.
+All extracted vectors contain 1,024 finite values. Compilation logs show a saved
+AOT function, and CPU graph mode is NONE; this is not CUDA graph evidence.
+
+| Configuration | Long minimum cosine | Long maximum relative L2 | Short-image cosine | Short-image relative L2 |
+| --- | --- | --- | --- | --- |
+| v1-eager | 0.999475 | 3.244% | 0.998610 | 5.286% |
+| v2-eager | 0.999475 | 3.244% | 0.998610 | 5.286% |
+| v2-compiled | 0.999563 | 2.961% | 0.998513 | 5.462% |
+| v2-mtp-eager | 0.999453 | 3.317% | 0.998614 | 5.276% |
+
+[Summary metrics](runs-v0.31.0/summary.json) link the same measurements to the
+configuration names. Full mixed-traffic reports, snapshots, and baseline outputs
+are retained in [run artifacts](runs-v0.31.0). Temporary snapshot paths in the
+command records correspond to the same-named durable files there.
+
+The short-image prompt has matching input IDs, final position, vector size,
+and first generated token, but fails the unchanged numerical threshold. This
+also fails on V1 and was present in earlier releases; no claim is made that its
+kernel-level cause has been established or fixed. The short suite stops at this
+failure; later protocol/concurrency checks pass in the complete long suite.
+These results establish the listed serving behavior, not full Transformers
+parity for all image inputs or retrieval quality. V2 remains experimental.
+
+## Coverage limits
+
+- GPU eager execution, CUDA graph replay, and GPU async scheduling: **untested**;
+  no CUDA device available. CPU upstream forces async scheduling off.
+- CPU INT4, other checkpoint sizes/precisions, compiled MTP, V1 compilation,
+  real preemption, and live client cancellation: **untested on 0.31.0**.
+  Cancellation/error cleanup and preemption state transitions have unit coverage.
+- No throughput or extraction-overhead benchmark was run.
+- Unsupported: non-Qwen3.5 architectures, LoRA, distributed configurations,
+  alternate executors/connectors, Rust frontend, non-MTP speculative methods.
+
+## Relationship to native PR
+
+[PR #57185](https://github.com/vllm-project/vllm/pull/57185) is independently rebased
+onto upstream main, rather than the v0.31.0 release. Its direct runner-output
+transport, accepted models/interfaces, and rejection of speculation differ from
+this package. Neither implementation's tests certify the other.

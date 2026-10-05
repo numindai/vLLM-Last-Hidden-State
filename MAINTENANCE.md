@@ -7,15 +7,17 @@ and [supported configurations](README.md#supported-configurations).
 Version and activation conflicts are checked at startup; model/runtime
 restrictions are checked in the connector and compatibility module.
 
-Current evidence: [vLLM 0.30.0](validation/UPGRADE-v0.30.0.md) and
-[V2 CPU runtime tests](validation/V2-v0.30.0.md). Native integration is proposed
+Current upgrade: [vLLM 0.31.0 source audit and CPU validation](validation/UPGRADE-v0.31.0.md).
+Historical runtime evidence: [vLLM 0.30.0](validation/UPGRADE-v0.30.0.md) and
+[V2 CPU runtime tests](validation/V2-v0.30.0.md); these do not certify 0.31.0.
+Native integration is proposed
 in [vLLM PR #57185](https://github.com/vllm-project/vllm/pull/57185); package
 validation does not certify that separate implementation.
 
 ## Development
 
-Use Python 3.12+ and a hardware-appropriate vLLM 0.30.0 installation. The package
-version and supported vLLM release are both `0.30.0`; hardware suffixes such as
+Use Python 3.12+ and a hardware-appropriate vLLM 0.31.0 installation. The package
+version and supported vLLM release are both `0.31.0`; hardware suffixes such as
 `+cpu` are accepted, while development/prerelease/post releases are rejected.
 Installing this extension does not install or replace vLLM or PyTorch.
 
@@ -36,7 +38,7 @@ against the pinned upstream source, initialize it separately:
 git submodule update --init --recursive
 ```
 
-The `vllm/` submodule is pinned to v0.30.0 (`ced6857afa0ea7b2e3f0846a62e1394e90f15607`).
+The `vllm/` submodule is pinned to v0.31.0 (`db9527a46873454610df6dbedf79a36d6bf1a7f6`).
 It does not select the vLLM installed in your environment. Source archive and
 wheel installations need no submodule; `git+https` installs may fetch it, so a
 release wheel or GitHub archive is preferable for users.
@@ -116,7 +118,7 @@ durable report; raw vectors and full environment dumps need not enter the packag
 
 Keep the extension package version in `pyproject.toml`,
 `compat.SUPPORTED_VLLM_VERSION`, and the README compatibility summary equal to the
-supported vLLM release (for example, all are `0.30.0`). Bump them together for an
+supported vLLM release (for example, all are `0.31.0`). Bump them together for an
 upgrade, alongside the source audit and a new report. Hardware local suffixes are
 accepted for the installed vLLM, but prereleases/dev/post releases are not. Changing
 the submodule alone does not certify compatibility. Never change installation
@@ -345,9 +347,9 @@ branch and tag. If the tag already exists locally, inspect its target first;
 do not recreate a correct tag or overwrite a published release.
 
 ```sh
-git tag -s v0.30.0 -m 'vLLM Last Hidden State 0.30.0'
+git tag -s v0.31.0 -m 'vLLM Last Hidden State 0.31.0'
 git push origin main
-git push origin v0.30.0
+git push origin v0.31.0
 ```
 
 Pushing the tag triggers the release workflow. These commands do not overwrite
@@ -358,9 +360,9 @@ accident. Preserve historical validation records.
 ### Optional PyPI publishing
 
 PyPI gives users the shortest installation command:
-`python -m pip install vllm-last-hidden-state==0.30.0`. This becomes available
+`python -m pip install vllm-last-hidden-state==0.31.0`. This becomes available
 only after a successful PyPI publication; pushing `main` alone does not publish
-to PyPI. Install hardware-appropriate vLLM 0.30.0 first.
+to PyPI. Install hardware-appropriate vLLM 0.31.0 first.
 
 The workflow's PyPI job is disabled unless the repository Actions variable
 `PYPI_PUBLISH` is exactly `true`. Before enabling it:

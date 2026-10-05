@@ -1,5 +1,8 @@
 # Historical implementation and validation notes
 
+Current release: [v0.31.0 upgrade report](UPGRADE-v0.31.0.md).
+The evidence below is historical.
+
 Archived on 2026-09-21 before the package maintenance update. Runtime results
 below apply to vLLM `23cfaad49701c497def53552b23317335431f72a`, not v0.29.0.
 Use the [current README](../README.md) for installation and activation, the
