@@ -1,0 +1,2 @@
+Checking dist/vllm_last_hidden_state-0.32.0-py3-none-any.whl: PASSED
+Checking dist/vllm_last_hidden_state-0.32.0.tar.gz: PASSED

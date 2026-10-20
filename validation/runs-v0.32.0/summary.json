@@ -1,0 +1,162 @@
+{
+  "v1-eager": {
+    "commands": "plugin-v1-eager-commands.json",
+    "ready": true,
+    "clients": {
+      "mixed": 0,
+      "short": 1,
+      "long": 0
+    },
+    "long": {
+      "minimum_cosine": 0.9994475841522217,
+      "maximum_relative_l2": 0.03328646719455719,
+      "prefix_hit_tokens": 14080.0
+    },
+    "short": [
+      {
+        "case": 0,
+        "cosine": 0.999900221824646,
+        "relative_l2": 0.014141392894089222
+      },
+      {
+        "case": 1,
+        "cosine": 0.9998496174812317,
+        "relative_l2": 0.01739526353776455
+      },
+      {
+        "case": 2,
+        "cosine": 0.9986095428466797,
+        "relative_l2": 0.05286160483956337
+      }
+    ],
+    "mixed_metrics": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    }
+  },
+  "v2-eager": {
+    "commands": "plugin-v2-eager-commands.json",
+    "ready": true,
+    "clients": {
+      "mixed": 0,
+      "short": 1,
+      "long": 0
+    },
+    "long": {
+      "minimum_cosine": 0.9994016289710999,
+      "maximum_relative_l2": 0.03460928052663803,
+      "prefix_hit_tokens": 14080.0
+    },
+    "short": [
+      {
+        "case": 0,
+        "cosine": 0.999900221824646,
+        "relative_l2": 0.014141392894089222
+      },
+      {
+        "case": 1,
+        "cosine": 0.9998496174812317,
+        "relative_l2": 0.01739526353776455
+      },
+      {
+        "case": 2,
+        "cosine": 0.9986095428466797,
+        "relative_l2": 0.05286160483956337
+      }
+    ],
+    "mixed_metrics": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    },
+    "control": {
+      "minimum_cosine": 1.0000001192092896,
+      "maximum_relative_l2": 0.0
+    }
+  },
+  "v2-compiled": {
+    "commands": "plugin-v2-compiled-commands.json",
+    "ready": true,
+    "clients": {
+      "mixed": 0,
+      "short": 1,
+      "long": 0
+    },
+    "long": {
+      "minimum_cosine": 0.9995512962341309,
+      "maximum_relative_l2": 0.029971176758408546,
+      "prefix_hit_tokens": 14080.0
+    },
+    "short": [
+      {
+        "case": 0,
+        "cosine": 0.9998849034309387,
+        "relative_l2": 0.01519231777638197
+      },
+      {
+        "case": 1,
+        "cosine": 0.9998633861541748,
+        "relative_l2": 0.016565511003136635
+      },
+      {
+        "case": 2,
+        "cosine": 0.9985131025314331,
+        "relative_l2": 0.05461708456277847
+      }
+    ],
+    "mixed_metrics": {
+      "spec_decode_num_drafts_total": 0,
+      "spec_decode_num_draft_tokens_total": 0,
+      "spec_decode_num_accepted_tokens_total": 0,
+      "prefix_cache_hits_total": 6400.0
+    },
+    "control": {
+      "minimum_cosine": 0.9998645782470703,
+      "maximum_relative_l2": 0.01647154614329338
+    }
+  },
+  "v2-mtp-eager": {
+    "commands": "plugin-v2-mtp-eager-commands.json",
+    "ready": true,
+    "clients": {
+      "mixed": 0,
+      "short": 1,
+      "long": 0
+    },
+    "long": {
+      "minimum_cosine": 0.9994534254074097,
+      "maximum_relative_l2": 0.03316965326666832,
+      "prefix_hit_tokens": 7040.0
+    },
+    "short": [
+      {
+        "case": 0,
+        "cosine": 0.9998823404312134,
+        "relative_l2": 0.015375846065580845
+      },
+      {
+        "case": 1,
+        "cosine": 0.9998785853385925,
+        "relative_l2": 0.015600087121129036
+      },
+      {
+        "case": 2,
+        "cosine": 0.9986143112182617,
+        "relative_l2": 0.05276096612215042
+      }
+    ],
+    "mixed_metrics": {
+      "spec_decode_num_drafts_total": 49.0,
+      "spec_decode_num_draft_tokens_total": 49.0,
+      "spec_decode_num_accepted_tokens_total": 27.0,
+      "prefix_cache_hits_total": 2560.0
+    },
+    "control": {
+      "minimum_cosine": 0.9998538494110107,
+      "maximum_relative_l2": 0.017107445746660233
+    }
+  }
+}

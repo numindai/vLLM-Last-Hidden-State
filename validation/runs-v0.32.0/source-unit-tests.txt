@@ -1,0 +1,123 @@
+Running 112 items in this shard
+........................................................................ [ 64%]
+............F...........................                                 [100%]
+=================================== FAILURES ===================================
+________ test_matching_configuration_preserves_extra_connector_options _________
+vllm/vllm/engine/arg_utils.py:366: in parse_dataclass
+    return TypeAdapter(cls).validate_json(val)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../vllm/.venv/lib/python3.12/site-packages/pydantic/type_adapter.py:492: in validate_json
+    return self.validator.validate_json(
+E   pydantic_core._pydantic_core.ValidationError: 1 validation error for KVTransferConfig
+E   kv_buffer_size
+E     Unexpected keyword argument [type=unexpected_keyword_argument, input_value=2048, input_type=int]
+E       For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument
+
+The above exception was the direct cause of the following exception:
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2546: in _get_value
+    result = type_func(arg_string)
+             ^^^^^^^^^^^^^^^^^^^^^
+vllm/vllm/engine/arg_utils.py:176: in _optional_type
+    return parse_type(return_type)(val)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm/vllm/engine/arg_utils.py:163: in _parse_type
+    return return_type(val)
+           ^^^^^^^^^^^^^^^^
+vllm/vllm/engine/arg_utils.py:368: in parse_dataclass
+    raise argparse.ArgumentTypeError(repr(e)) from e
+E   argparse.ArgumentTypeError: 1 validation error for KVTransferConfig
+E   kv_buffer_size
+E     Unexpected keyword argument [type=unexpected_keyword_argument, input_value=2048, input_type=int]
+E       For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument
+
+During handling of the above exception, another exception occurred:
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1943: in _parse_known_args2
+    namespace, args = self._parse_known_args(args, namespace, intermixed)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2184: in _parse_known_args
+    start_index = consume_optional(start_index)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2113: in consume_optional
+    take_action(action, args, option_string)
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2003: in take_action
+    argument_values = self._get_values(action, argument_strings)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2513: in _get_values
+    value = self._get_value(action, arg_string)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2551: in _get_value
+    raise ArgumentError(action, msg)
+E   argparse.ArgumentError: argument --kv-transfer-config: 1 validation error for KVTransferConfig
+E   kv_buffer_size
+E     Unexpected keyword argument [type=unexpected_keyword_argument, input_value=2048, input_type=int]
+E       For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument
+
+During handling of the above exception, another exception occurred:
+validation/test_startup.py:134: in test_matching_configuration_preserves_extra_connector_options
+    assert serve.prepare_arguments(args) == args
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm_last_hidden_state/serve.py:30: in prepare_arguments
+    settings = parse_serve_settings(arguments)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm_last_hidden_state/compat.py:49: in parse_serve_settings
+    return parser.parse_args(["serve", *arguments])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm/vllm/utils/argparse_utils.py:465: in parse_args
+    return super().parse_args(processed_args, namespace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1904: in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm/vllm/utils/argparse_utils.py:163: in parse_known_args
+    namespace, args = super().parse_known_args(args, namespace)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1914: in parse_known_args
+    return self._parse_known_args2(args, namespace, intermixed=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1943: in _parse_known_args2
+    namespace, args = self._parse_known_args(args, namespace, intermixed)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2165: in _parse_known_args
+    positionals_end_index = consume_positionals(start_index)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2141: in consume_positionals
+    take_action(action, args)
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2018: in take_action
+    action(self, namespace, argument_values, option_string)
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1272: in __call__
+    subnamespace, arg_strings = parser.parse_known_args(arg_strings, None)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+vllm/vllm/utils/argparse_utils.py:163: in parse_known_args
+    namespace, args = super().parse_known_args(args, namespace)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1914: in parse_known_args
+    return self._parse_known_args2(args, namespace, intermixed=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:1945: in _parse_known_args2
+    self.error(str(err))
+vllm/vllm/utils/argparse_utils.py:157: in error
+    super().error(message)
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2650: in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py:2637: in exit
+    _sys.exit(status)
+E   SystemExit: 2
+----------------------------- Captured stderr call -----------------------------
+usage: vllm serve [model_tag] [options]
+vllm serve: error: argument --kv-transfer-config: 1 validation error for KVTransferConfig
+kv_buffer_size
+  Unexpected keyword argument [type=unexpected_keyword_argument, input_value=2048, input_type=int]
+    For further information visit https://errors.pydantic.dev/2.13/v/unexpected_keyword_argument
+=============================== warnings summary ===============================
+../vllm/.venv/lib/python3.12/site-packages/torch/jit/_script.py:365: 14 warnings
+  /home/soren/Documents/numind/vllm_patches/vllm/.venv/lib/python3.12/site-packages/torch/jit/_script.py:365: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+validation/test_extension.py::test_cancelled_chat_discards_the_same_internal_handle
+  /home/soren/Documents/numind/vllm_patches/vllm_package/vllm_last_hidden_state/endpoint.py:35: DeprecationWarning: max_tokens is deprecated in favor of the max_completion_tokens field
+    else request.max_tokens
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED validation/test_startup.py::test_matching_configuration_preserves_extra_connector_options
+1 failed, 111 passed, 15 warnings in 9.95s

@@ -1,0 +1,27 @@
+[
+  {
+    "command": [
+      "/tmp/vllm032-runtime/bin/python",
+      "validation/validate_hidden_state.py",
+      "reference",
+      "--model",
+      "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+      "--reference",
+      "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v0.32.0/reference-short.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/tmp/vllm032-runtime/bin/python",
+      "validation/validate_hidden_state.py",
+      "reference",
+      "--model",
+      "/home/soren/.cache/huggingface/hub/models--Qwen--Qwen3.5-0.8B/snapshots/2fc06364715b967f1860aea9cf38778875588b17",
+      "--reference",
+      "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v0.32.0/reference-long.json",
+      "--long-prompts"
+    ],
+    "exit_code": 0
+  }
+]

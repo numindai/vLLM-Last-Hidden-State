@@ -1,0 +1,13 @@
+3.12.13 (main, Apr 14 2026, 14:29:00) [Clang 22.1.3 ]
+Linux-7.2.10-1-cachyos-x86_64-with-glibc2.44
+vllm 0.32.0+cpu
+vllm-last-hidden-state 0.32.0
+torch 2.13.0+cpu
+transformers 5.19.0
+triton 3.8.0+cpu
+tokenizers 0.23.3
+compressed-tensors 0.17.0
+openai 3.35.1
+vllm source /tmp/vllm032-runtime/lib/python3.12/site-packages/vllm/__init__.py
+CUDA available False
+Triton backends dict_keys(['amd', 'cpu', 'nvidia'])

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vllm-last-hidden-state"
-version = "0.31.0"
+version = "0.32.0"
 description = "One-token prompt hidden states through vLLM chat completions"
 readme = "README.md"
 license = "Apache-2.0"

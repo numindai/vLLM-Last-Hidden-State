@@ -1,0 +1,49 @@
+[
+  {
+    "name": "vllm_last_hidden_state-0.32.0-py3-none-any.whl",
+    "sha256": "b247a73291d5e0d0c34edda5da3cf08ecec9c98a963beedcd4aecbc1635611a0",
+    "bytes": 19872,
+    "members": [
+      "vllm_last_hidden_state/__init__.py",
+      "vllm_last_hidden_state/compat.py",
+      "vllm_last_hidden_state/connector.py",
+      "vllm_last_hidden_state/endpoint.py",
+      "vllm_last_hidden_state/serve.py",
+      "vllm_last_hidden_state/worker.py",
+      "vllm_last_hidden_state-0.32.0.dist-info/licenses/LICENSE",
+      "vllm_last_hidden_state-0.32.0.dist-info/METADATA",
+      "vllm_last_hidden_state-0.32.0.dist-info/WHEEL",
+      "vllm_last_hidden_state-0.32.0.dist-info/entry_points.txt",
+      "vllm_last_hidden_state-0.32.0.dist-info/top_level.txt",
+      "vllm_last_hidden_state-0.32.0.dist-info/RECORD"
+    ]
+  },
+  {
+    "name": "vllm_last_hidden_state-0.32.0.tar.gz",
+    "sha256": "fb7b98339c8952a8bdd54e8e661b59040abab46e242600e82599d835bfa014b7",
+    "bytes": 22021,
+    "members": [
+      "vllm_last_hidden_state-0.32.0",
+      "vllm_last_hidden_state-0.32.0/LICENSE",
+      "vllm_last_hidden_state-0.32.0/MANIFEST.in",
+      "vllm_last_hidden_state-0.32.0/PKG-INFO",
+      "vllm_last_hidden_state-0.32.0/README.md",
+      "vllm_last_hidden_state-0.32.0/pyproject.toml",
+      "vllm_last_hidden_state-0.32.0/setup.cfg",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/__init__.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/compat.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/connector.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/endpoint.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/serve.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state/worker.py",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/PKG-INFO",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/SOURCES.txt",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/dependency_links.txt",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/entry_points.txt",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/requires.txt",
+      "vllm_last_hidden_state-0.32.0/vllm_last_hidden_state.egg-info/top_level.txt"
+    ]
+  }
+]

@@ -26,7 +26,7 @@ retrieval quality still depends on the model, prompt, and downstream processing.
 
 ## Quick start
 
-Use Python 3.12+ with **vLLM 0.31.0 installed for your hardware**. The extension
+Use Python 3.12+ with **vLLM 0.32.0 installed for your hardware**. The extension
 keeps your existing vLLM/PyTorch installation intact.
 
 ```sh
@@ -131,11 +131,11 @@ Choose and evaluate your prompting and normalization strategy for your task.
 
 | Setting | Current scope |
 | --- | --- |
-| vLLM version | **0.31.0**; local build suffixes such as `+cpu` are accepted |
+| vLLM version | **0.32.0**; local build suffixes such as `+cpu` are accepted |
 | Models | Native Qwen3.5 architecture |
 | API | Python `/v1/chat/completions`; extraction requires `n=1`, `stream=False`, and one output token |
 | Execution | One local `mp` worker; CPU or CUDA adapters; V1 and experimental V2 |
-| Scheduling | Prefix caching and chunked prefill tested on CPU with 0.31.0 |
+| Scheduling | Prefix caching and chunked prefill tested on CPU with 0.32.0 |
 | Speculation | MTP target-state capture; other speculative methods unsupported |
 | Precision | Model dtype/quantization follow the installed vLLM backend |
 | Exclusions | LoRA, distributed parallelism, other KV connectors, and the Rust frontend |
@@ -146,7 +146,7 @@ model precision, scheduling, and compilation to upstream vLLM and your settings.
 Conflicting executor/worker/connector settings are rejected. See
 [advanced configuration](MAINTENANCE.md#launcher-and-advanced-configuration).
 
-On vLLM 0.31.0, V1 eager and V2 eager/compiled CPU runs pass the long-prompt
+On vLLM 0.32.0, V1 eager and V2 eager/compiled CPU runs pass the long-prompt
 text/image suite, mixed traffic, streaming, and measured prefix-cache checks on
 Qwen3.5-0.8B BF16. V2 ordinary output matches plugin-disabled baselines. Eager
 V2 MTP passes target-state comparison while drafting and accepting tokens. CPU
@@ -157,12 +157,13 @@ VLLM_USE_V2_MODEL_RUNNER=1 vllm-last-hidden-state Qwen/Qwen3.5-0.8B \
     --speculative-config '{"method":"mtp","num_speculative_tokens":1}'
 ```
 
-**Validation limits:** See the [0.31.0 upgrade report](validation/UPGRADE-v0.31.0.md)
+**Validation limits:** See the [0.32.0 upgrade report](validation/UPGRADE-v0.32.0.md)
 for current checks. V2 remains experimental. Short image vectors exceed the
 strict Transformers comparison tolerance on both V1 and V2. GPU execution,
 CUDA graph replay, and async scheduling are not runtime-validated for this
 package. The synchronous vector copy and retrieval RPC have a cost; these checks
-are not performance benchmarks. The [earlier V2 results](validation/V2-v0.30.0.md)
+are not performance benchmarks. The [0.31.0 report](validation/UPGRADE-v0.31.0.md),
+[earlier V2 results](validation/V2-v0.30.0.md)
 and [v0.30.0 report](validation/UPGRADE-v0.30.0.md) retain historical coverage and
 failures; they do not certify newer releases.
 
