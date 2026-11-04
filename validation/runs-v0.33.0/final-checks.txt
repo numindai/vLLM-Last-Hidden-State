@@ -1,0 +1,4 @@
+Version metadata and current local documentation links pass.
+Final wheel/sdist metadata, contents and hashes pass.
+Changed/new text whitespace passes.
+Upstream submodule is clean at v0.33.0.

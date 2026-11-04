@@ -1,0 +1,244 @@
+W1104 16:15:19.500000 730460 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1104 16:15:19.501000 730460 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1104 16:15:19.501000 730460 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1104 16:15:25.420000 730460 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1104 16:15:25.420000 730460 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1104 16:15:25.421000 730460 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]        █     █     █▄   ▄█
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.33.0
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]   █▄█▀ █     █     █     █  model   /tmp/vllm033-model
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:38]
+(APIServer pid=730460) INFO 11-04 16:15:28 [startup.py:96] non-default args: {'model_tag': '/tmp/vllm033-model', 'host': '127.0.0.1', 'port': 18432, 'model': '/tmp/vllm033-model', 'dtype': 'bfloat16', 'max_model_len': 4096, 'enforce_eager': True, 'distributed_executor_backend': 'mp', 'worker_extension_cls': 'vllm_last_hidden_state.worker.LastHiddenStateWorker', 'enable_prefix_caching': True, 'skip_mm_profiling': True, 'max_num_batched_tokens': 1280, 'max_num_seqs': 4, 'enable_chunked_prefill': True, 'kv_transfer_config': KVTransferConfig(kv_connector='LastHiddenStateConnector', engine_id='e624a228-83dc-4d2e-965d-f099330b8e6e', kv_buffer_device='cpu', kv_role='kv_producer', kv_port=14579, kv_connector_extra_config={}, kv_connector_module_path='vllm_last_hidden_state.connector', enable_permute_local_kv=False, kv_load_failure_policy='fail')}
+(APIServer pid=730460) INFO 11-04 16:15:28 [model.py:744] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=730460) INFO 11-04 16:15:28 [model.py:2170] Using max model len 4096
+(APIServer pid=730460) INFO 11-04 16:15:29 [scheduler.py:310] Chunked prefill is enabled with max_num_batched_tokens=1280.
+(APIServer pid=730460) INFO 11-04 16:15:29 [config.py:766] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+(APIServer pid=730460) WARNING 11-04 16:15:29 [vllm.py:1778] Enforce eager set, disabling torch.compile, CUDAGraphs, and JIT kernel warmup. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none and --kernel_config.enable_jit_warmup=False
+(APIServer pid=730460) WARNING 11-04 16:15:29 [vllm.py:1802] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=730460) INFO 11-04 16:15:29 [kernel.py:480] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native'])
+(APIServer pid=730460) INFO 11-04 16:15:29 [compilation.py:317] Enabled custom fusions: norm_quant, act_quant
+W1104 16:15:39.890000 730781 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1104 16:15:39.891000 730781 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1104 16:15:39.891000 730781 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+(EngineCore pid=730781) INFO 11-04 16:15:43 [core.py:139] Initializing a V1 LLM engine (v0.33.0) with config: model='/tmp/vllm033-model', speculative_config=None, tokenizer='/tmp/vllm033-model', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=None, quantization_config=None, enforce_eager=True, aux_output_config=AuxOutputConfig(enable_return_routed_experts=False, max_bytes=None), kv_cache_dtype=auto, device_config=cpu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, custom_histogram_buckets=None, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/tmp/vllm033-model, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['all'], 'ir_enable_torch_wrap': False, 'splitting_ops': [], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'cudagraph_decoder_replay': True, 'decoder_replay_cudagraph_capture_sizes': [], 'decoder_replay_trim_threshold': 768, 'compile_sizes': None, 'compile_ranges_endpoints': [1280], 'inductor_compile_config': {'enable_auto_functionalized_v2': False}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 0, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': None, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native']), enable_flashinfer_autotune=True, enable_rocm_segmented_attn_autotune=False, enable_cutedsl_warmup=True, enable_jit_warmup=False, monokernel=False, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=730781) INFO 11-04 16:15:43 [multiproc_executor.py:167] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=10.16.4.92 (local), world_size=1, local_world_size=1
+(EngineCore pid=730781) INFO 11-04 16:15:43 [ompmultiprocessing.py:186] OpenMP thread binding info:
+(EngineCore pid=730781) INFO 11-04 16:15:43 [ompmultiprocessing.py:186] 	VLLM_CPU_OMP_THREADS_BIND='nobind', auto_setup=False, skip_setup=True
+(EngineCore pid=730781) INFO 11-04 16:15:43 [ompmultiprocessing.py:186] 	local_world_size=1, reserve_cpu_num=2
+(EngineCore pid=730781) INFO 11-04 16:15:43 [ompmultiprocessing.py:186] 	reserved_cpus=[]
+W1104 16:15:45.677000 730836 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1104 16:15:45.677000 730836 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1104 16:15:45.678000 730836 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+(VllmWorker-0 pid=730836) INFO 11-04 16:15:49 [worker_base.py:331] Injected <class 'vllm_last_hidden_state.worker.LastHiddenStateWorker'> into <class 'vllm.v1.worker.cpu_worker.CPUWorker'> for extended collective_rpc calls ['last_hidden_state_discard', 'last_hidden_state_initialize', 'last_hidden_state_take']
+[W1104 16:15:49.628871049 utils.cpp:68] Warning: NUMA binding: Using MEMBIND policy for memory allocation on the NUMA nodes (0). Memory allocations will be strictly bound to these NUMA nodes. (function init_cpu_memory_env)
+(Worker pid=730836) INFO 11-04 16:15:49 [parallel_state.py:1929] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_2b7308848e0048d682387b8bc4d46cfc backend=gloo
+(Worker pid=730836) INFO 11-04 16:15:49 [parallel_state.py:2385] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(Worker pid=730836) WARNING 11-04 16:15:49 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+[transformers] Qwen3VL video processing does not apply the per-frame pixel cap the reference implementation (qwen-vl-utils) applies, so some videos cost far more tokens than they would there. In v5.22 the capped behavior will become the default and `cap_pixels_per_frame` will be removed. Pass `cap_pixels_per_frame=True` to adopt the reference behavior now, or `False` to keep the current behavior and silence this warning.
+(APIServer pid=730460) INFO 11-04 16:15:51 [base.py:283] Multi-modal warmup completed in 14.007s
+(Worker pid=730836) WARNING 11-04 16:15:54 [cpu_worker.py:127] CPU backend doesn't allow to use `torch.set_num_threads` after the thread binding, skip it.
+(Worker pid=730836) INFO 11-04 16:15:54 [cpu_model_runner.py:68] Starting to load model /tmp/vllm033-model...
+(Worker pid=730836) INFO 11-04 16:15:54 [interface.py:429] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker pid=730836) INFO 11-04 16:15:54 [mm_encoder_attention.py:372] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker pid=730836) INFO 11-04 16:15:54 [qwen_gdn_linear_attn.py:284] Using CPU GDN prefill kernel (head_k_dim=128).
+(Worker pid=730836) INFO 11-04 16:15:54 [base_loader.py:82] Initializing model took 0.102601 seconds
+(Worker pid=730836) INFO 11-04 16:15:54 [weight_utils.py:1144] Filesystem type for checkpoints: TMPFS. Checkpoint size: 1.63 GiB. Available RAM: 93.27 GiB.
+(Worker pid=730836) INFO 11-04 16:15:54 [weight_utils.py:1167] Auto-prefetch is disabled because the filesystem (TMPFS) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.0.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.1.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.10.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.12.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.13.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.14.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.16.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.17.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.18.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.2.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.20.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.21.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.22.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.4.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.5.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.6.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.8.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+(Worker pid=730836) WARNING 11-04 16:15:54 [utils.py:333] Attempted to load weight layers.9.linear_attn.norm.weight with dtype torch.float32 into parameter with dtype torch.bfloat16
+
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00, 10.21it/s]
+
+(Worker pid=730836) INFO 11-04 16:15:54 [default_loader.py:506] Loading weights took 0.13 seconds
+(Worker pid=730836) WARNING 11-04 16:15:55 [torch_utils.py:269] OMP_NUM_THREADS=8 is set; leaving Torch threads at 8 for serving. Multi-threaded torch CPU ops during serving can degrade performance through spin-wait contention and cgroup CPU-quota throttling.
+(Worker pid=730836) INFO 11-04 16:15:55 [mamba_utils.py:38] VLLM_SSM_CONV_STATE_LAYOUT env detected. Setting SSM conv state layout to SD.
+(Worker pid=730836) INFO 11-04 16:15:55 [interface.py:1108] Setting attention block size to 640 tokens to ensure that attention page size is >= mamba page size.
+(Worker pid=730836) INFO 11-04 16:15:55 [interface.py:1132] Padding mamba page size by 20.75% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=730781) WARNING 11-04 16:15:55 [torch_utils.py:269] OMP_NUM_THREADS=8 is set; leaving Torch threads at 8 for serving. Multi-threaded torch CPU ops during serving can degrade performance through spin-wait contention and cgroup CPU-quota throttling.
+(EngineCore pid=730781) INFO 11-04 16:15:55 [utils.py:381] Using LBHNC KV cache layout.
+(Worker pid=730836) INFO 11-04 16:15:55 [cpu_worker.py:261] Explicitly set (1.0/121.49) GiB for KV cache on node 0.
+(EngineCore pid=730781) INFO 11-04 16:15:55 [kv_cache_utils.py:1147] CPU KV cache size: 42,850 tokens, Maximum concurrency for 4,096 tokens per request: 10.46x
+(EngineCore pid=730781) INFO 11-04 16:15:55 [kv_cache_utils.py:865] kv cache group sizes (640, 640, 640, 640)
+(EngineCore pid=730781) INFO 11-04 16:15:55 [kv_cache_utils.py:866] kv lcm block sizes 640
+(Worker pid=730836) INFO 11-04 16:15:55 [factory.py:62] Creating v1 connector with name: LastHiddenStateConnector and engine_id: e624a228-83dc-4d2e-965d-f099330b8e6e
+(Worker pid=730836) WARNING 11-04 16:15:55 [base.py:220] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(EngineCore pid=730781) INFO 11-04 16:15:55 [core.py:412] init engine (profile, create kv cache, warmup model) took 0.04 s
+(EngineCore pid=730781) INFO 11-04 16:15:56 [factory.py:62] Creating v1 connector with name: LastHiddenStateConnector and engine_id: e624a228-83dc-4d2e-965d-f099330b8e6e
+(EngineCore pid=730781) WARNING 11-04 16:15:56 [base.py:220] Initializing KVConnectorBase_V1. This API is experimental and subject to change in the future as we iterate the design.
+(EngineCore pid=730781) WARNING 11-04 16:16:00 [vllm.py:1778] Enforce eager set, disabling torch.compile, CUDAGraphs, and JIT kernel warmup. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none and --kernel_config.enable_jit_warmup=False
+(EngineCore pid=730781) WARNING 11-04 16:16:00 [vllm.py:1802] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=730781) INFO 11-04 16:16:00 [kernel.py:480] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['native'])
+(EngineCore pid=730781) INFO 11-04 16:16:00 [compilation.py:317] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=730460) INFO 11-04 16:16:00 [entry.py:135] Supported tasks: ['generate']
+(APIServer pid=730460) INFO 11-04 16:16:00 [factories.py:105] Scale-out endpoints are disabled. Restart vllm serve with --enable-scale-out to enable them.
+(APIServer pid=730460) INFO 11-04 16:16:01 [__init__.py:52] Available plugins for group vllm.endpoint_plugins:
+(APIServer pid=730460) INFO 11-04 16:16:01 [__init__.py:54] - last_hidden_state -> vllm_last_hidden_state.endpoint:LastHiddenStatePlugin
+(APIServer pid=730460) INFO 11-04 16:16:01 [__init__.py:66] Loading plugin last_hidden_state
+(APIServer pid=730460) INFO 11-04 16:16:01 [__init__.py:156] Loaded endpoint plugin last_hidden_state
+(APIServer pid=730460) INFO 11-04 16:16:01 [hf.py:736] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=730460) WARNING 11-04 16:16:01 [serving.py:291] The chat template requires system-first ordering, so inline system messages in /v1/messages requests (e.g. Claude Code's per-turn reminders) are merged into the leading system prompt. Each new one changes the prompt prefix, so the rest of the conversation misses the prefix cache. Pass a --chat-template that accepts non-leading system messages to avoid this.
+(APIServer pid=730460) INFO 11-04 16:16:01 [entry.py:139] Starting vLLM server on http://127.0.0.1:18432
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:188] Available routes are:
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /docs, Methods: GET, HEAD
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /load, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /version, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /kv_event_sources, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /health, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /metrics, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /tokenize, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /detokenize, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/models, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/systemone, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/decisions, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /ping, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /ping, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /invocations, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/responses, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/completions, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/messages, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /generative_scoring, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/messages/render, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/completions/render, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/responses/render, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/chat/completions/derender, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /v1/completions/derender, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=730460) INFO 11-04 16:16:01 [launcher.py:197] Route: /inference/v1/abort_requests, Methods: POST
+INFO:     Started server process [730460]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:48108 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "GET /metrics HTTP/1.1" 200 OK
+In file included from /home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/Python.h:12,
+                 from /tmp/tmpvzfrm3ds/main.cpp:17:
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/pyconfig.h:1877:9: warning: ‘_POSIX_C_SOURCE’ redefined
+ 1877 | #define _POSIX_C_SOURCE 200809L
+      |         ^~~~~~~~~~~~~~~
+In file included from /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h:733,
+                 from /usr/include/c++/16/bits/stl_algobase.h:59,
+                 from /usr/include/c++/16/algorithm:62,
+                 from /tmp/tmpvzfrm3ds/main.cpp:2:
+/usr/include/features.h:319:10: note: this is the location of the previous definition
+  319 | # define _POSIX_C_SOURCE        202405L
+      |          ^~~~~~~~~~~~~~~
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/pyconfig.h:1898:9: warning: ‘_XOPEN_SOURCE’ redefined
+ 1898 | #define _XOPEN_SOURCE 700
+      |         ^~~~~~~~~~~~~
+/usr/include/features.h:234:10: note: this is the location of the previous definition
+  234 | # define _XOPEN_SOURCE  800
+      |          ^~~~~~~~~~~~~
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+In file included from /home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/Python.h:12,
+                 from /tmp/tmpcl0h6cco/main.cpp:17:
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/pyconfig.h:1877:9: warning: ‘_POSIX_C_SOURCE’ redefined
+ 1877 | #define _POSIX_C_SOURCE 200809L
+      |         ^~~~~~~~~~~~~~~
+In file included from /usr/include/c++/16/x86_64-pc-linux-gnu/bits/os_defines.h:39,
+                 from /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h:733,
+                 from /usr/include/c++/16/bits/stl_algobase.h:59,
+                 from /usr/include/c++/16/algorithm:62,
+                 from /tmp/tmpcl0h6cco/main.cpp:2:
+/usr/include/features.h:319:10: note: this is the location of the previous definition
+  319 | # define _POSIX_C_SOURCE        202405L
+      |          ^~~~~~~~~~~~~~~
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/include/python3.12/pyconfig.h:1898:9: warning: ‘_XOPEN_SOURCE’ redefined
+ 1898 | #define _XOPEN_SOURCE 700
+      |         ^~~~~~~~~~~~~
+/usr/include/features.h:234:10: note: this is the location of the previous definition
+  234 | # define _XOPEN_SOURCE  800
+      |          ^~~~~~~~~~~~~
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=730460) INFO 11-04 16:16:12 [loggers.py:335] Engine 000: Avg prompt throughput: 244.2 tokens/s, Avg generation throughput: 5.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, CPU KV cache usage: 3.0%, Prefix cache hit rate: 48.2%, External prefix cache hit rate: 0.0%, MM cache hit rate: 66.7%
+INFO:     127.0.0.1:35326 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35328 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35344 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35326 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35328 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35344 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48124 - "GET /metrics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47322 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47322 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47322 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47322 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47322 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=730460) INFO 11-04 16:16:22 [loggers.py:335] Engine 000: Avg prompt throughput: 152.7 tokens/s, Avg generation throughput: 3.2 tokens/s, Running: 0 reqs, Waiting: 0 reqs, CPU KV cache usage: 0.0%, Prefix cache hit rate: 59.9%, External prefix cache hit rate: 0.0%, MM cache hit rate: 83.3%
+INFO:     127.0.0.1:47330 - "GET /metrics HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47346 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "POST /v1/chat/completions HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:47354 - "POST /v1/chat/completions HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:47356 - "POST /v1/chat/completions HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:47332 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47364 - "GET /metrics HTTP/1.1" 200 OK
+(APIServer pid=730460) INFO 11-04 16:16:26 [launcher.py:256] [shutdown] API server: shutdown triggered
+(APIServer pid=730460) INFO 11-04 16:16:26 [launcher.py:272] [shutdown] API server: stopping engine client mode=abort timeout=0s
+(EngineCore pid=730781) INFO 11-04 16:16:26 [core.py:1525] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=730781) INFO 11-04 16:16:26 [core.py:1712] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=730781) INFO 11-04 16:16:26 [core.py:1743] [shutdown] EngineCore: request processing complete; starting resource teardown
+(APIServer pid=730460) INFO 11-04 16:16:26 [core_client.py:792] [shutdown] MPClient: start timeout=0s
+(EngineCore pid=730781) INFO 11-04 16:16:26 [core.py:1573] [shutdown] EngineCore: exiting busy loop
+(APIServer pid=730460) INFO 11-04 16:16:26 [core_client.py:794] [shutdown] MPClient: stopping engine manager
+(APIServer pid=730460) INFO 11-04 16:16:26 [utils.py:628] [shutdown] Process manager: send sigterm to process EngineCore
+(APIServer pid=730460) WARNING 11-04 16:16:26 [utils.py:648] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=730460) WARNING 11-04 16:16:26 [utils.py:653] [shutdown] Process manager: force killing remaining process EngineCore pid 730781
+(APIServer pid=730460) INFO 11-04 16:16:26 [core_client.py:796] [shutdown] MPClient: engine manager stopped
+(APIServer pid=730460) INFO 11-04 16:16:26 [core_client.py:797] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=730460) INFO 11-04 16:16:26 [core_client.py:799] [shutdown] MPClient: complete
+(APIServer pid=730460) INFO 11-04 16:16:26 [launcher.py:281] [shutdown] API server: engine client stopped
+(APIServer pid=730460) INFO 11-04 16:16:26 [launcher.py:284] [shutdown] API server: signalling HTTP server shutdown
+(APIServer pid=730460) INFO 11-04 16:16:26 [launcher.py:306] [shutdown] API server: shutting down FastAPI HTTP server
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+(Worker pid=730836) INFO 11-04 16:16:27 [multiproc_executor.py:944] Parent process exited, terminating worker queues
+/home/soren/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 1 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

@@ -19,18 +19,18 @@ def isolate_runner_selection(monkeypatch):
     monkeypatch.delenv("VLLM_USE_V2_MODEL_RUNNER", raising=False)
 
 
-@pytest.mark.parametrize("version", ["0.32.0", "0.32.0+cpu", "0.32.0+cu130"])
+@pytest.mark.parametrize("version", ["0.33.0", "0.33.0+cpu", "0.33.0+cu130"])
 def test_supported_release_with_hardware_suffix(monkeypatch, version):
     monkeypatch.setattr(compat.metadata, "version", lambda _: version)
     assert compat.require_supported_vllm() == version
 
 
 @pytest.mark.parametrize(
-    "version", ["0.31.0", "0.33.0", "0.32.0rc1", "0.32.0.dev1", "0.32.0.post1", "dev"]
+    "version", ["0.32.0", "0.34.0", "0.33.0rc1", "0.33.0.dev1", "0.33.0.post1", "dev"]
 )
 def test_other_releases_fail_with_actionable_message(monkeypatch, version):
     monkeypatch.setattr(compat.metadata, "version", lambda _: version)
-    with pytest.raises(RuntimeError, match="requires 0.32.0"):
+    with pytest.raises(RuntimeError, match="requires 0.33.0"):
         compat.require_supported_vllm()
 
 
@@ -38,7 +38,7 @@ def test_missing_vllm_does_not_require_importing_it(monkeypatch):
     monkeypatch.setattr(
         compat.metadata, "version", Mock(side_effect=PackageNotFoundError)
     )
-    with pytest.raises(RuntimeError, match="Install vLLM 0.32.0 for your hardware"):
+    with pytest.raises(RuntimeError, match="Install vLLM 0.33.0 for your hardware"):
         compat.require_supported_vllm()
 
 
@@ -248,7 +248,7 @@ def test_yaml_connector_conflict(tmp_path):
 def test_main_executes_same_python_with_forwarded_arguments(monkeypatch, runner):
     if runner is not None:
         monkeypatch.setenv("VLLM_USE_V2_MODEL_RUNNER", runner)
-    monkeypatch.setattr(compat.metadata, "version", lambda _: "0.32.0+cpu")
+    monkeypatch.setattr(compat.metadata, "version", lambda _: "0.33.0+cpu")
     monkeypatch.setenv("VLLM_PLUGINS", "other")
     monkeypatch.delenv("VLLM_USE_RUST_FRONTEND", raising=False)
     monkeypatch.setattr(

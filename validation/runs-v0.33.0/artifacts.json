@@ -1,0 +1,49 @@
+[
+  {
+    "file": "vllm_last_hidden_state-0.33.0.tar.gz",
+    "bytes": 22024,
+    "sha256": "5c8faa30bd15f9fe6c27ca2f19df651a2c576d6160075b79595c656a5e391ee4",
+    "contents": [
+      "vllm_last_hidden_state-0.33.0",
+      "vllm_last_hidden_state-0.33.0/LICENSE",
+      "vllm_last_hidden_state-0.33.0/MANIFEST.in",
+      "vllm_last_hidden_state-0.33.0/PKG-INFO",
+      "vllm_last_hidden_state-0.33.0/README.md",
+      "vllm_last_hidden_state-0.33.0/pyproject.toml",
+      "vllm_last_hidden_state-0.33.0/setup.cfg",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/__init__.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/compat.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/connector.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/endpoint.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/serve.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state/worker.py",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/PKG-INFO",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/SOURCES.txt",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/dependency_links.txt",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/entry_points.txt",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/requires.txt",
+      "vllm_last_hidden_state-0.33.0/vllm_last_hidden_state.egg-info/top_level.txt"
+    ]
+  },
+  {
+    "file": "vllm_last_hidden_state-0.33.0-py3-none-any.whl",
+    "bytes": 19884,
+    "sha256": "40930ece71875bbebebfea9826ecb972713c5f84d87cebe180c12d9e15f755f3",
+    "contents": [
+      "vllm_last_hidden_state/__init__.py",
+      "vllm_last_hidden_state/compat.py",
+      "vllm_last_hidden_state/connector.py",
+      "vllm_last_hidden_state/endpoint.py",
+      "vllm_last_hidden_state/serve.py",
+      "vllm_last_hidden_state/worker.py",
+      "vllm_last_hidden_state-0.33.0.dist-info/licenses/LICENSE",
+      "vllm_last_hidden_state-0.33.0.dist-info/METADATA",
+      "vllm_last_hidden_state-0.33.0.dist-info/WHEEL",
+      "vllm_last_hidden_state-0.33.0.dist-info/entry_points.txt",
+      "vllm_last_hidden_state-0.33.0.dist-info/top_level.txt",
+      "vllm_last_hidden_state-0.33.0.dist-info/RECORD"
+    ]
+  }
+]

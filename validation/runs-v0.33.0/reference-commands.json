@@ -1,0 +1,27 @@
+[
+  {
+    "command": [
+      "/tmp/vllm033-runtime/bin/python",
+      "validation/validate_hidden_state.py",
+      "reference",
+      "--model",
+      "/tmp/vllm033-model",
+      "--reference",
+      "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v0.33.0/reference-short.json"
+    ],
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "/tmp/vllm033-runtime/bin/python",
+      "validation/validate_hidden_state.py",
+      "reference",
+      "--model",
+      "/tmp/vllm033-model",
+      "--reference",
+      "/home/soren/Documents/numind/vllm_patches/vllm_package/validation/runs-v0.33.0/reference-long.json",
+      "--long-prompts"
+    ],
+    "exit_code": 0
+  }
+]

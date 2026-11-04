@@ -1,0 +1,19 @@
+{
+  "package_base": "22841772e84deaf154470125c29e5a908fe78f9b",
+  "upstream_pin": "4ba787ec9959e566d3b587a796dff07673324da5",
+  "package_version": "0.33.0",
+  "files": {
+    "pyproject.toml": "715bea04d367e892cde7fc70cd03f234861f6d5504681a2f2a0455944b203785",
+    "validation/test_compat.py": "eba5b719e70059afdea049b3cc228d72955dc7515978182d746723e3cad55dd3",
+    "validation/test_extension.py": "3c84fc5ecdf4231ef7e30562495577c40311af9fd8c86a27bcee95eda1f55fa6",
+    "validation/test_startup.py": "a210f5f3497362a8171e62cf2975d292246aff08ac7e06f77bcb88570be5ccee",
+    "validation/validate_hidden_state.py": "6f5ef75a65173995fd077eba71b20e4928fe4d81ce22a26a1296e94efe9fa780",
+    "validation/validate_mtp.py": "e30ef12f071fd11085b21b00d20e2afd8eff249a352b09b36315f966db1bc3db",
+    "vllm_last_hidden_state/__init__.py": "0c4c95cc138fd28f35f58b5501407c32f5e527e3a614c90eb9b72228ac6b515a",
+    "vllm_last_hidden_state/compat.py": "820042a35eb6a73a33dc56556e520d9a71b1e9b055938f73ca66801afbad5148",
+    "vllm_last_hidden_state/connector.py": "a419e9d298384af85bd8df1259ddc8b71a9c49f45bca0aa354371108e37ea0c5",
+    "vllm_last_hidden_state/endpoint.py": "8dc7cc7401fac27dec69b6324724db5c0e859ef8337d8840454d61c7e6bd251c",
+    "vllm_last_hidden_state/serve.py": "718e727b265639ba78128bc7bf9e13e813500702290bde3b18b71a96b636aef2",
+    "vllm_last_hidden_state/worker.py": "8a264b0a9cf0372146e2be2dc4ae02912ad0912118212a9674b465d252083ca6"
+  }
+}

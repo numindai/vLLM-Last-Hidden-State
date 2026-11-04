@@ -1,0 +1,7 @@
+Using Python 3.12.13 environment at: /tmp/vllm033-runtime
+  × Failed to resolve dependencies for `vllm` (v0.33.0+cpu)
+  ╰─▶ Package `triton` was included as a URL dependency.
+      URL dependencies must be expressed as direct
+      requirements or constraints. Consider adding `triton @
+      https://github.com/triton-lang/triton-cpu/releases/download/v3.8.0/triton-3.8.0+cpu-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl`
+      to your dependencies or constraints file.
