@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: Copyright contributors to the vLLM project
-"""vLLM 0.33.0 assumptions; audit this module when changing the upstream pin."""
+"""vLLM 0.34.0 assumptions; audit this module when changing the upstream pin."""
 
 from dataclasses import dataclass
 from importlib import metadata
@@ -10,7 +10,7 @@ from packaging.version import InvalidVersion, Version
 
 from . import FLAG, HANDLE
 
-SUPPORTED_VLLM_VERSION = "0.33.0"
+SUPPORTED_VLLM_VERSION = "0.34.0"
 
 
 def require_supported_vllm():
@@ -58,35 +58,6 @@ def default_plugin_names():
         "vllm.stat_logger_plugins",
     )
     return [ep.name for group in groups for ep in metadata.entry_points(group=group)]
-
-
-def prompt_batch_rows(runner):
-    """Read metadata at the forward boundary, before the runner reuses buffers."""
-    batch = runner.input_batch
-    starts = runner.query_start_loc.np
-    for index, request_id in enumerate(batch.req_ids):
-        yield (
-            runner.requests[request_id],
-            int(batch.num_computed_tokens_cpu[index]),
-            int(starts[index]),
-            int(starts[index + 1]),
-        )
-
-
-def capture_model_forward(runner, connector):
-    """Capture the target forward, outside compilation and CUDA graph replay.
-
-    In 0.33.0 Qwen MTP's EagleProposer calls its own model directly, not this
-    method. Copying here also precedes drafting and output-buffer reuse.
-    """
-    original = runner._model_forward
-
-    def forward(*args, **kwargs):
-        output = original(*args, **kwargs)
-        connector.capture_batch(runner, output)
-        return output
-
-    runner._model_forward = forward
 
 
 @dataclass
@@ -162,35 +133,19 @@ class V2CaptureAdapter:
 def install_capture(worker, connector):
     """Validate the concrete model/runner and attach one instance-local hook."""
     from vllm.model_executor.models.qwen3_5 import Qwen3_5Model
-    from vllm.v1.worker.cpu.model_runner import CPUModelRunner as CPUModelRunnerV2
-    from vllm.v1.worker.cpu_model_runner import CPUModelRunner
-    from vllm.v1.worker.gpu.model_runner import GPUModelRunner as GPUModelRunnerV2
-    from vllm.v1.worker.gpu_model_runner import GPUModelRunner
+    from vllm.v1.worker.cpu.model_runner import CPUModelRunner
+    from vllm.v1.worker.gpu.model_runner import GPUModelRunner
 
     model = worker.get_model()
     language_model = getattr(model, "language_model", model)
     if not isinstance(getattr(language_model, "model", None), Qwen3_5Model):
         raise ValueError("Only Qwen3.5 is currently supported")
     runner = worker.model_runner
-    if type(runner) not in (
-        CPUModelRunner,
-        GPUModelRunner,
-        CPUModelRunnerV2,
-        GPUModelRunnerV2,
-    ):
-        raise ValueError("Last hidden state requires a supported V1 or V2 model runner")
+    if type(runner) not in (CPUModelRunner, GPUModelRunner):
+        raise ValueError(
+            "Last hidden state requires a supported CPU or GPU model runner"
+        )
     if getattr(worker, "_last_hidden_state_initialized", False):
         return
-    if type(runner) in (CPUModelRunnerV2, GPUModelRunnerV2):
-        runner.execute_model = V2CaptureAdapter(runner, connector)
-    elif type(runner) is CPUModelRunner:
-        # MTP shares embeddings/lm_head, not this outer target module. Attaching
-        # to an inner shared layer would capture draft forwards as well.
-
-        def capture(module, inputs, output):
-            connector.capture_batch(runner, output)
-
-        worker._last_hidden_state_hook = model.register_forward_hook(capture)
-    else:
-        capture_model_forward(runner, connector)
+    runner.execute_model = V2CaptureAdapter(runner, connector)
     worker._last_hidden_state_initialized = True

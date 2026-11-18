@@ -1,0 +1,87 @@
+{
+  "model": "/tmp/vllm034-model",
+  "metrics_delta": {
+    "spec_decode_num_drafts_total": 49.0,
+    "spec_decode_num_draft_tokens_total": 49.0,
+    "spec_decode_num_accepted_tokens_total": 27.0,
+    "prefix_cache_hits_total": 3200.0
+  },
+  "repeated": [
+    {
+      "cosine": 1.0000003576278687,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.000000238418579,
+      "relative_l2": 0.0,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 1.0000001192092896,
+      "relative_l2": 0.0,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999150037765503,
+      "relative_l2": 0.013077168725430965,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "control": [
+    {
+      "cosine": 0.9999085068702698,
+      "relative_l2": 0.013558775186538696,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9999046325683594,
+      "relative_l2": 0.013847005553543568,
+      "prompt_tokens": 28,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998538494110107,
+      "relative_l2": 0.017107445746660233,
+      "prompt_tokens": 105,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998805522918701,
+      "relative_l2": 0.01553361676633358,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.999858021736145,
+      "relative_l2": 0.016870271414518356,
+      "prompt_tokens": 1628,
+      "hidden_size": 1024
+    },
+    {
+      "cosine": 0.9998631477355957,
+      "relative_l2": 0.01655367761850357,
+      "prompt_tokens": 1705,
+      "hidden_size": 1024
+    }
+  ],
+  "streaming": true,
+  "mixed_traffic": true
+}

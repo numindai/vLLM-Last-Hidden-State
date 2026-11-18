@@ -15,7 +15,6 @@ from vllm.distributed.kv_transfer.kv_connector.v1.base import (
 )
 
 from . import FLAG, HANDLE
-from .compat import prompt_batch_rows
 
 TTL_SECONDS = 120.0
 MAX_RESULTS = 1024
@@ -95,10 +94,6 @@ class LastHiddenStateConnector(KVConnectorBase_V1, SupportsHMA):
 
     def request_finished_all_groups(self, request, block_ids):
         return self.request_finished(request, block_ids)
-
-    def capture_batch(self, runner, output):
-        """Copy the final prompt row from each opted-in request's packed span."""
-        self.capture_rows(prompt_batch_rows(runner), output)
 
     @torch.inference_mode()
     def capture_rows(self, rows, output):

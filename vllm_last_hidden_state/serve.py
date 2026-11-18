@@ -21,7 +21,7 @@ CONNECTOR_CONFIG = {
 
 
 def prepare_arguments(arguments):
-    # Upstream 0.33.0 expands YAML only for the two-token spelling.
+    # Upstream 0.34.0 expands YAML only for the two-token spelling.
     arguments = [
         part
         for arg in arguments

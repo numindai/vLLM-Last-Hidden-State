@@ -51,11 +51,12 @@ Do not modify upstream source in the package's `vllm/` submodule.
 
 1. `serve.py` validates effective upstream CLI/YAML settings, activates the
    endpoint/worker/connector, supplies `mp` when missing, and selects the Python
-   frontend. Runner selection and precision remain upstream/caller decisions.
+   frontend. Precision remains an upstream/caller decision; the obsolete runner
+   environment variable is passed through for upstream validation.
 2. `endpoint.py` validates opt-in requests, creates request handles, delegates
    ordinary chat work, and includes the retrieved vector in the response.
-3. `compat.py` checks vLLM 0.33.0 and installs an instance-local V1 CPU model
-   hook, V1 GPU forward wrapper, or V2 execute wrapper. V2 captures fresh target
+3. `compat.py` checks vLLM 0.34.0 and installs an instance-local execute wrapper
+   for the remaining CPU/GPU runner (formerly V2). It captures fresh target
    `execute_model_state` before sampling/drafting; it tracks only opted-in
    metadata through chunking and preemption.
 4. `connector.py` selects the final prompt row, stores bounded request results,
@@ -70,13 +71,17 @@ transport internals.
 
 ## Scope and evidence
 
-Current guards allow native Qwen3.5, one local `mp` worker, CPU/CUDA V1 or V2,
-compatible compilation modes, and MTP only among speculative methods. LoRA,
+Current guards allow native Qwen3.5, one local `mp` worker, the remaining CPU/CUDA
+runner, compatible compilation modes, and MTP only among speculative methods. LoRA,
 distributed parallelism, other KV connectors, and other model families remain
 unsupported. Dtype/quantization validation belongs to upstream vLLM.
 
-Current upgrade evidence is in [UPGRADE-v0.33.0.md](validation/UPGRADE-v0.33.0.md).
-V2 remains experimental. Historical 0.30.0 CPU eager/compiled and eager MTP evidence is in
+Current upgrade evidence is in [UPGRADE-v0.34.0.md](validation/UPGRADE-v0.34.0.md).
+Model Runner V1 was removed upstream; its imports, hooks and packed metadata
+adapter have been removed from this package. Unset `VLLM_USE_V2_MODEL_RUNNER`;
+upstream rejects values other than the redundant `1`. This package does not
+register custom logits processors, so the removed V1 logits-processor API needs
+no replacement here. Historical 0.30.0 CPU eager/compiled and eager MTP evidence is in
 [V2-v0.30.0.md](validation/V2-v0.30.0.md). The [release report](validation/UPGRADE-v0.30.0.md)
 records V1/precision coverage and earlier failures. Preserve the failed image
 comparisons; do not infer numerical parity or retrieval quality from passing

@@ -26,11 +26,12 @@ retrieval quality still depends on the model, prompt, and downstream processing.
 
 ## Quick start
 
-Use Python 3.12+ with **vLLM 0.33.0 installed for your hardware**. The extension
+Use Python 3.12+ with **vLLM 0.34.0 installed for your hardware**. The extension
 keeps your existing vLLM/PyTorch installation intact.
 
 ```sh
 python -m pip install "vllm-last-hidden-state @ https://github.com/numindai/vLLM-Last-Hidden-State/archive/refs/heads/main.zip"
+unset VLLM_USE_V2_MODEL_RUNNER
 vllm-last-hidden-state Qwen/Qwen3.5-9B
 ```
 
@@ -96,10 +97,12 @@ vllm serve Qwen/Qwen3.5-9B \
 | `--host`, `--port` | Optional ordinary vLLM server settings; the example serves the client above on localhost port 8000. |
 
 Replace the model and append your usual compatible vLLM options, such as
-`--max-model-len` or `--dtype`. Runner selection follows upstream defaults;
-set `VLLM_USE_V2_MODEL_RUNNER=0` or `1` yourself if you want an explicit choice.
+`--max-model-len` or `--dtype`. vLLM 0.34.0 removed Model Runner V1;
+**unset `VLLM_USE_V2_MODEL_RUNNER`** in your shell, containers, and service
+configuration. Setting it to `0` (or any value except `1`) fails upstream startup;
+`1` is redundant. The launcher leaves this variable untouched.
 The [supported configurations](#supported-configurations) apply to either launch
-method, including the Triton CPU requirement for CPU V2.
+method, including the Triton CPU requirement on x86.
 
 The example enables only this plugin. If you also need other installed plugins,
 include their entry-point names in the comma-separated `VLLM_PLUGINS` value,
@@ -131,11 +134,11 @@ Choose and evaluate your prompting and normalization strategy for your task.
 
 | Setting | Current scope |
 | --- | --- |
-| vLLM version | **0.33.0**; local build suffixes such as `+cpu` are accepted |
+| vLLM version | **0.34.0**; local build suffixes such as `+cpu` are accepted |
 | Models | Native Qwen3.5 architecture |
 | API | Python `/v1/chat/completions`; extraction requires `n=1`, `stream=False`, and one output token |
-| Execution | One local `mp` worker; CPU or CUDA adapters; V1 and experimental V2 |
-| Scheduling | Prefix caching and chunked prefill tested on CPU with 0.33.0 |
+| Execution | One local `mp` worker; CPU or CUDA adapters for the remaining runner (formerly V2) |
+| Scheduling | Prefix caching and chunked prefill tested on CPU with 0.34.0 |
 | Speculation | MTP target-state capture; other speculative methods unsupported |
 | Precision | Model dtype/quantization follow the installed vLLM backend |
 | Exclusions | LoRA, distributed parallelism, other KV connectors, and the Rust frontend |
@@ -146,27 +149,32 @@ model precision, scheduling, and compilation to upstream vLLM and your settings.
 Conflicting executor/worker/connector settings are rejected. See
 [advanced configuration](MAINTENANCE.md#launcher-and-advanced-configuration).
 
-On vLLM 0.33.0, V1 eager and V2 eager/compiled CPU runs pass the long-prompt
-text/image suite, mixed traffic, streaming, and measured prefix-cache checks on
-Qwen3.5-0.8B BF16. V2 ordinary output matches plugin-disabled baselines. Eager
-V2 MTP passes target-state comparison while drafting and accepting tokens. CPU
-V2 requires Triton CPU. For example, select V2 and MTP explicitly with:
+vLLM 0.34.0 uses the remaining model runner (formerly V2) on CPU and CUDA.
+The package captures its target execution output before sampling or MTP drafting.
+x86 CPU execution requires Triton CPU. To enable MTP:
 
 ```sh
-VLLM_USE_V2_MODEL_RUNNER=1 vllm-last-hidden-state Qwen/Qwen3.5-0.8B \
+vllm-last-hidden-state Qwen/Qwen3.5-0.8B \
     --speculative-config '{"method":"mtp","num_speculative_tokens":1}'
 ```
 
-**Validation limits:** See the [0.33.0 upgrade report](validation/UPGRADE-v0.33.0.md)
-for current checks. V2 remains experimental. Short image vectors exceed the
-strict Transformers comparison tolerance on both V1 and V2. GPU execution,
-CUDA graph replay, and async scheduling are not runtime-validated for this
-package. The synchronous vector copy and retrieval RPC have a cost; these checks
-are not performance benchmarks. The [0.32.0 report](validation/UPGRADE-v0.32.0.md),
+Qwen3.5-0.8B BF16 CPU eager, compiled and eager-MTP runs pass long-prompt
+text/image, mixed-traffic, streaming and measured prefix-cache checks on 0.34.0.
+Ordinary output matches plugin-disabled baselines, and MTP target-state checks
+pass with measured drafting and acceptance.
+
+**Validation limits:** See the [0.34.0 upgrade report](validation/UPGRADE-v0.34.0.md)
+for the exact checks and remaining gaps. Short-image vectors still exceed the
+strict Transformers comparison tolerance in all three tested CPU modes.
+GPU execution, CUDA graph replay, and
+async scheduling are not runtime-validated for this package. The synchronous
+vector copy and retrieval RPC have a cost; correctness checks are not performance
+benchmarks. The [0.33.0 report](validation/UPGRADE-v0.33.0.md),
+[0.32.0 report](validation/UPGRADE-v0.32.0.md),
 [0.31.0 report](validation/UPGRADE-v0.31.0.md),
-[earlier V2 results](validation/V2-v0.30.0.md)
-and [v0.30.0 report](validation/UPGRADE-v0.30.0.md) retain historical coverage and
-failures; they do not certify newer releases.
+[earlier V2 results](validation/V2-v0.30.0.md), and
+[v0.30.0 report](validation/UPGRADE-v0.30.0.md) retain historical coverage and
+failed image comparisons; they do not certify newer releases.
 
 ## Research background
 

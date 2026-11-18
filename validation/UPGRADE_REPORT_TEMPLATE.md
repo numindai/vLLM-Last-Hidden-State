@@ -23,7 +23,7 @@ preserve relevant failed-run output. See the [runbook](../MAINTENANCE.md).
 | Endpoint loading, Python frontend, route delegation | TODO | TODO |
 | Request metadata, connector lifecycle, response handle | TODO | TODO |
 | Worker initialization and RPC ordering | TODO | TODO |
-| V1/V2 CPU/GPU capture boundary, output normalization | TODO | TODO |
+| CPU/GPU capture boundary, output normalization (remaining runner, formerly V2) | TODO | TODO |
 | V2 fresh execution state, batch order, preemption/resume metadata | TODO | TODO |
 | MTP target/draft ownership and capture-before-drafting | TODO | TODO |
 | Packed rows, cached prefix, chunks, preemption | TODO | TODO |

@@ -1,0 +1,511 @@
+{
+  "plugin-v2-eager": {
+    "short": {
+      "complete_report": false,
+      "min_cosine": 0.9986095428466797,
+      "max_relative_l2": 0.05286160483956337,
+      "positions": [
+        27,
+        104
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": null,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 104,
+        "last_token_id": 328,
+        "max_abs_error": 2.1875,
+        "mean_abs_error": 0.1440962851047516,
+        "cosine": 0.9986095428466797,
+        "relative_l2_error": 0.05286160483956337,
+        "seconds": 0.09249122900655493,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        }
+      }
+    },
+    "long": {
+      "complete_report": true,
+      "min_cosine": 0.999517023563385,
+      "max_relative_l2": 0.031100459396839142,
+      "positions": [
+        1627,
+        1704
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": 14080.0,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 1704,
+        "last_token_id": 328,
+        "max_abs_error": 0.5625,
+        "mean_abs_error": 0.09588980674743652,
+        "cosine": 0.9995325207710266,
+        "relative_l2_error": 0.030645661056041718,
+        "seconds": 0.41573526395950466,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        },
+        "prefix_cache_hit_tokens_during_suite": 14080.0
+      }
+    },
+    "mixed": {
+      "model": "/tmp/vllm034-model",
+      "metrics_delta": {
+        "spec_decode_num_drafts_total": 0,
+        "spec_decode_num_draft_tokens_total": 0,
+        "spec_decode_num_accepted_tokens_total": 0,
+        "prefix_cache_hits_total": 6400.0
+      },
+      "repeated": [
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.0000001192092896,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 105,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.99992835521698,
+          "relative_l2": 0.011990103870630264,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999343752861023,
+          "relative_l2": 0.011474530212581158,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9998999834060669,
+          "relative_l2": 0.014159668236970901,
+          "prompt_tokens": 1705,
+          "hidden_size": 1024
+        }
+      ],
+      "control": null,
+      "streaming": true,
+      "mixed_traffic": true
+    }
+  },
+  "plugin-v2-compiled": {
+    "short": {
+      "complete_report": false,
+      "min_cosine": 0.9985131025314331,
+      "max_relative_l2": 0.05461708456277847,
+      "positions": [
+        27,
+        104
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": null,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 104,
+        "last_token_id": 328,
+        "max_abs_error": 2.5,
+        "mean_abs_error": 0.14485469460487366,
+        "cosine": 0.9985131025314331,
+        "relative_l2_error": 0.05461708456277847,
+        "seconds": 0.09452324797166511,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        }
+      }
+    },
+    "long": {
+      "complete_report": true,
+      "min_cosine": 0.9995507597923279,
+      "max_relative_l2": 0.029979800805449486,
+      "positions": [
+        1627,
+        1704
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": 14080.0,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 1704,
+        "last_token_id": 328,
+        "max_abs_error": 0.46875,
+        "mean_abs_error": 0.09073394536972046,
+        "cosine": 0.9995911717414856,
+        "relative_l2_error": 0.028623489663004875,
+        "seconds": 0.30852755199884996,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        },
+        "prefix_cache_hit_tokens_during_suite": 14080.0
+      }
+    },
+    "mixed": {
+      "model": "/tmp/vllm034-model",
+      "metrics_delta": {
+        "spec_decode_num_drafts_total": 0,
+        "spec_decode_num_draft_tokens_total": 0,
+        "spec_decode_num_accepted_tokens_total": 0,
+        "prefix_cache_hits_total": 6400.0
+      },
+      "repeated": [
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.0,
+          "relative_l2": 0.0,
+          "prompt_tokens": 105,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999515414237976,
+          "relative_l2": 0.009885719045996666,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999691843986511,
+          "relative_l2": 0.007896165363490582,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999447464942932,
+          "relative_l2": 0.0105295330286026,
+          "prompt_tokens": 1705,
+          "hidden_size": 1024
+        }
+      ],
+      "control": [
+        {
+          "cosine": 0.9999300241470337,
+          "relative_l2": 0.011840704828500748,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999397993087769,
+          "relative_l2": 0.011005581356585026,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999052882194519,
+          "relative_l2": 0.013782776892185211,
+          "prompt_tokens": 105,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.999901294708252,
+          "relative_l2": 0.01410133671015501,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999290108680725,
+          "relative_l2": 0.011956390924751759,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999160766601562,
+          "relative_l2": 0.0129871666431427,
+          "prompt_tokens": 1705,
+          "hidden_size": 1024
+        }
+      ],
+      "streaming": true,
+      "mixed_traffic": true
+    }
+  },
+  "plugin-v2-mtp-eager": {
+    "short": {
+      "complete_report": false,
+      "min_cosine": 0.9986143112182617,
+      "max_relative_l2": 0.05276096612215042,
+      "positions": [
+        27,
+        104
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": null,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 104,
+        "last_token_id": 328,
+        "max_abs_error": 2.3125,
+        "mean_abs_error": 0.13888496160507202,
+        "cosine": 0.9986143112182617,
+        "relative_l2_error": 0.05276096612215042,
+        "seconds": 0.12176140199881047,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        }
+      }
+    },
+    "long": {
+      "complete_report": true,
+      "min_cosine": 0.9995262622833252,
+      "max_relative_l2": 0.030830413103103638,
+      "positions": [
+        1627,
+        1704
+      ],
+      "hidden_sizes": [
+        1024
+      ],
+      "prefix_cache_hit_tokens": 7040.0,
+      "image": {
+        "case": 2,
+        "reference_backend": "transformers",
+        "hidden_size": 1024,
+        "position": 1704,
+        "last_token_id": 328,
+        "max_abs_error": 0.5625,
+        "mean_abs_error": 0.09911872446537018,
+        "cosine": 0.9995262622833252,
+        "relative_l2_error": 0.030830413103103638,
+        "seconds": 1.0499718160135671,
+        "completion": {
+          "finish_reason": "length",
+          "index": 0,
+          "logprobs": null,
+          "message": {
+            "content": "A",
+            "refusal": null,
+            "role": "assistant",
+            "annotations": null,
+            "audio": null,
+            "function_call": null,
+            "tool_calls": null,
+            "reasoning": null
+          },
+          "stop_reason": null,
+          "token_ids": [
+            32
+          ],
+          "routed_experts": null,
+          "weight_versions": null
+        },
+        "prefix_cache_hit_tokens_during_suite": 7040.0
+      }
+    },
+    "mixed": {
+      "model": "/tmp/vllm034-model",
+      "metrics_delta": {
+        "spec_decode_num_drafts_total": 49.0,
+        "spec_decode_num_draft_tokens_total": 49.0,
+        "spec_decode_num_accepted_tokens_total": 27.0,
+        "prefix_cache_hits_total": 3200.0
+      },
+      "repeated": [
+        {
+          "cosine": 1.0000003576278687,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.0000001192092896,
+          "relative_l2": 0.0,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 105,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.000000238418579,
+          "relative_l2": 0.0,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 1.0000001192092896,
+          "relative_l2": 0.0,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999150037765503,
+          "relative_l2": 0.013077168725430965,
+          "prompt_tokens": 1705,
+          "hidden_size": 1024
+        }
+      ],
+      "control": [
+        {
+          "cosine": 0.9999085068702698,
+          "relative_l2": 0.013558775186538696,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9999046325683594,
+          "relative_l2": 0.013847005553543568,
+          "prompt_tokens": 28,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9998538494110107,
+          "relative_l2": 0.017107445746660233,
+          "prompt_tokens": 105,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9998805522918701,
+          "relative_l2": 0.01553361676633358,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.999858021736145,
+          "relative_l2": 0.016870271414518356,
+          "prompt_tokens": 1628,
+          "hidden_size": 1024
+        },
+        {
+          "cosine": 0.9998631477355957,
+          "relative_l2": 0.01655367761850357,
+          "prompt_tokens": 1705,
+          "hidden_size": 1024
+        }
+      ],
+      "streaming": true,
+      "mixed_traffic": true
+    }
+  }
+}

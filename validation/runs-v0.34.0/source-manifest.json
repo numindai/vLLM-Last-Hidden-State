@@ -1,0 +1,15 @@
+{
+  "pyproject.toml": "b65121f9097e0165b140a3fb685f85f0e8e02e4c0d67ff2031e19952f3b2c610",
+  "MANIFEST.in": "433f816db5f4892f1adcd4f1fcbefadb7082158a2a59439d217e9d248b3cada6",
+  "vllm_last_hidden_state/__init__.py": "0c4c95cc138fd28f35f58b5501407c32f5e527e3a614c90eb9b72228ac6b515a",
+  "vllm_last_hidden_state/compat.py": "daf4e2c571876da2afb16211df879d2d66a3b4bd696a1f9d48de2e7ad9403d0e",
+  "vllm_last_hidden_state/connector.py": "3433ea0f6918c8277a12e06261b80a1f496c15973edb148d869f6db7f7f2a724",
+  "vllm_last_hidden_state/endpoint.py": "8dc7cc7401fac27dec69b6324724db5c0e859ef8337d8840454d61c7e6bd251c",
+  "vllm_last_hidden_state/serve.py": "cb27648a8732d360c7b84d7f610a3e7530f1a57531ecddd193927a1425968907",
+  "vllm_last_hidden_state/worker.py": "8a264b0a9cf0372146e2be2dc4ae02912ad0912118212a9674b465d252083ca6",
+  "validation/test_compat.py": "387f08f6452783eab7e13c19ccd320a20799623385ebd990841a8b3e80f9440f",
+  "validation/test_extension.py": "27e7805b13ce114cc853ba58f2c420d8710af069a44fbe653720c63ab1333a7c",
+  "validation/test_startup.py": "eeada11d457bd4477e78b7b7ba458ce91ea4ed348abed3d479480c2ae1f85f9b",
+  "validation/validate_hidden_state.py": "6f5ef75a65173995fd077eba71b20e4928fe4d81ce22a26a1296e94efe9fa780",
+  "validation/validate_mtp.py": "e30ef12f071fd11085b21b00d20e2afd8eff249a352b09b36315f966db1bc3db"
+}

@@ -7,19 +7,20 @@ and [supported configurations](README.md#supported-configurations).
 Version and activation conflicts are checked at startup; model/runtime
 restrictions are checked in the connector and compatibility module.
 
-Current upgrade: [vLLM 0.33.0 source audit and CPU validation](validation/UPGRADE-v0.33.0.md).
-Historical runtime evidence: [vLLM 0.32.0](validation/UPGRADE-v0.32.0.md),
+Current upgrade: [vLLM 0.34.0 source audit and CPU validation](validation/UPGRADE-v0.34.0.md).
+Historical runtime evidence: [vLLM 0.33.0](validation/UPGRADE-v0.33.0.md),
+[vLLM 0.32.0](validation/UPGRADE-v0.32.0.md),
 [vLLM 0.31.0](validation/UPGRADE-v0.31.0.md),
 [vLLM 0.30.0](validation/UPGRADE-v0.30.0.md) and
-[V2 CPU runtime tests](validation/V2-v0.30.0.md); these do not certify 0.33.0.
+[V2 CPU runtime tests](validation/V2-v0.30.0.md); these do not certify 0.34.0.
 Native integration is proposed
 in [vLLM PR #57185](https://github.com/vllm-project/vllm/pull/57185); package
 validation does not certify that separate implementation.
 
 ## Development
 
-Use Python 3.12+ and a hardware-appropriate vLLM 0.33.0 installation. The package
-version and supported vLLM release are both `0.33.0`; hardware suffixes such as
+Use Python 3.12+ and a hardware-appropriate vLLM 0.34.0 installation. The package
+version and supported vLLM release are both `0.34.0`; hardware suffixes such as
 `+cpu` are accepted, while development/prerelease/post releases are rejected.
 Installing this extension does not install or replace vLLM or PyTorch.
 
@@ -40,7 +41,7 @@ against the pinned upstream source, initialize it separately:
 git submodule update --init --recursive
 ```
 
-The `vllm/` submodule is pinned to v0.33.0 (`4ba787ec9959e566d3b587a796dff07673324da5`).
+The `vllm/` submodule is pinned to v0.34.0 (`62d4bc3c7e33b1b6c906e233e6af2d3506c482ca`).
 It does not select the vLLM installed in your environment. Source archive and
 wheel installations need no submodule; `git+https` installs may fetch it, so a
 release wheel or GitHub archive is preferable for users.
@@ -61,8 +62,10 @@ forwarded to upstream, with activation arguments added when omitted.
   worker extension/connector. It validates effective YAML, dotted JSON, aliases,
   and CLI precedence using upstream's parser. Conflicting settings fail rather
   than being silently overwritten.
-- Runner selection follows upstream and the caller's environment;
-  `VLLM_USE_V2_MODEL_RUNNER` is neither set nor validated by the launcher.
+- Model Runner V1 is removed in 0.34.0. Unset `VLLM_USE_V2_MODEL_RUNNER`;
+  upstream rejects `0` and every value except the redundant `1`. The launcher
+  neither sets nor validates it, preserving upstream diagnostics. Remove old
+  settings from shells, container environments, YAML launch scripts, and services.
 - The Python frontend is required. An explicit `VLLM_USE_RUST_FRONTEND=1`
   conflicts; otherwise the launcher sets it to `0`.
 - Existing `VLLM_PLUGINS` entries are retained and `last_hidden_state` is added
@@ -120,7 +123,7 @@ durable report; raw vectors and full environment dumps need not enter the packag
 
 Keep the extension package version in `pyproject.toml`,
 `compat.SUPPORTED_VLLM_VERSION`, and the README compatibility summary equal to the
-supported vLLM release (for example, all are `0.33.0`). Bump them together for an
+supported vLLM release (for example, all are `0.34.0`). Bump them together for an
 upgrade, alongside the source audit and a new report. Hardware local suffixes are
 accepted for the installed vLLM, but prereleases/dev/post releases are not. Changing
 the submodule alone does not certify compatibility. Never change installation
@@ -133,10 +136,11 @@ preserve explicit `mp` and CLI overrides of YAML. Test YAML,
 dotted JSON, aliases, and CLI precedence when upgrading this parser integration.
 
 The launcher leaves `VLLM_USE_V2_MODEL_RUNNER` untouched; upstream vLLM owns
-its default and validation. V2 is experimental. Retain the concrete-runner
-guard because upstream features can require or force a runner. Test that an
-unset or explicitly selected runner stays unchanged before upstream argument
-parsing and before executing the server.
+its removal diagnostics. Retain the concrete-runner guard and test that the
+obsolete modules are never imported. Test environment pass-through before parsing
+and executing the server, and upstream rejection of obsolete values. The package
+does not register custom logits processors; downstream V1 processors must move
+to `vllm.v1.worker.gpu.sample.logits_processor` separately.
 
 ## Audit the upstream contracts
 
@@ -154,28 +158,26 @@ these contracts.
 | Result transport | `request_finished`, `request_finished_all_groups`, `EngineCoreOutput`, `collective_rpc` | Completion carries the handle back; RPC reaches the capturing worker and returns one result per worker. |
 | `connector.py` registration | `KVConnectorBase_V1`, `SupportsHMA`, `KVConnectorFactory`, `kv_connector_module_path`, `get_transfer_results`, `register_finished_partial_tail` | Constructor/abstract methods and hybrid-cache lifecycle still fit a metadata-only connector with no external tokens, transfer completions, or delayed block release. |
 | `worker.py` initialization | `worker_extension_cls`, `get_model`, `get_kv_transfer_group` | Extension methods do not conflict with worker methods; initialization reaches the actual runner after model warmup. |
-| `compat.py`: CPU capture | `CPUModelRunner`, `register_forward_hook`, `execute_model` | Outer-model hook still runs outside the compiled decoder and sees its final normalized states. |
-| `compat.py`: GPU capture | `GPUModelRunner`, `_model_forward`, `CUDAGraphWrapper`, `execute_model` | Wrapped method executes on every real batch, including graph replay, before corresponding batch metadata or output storage can be reused. |
 | `compat.py`: V2 capture | `gpu/model_runner.py:execute_model/sample_tokens`, `cpu/model_runner.py`, `ExecuteModelState`, `InputBatch` | CPU V2 inherits GPU V2 execution. Capture fresh target state after the real execute call, before sampling/drafting, with batch-ordered computed offsets/query spans; do not use request-state slot indices as batch indices. |
-| `compat.py`: V2 request lifecycle | `SchedulerOutput`, `NewRequestData`, `finish_requests`, `scheduled_resumed_reqs` | V2 resends resumed requests as new data. Retain only capture metadata, remove finished/preempted IDs, then add replacements. Skip dummy/no-forward steps without reading stale execution state. |
-| `compat.py`: packed metadata | `input_batch`, `req_ids`, `requests`, `query_start_loc`, `num_computed_tokens_cpu` | Request order, CPU offsets, query spans, output rows, and padding refer to the same forward pass. |
+| `compat.py`: V2 request lifecycle | `SchedulerOutput`, `NewRequestData`, `finish_requests`, `scheduled_new_reqs` | The scheduler resends resumed requests as new data. Retain only capture metadata, remove finished/preempted IDs, then add replacements. Skip dummy/no-forward steps without reading stale execution state. |
+| `compat.py`: packed metadata | `InputBatch`, `req_ids`, `query_start_loc_np`, `num_computed_tokens_np` | Request order, CPU offsets, query spans, output rows, and padding refer to the same forward pass. |
 | Cache/chunk scheduling | `get_computed_blocks`, `max_cache_hit_length`, `num_computed_tokens`, `async_scheduling` | A cache hit still recomputes the final prompt token; chunk/preemption offsets describe actual computed input tokens. |
 | Model representation | `Qwen3_5Model`, `Qwen3NextModel`, `self.norm`, `language_model` | Trace inherited forwards too: captured output is after final output normalization, before logits, for text and multimodal wrappers. |
-| MTP | `EagleProposer`, `SpecDecodeBaseProposer`, `Qwen3_5MTP`, `finalize_kv_connector` | Drafter uses a separate outer model, sharing only embeddings/head; target capture precedes drafting and deferred connector finalization. Verify packed prompt offsets during speculative verification. |
+| MTP | `gpu/spec_decode/mtp/speculator.py`, `Qwen3_5MTP`, `sample_tokens`, `finalize_step` | Drafter uses a separate outer model, sharing only embeddings/head; target capture precedes drafting and deferred connector finalization. Verify packed prompt offsets during speculative verification. |
 | Runtime validation | `CompilationMode`, `device_config`, `parallel_config`, `speculative_config` | Guard names and meanings still match the supported backend, runner, executor, and normalized MTP method. Dtype/quantization validation belongs to upstream. |
 
 For example:
 
 ```sh
 rg -n 'worker_extension_cls|def collective_rpc|vllm.endpoint_plugins' vllm
-rg -n '_model_forward|query_start_loc|num_computed_tokens_cpu' vllm
+rg -n 'execute_model_state|query_start_loc_np|num_computed_tokens_np' vllm
 rg -n 'kv_transfer_params|request_finished_all_groups|max_cache_hit_length' vllm
 rg -n 'Qwen3_5Model|Qwen3NextModel|VLLM_USE_RUST_FRONTEND' vllm
 ```
 
 Prefer a new upstream extension hook if it satisfies the same semantics with
-less maintenance. The current CPU module hook and GPU instance-method wrapper
-are deliberate, disclosed adaptations. A moved/renamed runner requires tracing
+less maintenance. The current CPU/GPU execute wrapper is a deliberate, disclosed
+adaptation. A moved/renamed runner requires tracing
 the execution boundary; accepting another class in a type check is insufficient.
 
 ## Semantics that are easy to break
@@ -349,9 +351,9 @@ branch and tag. If the tag already exists locally, inspect its target first;
 do not recreate a correct tag or overwrite a published release.
 
 ```sh
-git tag -s v0.33.0 -m 'vLLM Last Hidden State 0.33.0'
+git tag -s v0.34.0 -m 'vLLM Last Hidden State 0.34.0'
 git push origin main
-git push origin v0.33.0
+git push origin v0.34.0
 ```
 
 Pushing the tag triggers the release workflow. These commands do not overwrite
@@ -362,9 +364,9 @@ accident. Preserve historical validation records.
 ### Optional PyPI publishing
 
 PyPI gives users the shortest installation command:
-`python -m pip install vllm-last-hidden-state==0.33.0`. This becomes available
+`python -m pip install vllm-last-hidden-state==0.34.0`. This becomes available
 only after a successful PyPI publication; pushing `main` alone does not publish
-to PyPI. Install hardware-appropriate vLLM 0.33.0 first.
+to PyPI. Install hardware-appropriate vLLM 0.34.0 first.
 
 The workflow's PyPI job is disabled unless the repository Actions variable
 `PYPI_PUBLISH` is exactly `true`. Before enabling it:

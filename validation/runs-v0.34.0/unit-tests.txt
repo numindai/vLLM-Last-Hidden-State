@@ -1,0 +1,9 @@
+........................................................................ [ 62%]
+............................................                             [100%]
+=============================== warnings summary ===============================
+validation/test_extension.py::test_cancelled_chat_discards_the_same_internal_handle
+  /home/soren/Documents/numind/vllm_patches/vllm_package/vllm_last_hidden_state/endpoint.py:35: DeprecationWarning: max_tokens is deprecated in favor of the max_completion_tokens field
+    else request.max_tokens
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+116 passed, 1 warning in 17.27s
